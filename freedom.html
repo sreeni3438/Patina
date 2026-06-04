@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedom — Patina Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-muted:  #5a6271;
+      --c-footer: #f7f9fc;
+      --f-inter:  'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #000;
+      background: #fff;
+      overflow-x: hidden;
+      animation: pageFadeIn 0.3s ease-out forwards;
+    }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ─── NAVBAR ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 65px;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 12px 32px 0;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      margin-left: auto;
+      margin-right: 60px;
+    }
+    .nav-links a {
+      font-family: var(--f-inter);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--c-dark); }
+    .nav-links a.active { color: var(--c-dark); font-weight: 500; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      font-weight: 500;
+      font-size: 16.4px;
+      letter-spacing: -0.352px;
+      cursor: pointer;
+      border: none;
+      padding: 12px 20px;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+    .btn img { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ─── PAGE WRAPPER ─── */
+    .fr-page {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding-top: 65px;
+    }
+
+    /* ─── HERO ─── */
+    .fr-hero { position: relative; }
+
+    .fr-hero-image {
+      position: relative;
+      width: 100%;
+      height: 972px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .fr-hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .fr-hero-info {
+      position: relative;
+      height: 421px;
+    }
+    .fr-hero-left {
+      position: absolute;
+      left: 72px;
+      top: 113px;
+      width: 684px;
+    }
+    .fr-client-name {
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+      margin-bottom: 13px;
+    }
+    .fr-project-title {
+      font-size: 57.6px;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      color: #000;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+    .fr-project-body {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      color: #000;
+    }
+    .fr-hero-services {
+      position: absolute;
+      left: 1001px;
+      top: 113px;
+    }
+    .fr-services-label {
+      font-size: 20.9px;
+      line-height: 25.92px;
+      color: #949494;
+      text-transform: uppercase;
+      margin-bottom: 29px;
+    }
+    .fr-services-list p {
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+    }
+    .fr-year {
+      position: absolute;
+      left: 1598px;
+      top: 113px;
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+    }
+
+    /* ─── SECTION CONTAINER ─── */
+    .fr-section { margin: 84px 72px 0; }
+
+    /* Clean image (no template border) */
+    .fr-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 891px;
+      overflow: hidden;
+    }
+    .fr-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /*
+      Template-crop: strips the grey "Brand Design / Stage II" slide border.
+      The inner content card occupies ~88% of width (starting at ~6% left)
+      and ~80% of height (starting at ~14% from top). Scaling and offsetting
+      the image hides the surrounding grey template.
+    */
+    .fr-tpl-wrap {
+      position: relative;
+      width: 100%;
+      height: 891px;
+      overflow: hidden;
+    }
+    .fr-tpl-wrap img {
+      position: absolute;
+      width: 116%;
+      height: 127%;
+      left: -8%;
+      top: -18%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ─── TEXT SECTIONS ─── */
+    .fr-text-section { margin: 84px 72px 0; }
+    .fr-section-h2 {
+      font-size: 57.6px;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 90px;
+    }
+    .fr-section-p {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      color: #000;
+      max-width: 744px;
+    }
+    .fr-section-p + .fr-section-p { margin-top: 35px; }
+
+    /* ─── SPLIT: text left, image right ─── */
+    .fr-split {
+      margin: 84px 72px 0;
+      display: flex;
+      height: 947.7px;
+    }
+    .fr-split-left {
+      flex: 0 0 804px;
+      padding-right: 60px;
+    }
+    .fr-split-left .fr-section-h2 {
+      line-height: 57.6px;
+      margin-bottom: 35px;
+    }
+    .fr-split-left .fr-section-p { max-width: 633px; }
+    .fr-split-left .fr-section-p + .fr-section-p { margin-top: 35px; }
+    .fr-split-right {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .fr-split-right .fr-tpl-wrap { height: 100%; }
+
+    /* ─── TWO-COL ─── */
+    .fr-two-col {
+      margin: 84px 72px 0;
+      display: flex;
+      height: 947.7px;
+    }
+    .fr-col {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .fr-col .fr-tpl-wrap { height: 100%; }
+
+    /* ─── FOOTER ─── */
+    .fr-footer {
+      margin-top: 84px;
+      height: 476px;
+      background: var(--c-footer);
+      overflow: hidden;
+    }
+    .fr-footer-inner {
+      height: 100%;
+      padding: 32px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .fr-footer-logo img { height: 19.8px; width: auto; }
+    .fr-footer-blurb {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      max-width: 450px;
+      color: var(--c-dark);
+    }
+    .fr-footer-blurb .dim { color: var(--c-muted); }
+    .fr-footer-email-wrap {
+      display: inline-block;
+      position: relative;
+      margin-top: 28px;
+    }
+    .fr-footer-email {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      color: var(--c-dark);
+      transition: opacity 0.18s;
+    }
+    .fr-footer-email:hover { opacity: 0.6; }
+    .fr-footer-email-line {
+      position: absolute;
+      bottom: 4px; left: 0;
+      width: 15%; height: 2px;
+      background: var(--c-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ux.html">UX</a></li>
+      </ul>
+      <a href="#" class="btn">Let's Chat</a>
+    </div>
+  </nav>
+
+  <div class="fr-page">
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section class="fr-hero">
+      <div class="fr-hero-image">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Frame 33.png" alt="Freedom product">
+      </div>
+
+      <div class="fr-hero-info">
+        <div class="fr-hero-left">
+          <p class="fr-client-name">Freedom</p>
+          <h1 class="fr-project-title">HR that finally feels weightless</h1>
+          <p class="fr-project-body">All-in-one HR software that automates payroll, benefits, and compliance — starting at $0/month. Freedom makes running a team as easy as it should be.</p>
+        </div>
+        <div class="fr-hero-services">
+          <p class="fr-services-label">Services</p>
+          <div class="fr-services-list">
+            <p>Brand Strategy</p>
+            <p>Brand Identity</p>
+            <p>Web Design</p>
+          </div>
+        </div>
+        <p class="fr-year">2024</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LOGO PRIMARY
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 87.png" alt="Freedom logo">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         BRAND STRATEGY TEXT
+    ═══════════════════════════════════════ -->
+    <div class="fr-text-section">
+      <h2 class="fr-section-h2">Give it back.</h2>
+      <p class="fr-section-p">Freedom is built on a simple idea: managing your team should never feel like a second job. Our brand work positioned Freedom as the tool that removes friction from running a team — starting with a name that says everything.</p>
+      <p class="fr-section-p" style="max-width: 723px;">The visual identity reflects that clarity. A single-line bird that speaks to freedom, flight, and effortlessness. The acid green cuts through a sea of corporate blue, signaling that Freedom is a different kind of HR company — one that actually wants to give you yours back.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         LOGO VARIATIONS
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 100.png" alt="Freedom logo variations">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         COLOR SCHEME
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 81.png" alt="Freedom color scheme">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         LARGE OUTDOOR BILLBOARD
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 104.png" alt="Freedom outdoor billboard">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SPLIT: text + bus shelter ads
+    ═══════════════════════════════════════ -->
+    <div class="fr-split">
+      <div class="fr-split-left">
+        <h2 class="fr-section-h2">Weightless,<br>everywhere.</h2>
+        <p class="fr-section-p">The campaign extended the brand into outdoor advertising — bold, direct, and unmistakable. "HR that finally feels weightless" worked at every scale, from a shelter panel to a city billboard.</p>
+        <p class="fr-section-p">The lime green ensured Freedom stood out in any environment. No clutter, no jargon — just the promise of a tool that gets out of your way.</p>
+      </div>
+      <div class="fr-split-right">
+        <div class="fr-tpl-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 102.png" alt="Freedom bus shelter ads">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         INTERIOR BRAND POSTERS
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 101.png" alt="Freedom indoor posters">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         LARGE BILLBOARD 2
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 108.png" alt="Freedom billboard: All your HR in one place">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TWO-COL: hoodie + business cards
+    ═══════════════════════════════════════ -->
+    <div class="fr-two-col">
+      <div class="fr-col">
+        <div class="fr-tpl-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 103.png" alt="Freedom hoodie">
+        </div>
+      </div>
+      <div class="fr-col">
+        <div class="fr-tpl-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 107.png" alt="Freedom business cards and notebooks">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         PHONE + BOTTLE
+    ═══════════════════════════════════════ -->
+    <div class="fr-section">
+      <div class="fr-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Liam/ForWebsite/Slide 16_9 - 105.png" alt="Freedom phone mockup and water bottle">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="fr-footer">
+      <div class="fr-footer-inner">
+        <a href="index.html" class="fr-footer-logo">
+          <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+        </a>
+        <div>
+          <p class="fr-footer-blurb">
+            We'd love to hear from you —
+            <span class="dim"> whether you have a project in mind, or just want to say hi.</span>
+          </p>
+          <div class="fr-footer-email-wrap">
+            <a href="mailto:sreeni@patinaex.com" class="fr-footer-email">sreeni@patinaex.com</a>
+            <div class="fr-footer-email-line"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.fr-page -->
+
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+  </script>
+</body>
+</html>

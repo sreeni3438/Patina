@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roya.ai — Patina Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-muted:  #5a6271;
+      --c-footer: #f7f9fc;
+      --f-inter:  'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #000;
+      background: #fff;
+      overflow-x: hidden;
+      animation: pageFadeIn 0.3s ease-out forwards;
+    }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+
+    /* ─── NAVBAR ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 65px;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 12px 32px 0;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      margin-left: auto;
+      margin-right: 60px;
+    }
+    .nav-links a {
+      font-family: var(--f-inter);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--c-dark); }
+    .nav-links a.active { color: var(--c-dark); font-weight: 500; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      font-weight: 500;
+      font-size: 16.4px;
+      letter-spacing: -0.352px;
+      cursor: pointer;
+      border: none;
+      padding: 12px 20px;
+      white-space: nowrap;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+
+    /* ─── PAGE WRAPPER ─── */
+    .ry-page {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding-top: 65px;
+    }
+
+    /* ─── HERO ─── */
+    .ry-hero { position: relative; }
+
+    .ry-hero-image {
+      position: relative;
+      width: 100%;
+      height: 972px;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+    .ry-hero-image img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .ry-hero-info {
+      position: relative;
+      height: 421px;
+    }
+    .ry-hero-left {
+      position: absolute;
+      left: 72px;
+      top: 113px;
+      width: 684px;
+    }
+    .ry-client-name {
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+      margin-bottom: 13px;
+    }
+    .ry-project-title {
+      font-size: 57.6px;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      color: #000;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+    .ry-project-body {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      color: #000;
+    }
+    .ry-hero-services {
+      position: absolute;
+      left: 1001px;
+      top: 113px;
+    }
+    .ry-services-label {
+      font-size: 20.9px;
+      line-height: 25.92px;
+      color: #949494;
+      text-transform: uppercase;
+      margin-bottom: 29px;
+    }
+    .ry-services-list p {
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+    }
+    .ry-year {
+      position: absolute;
+      left: 1598px;
+      top: 113px;
+      font-size: 24px;
+      line-height: 28.8px;
+      letter-spacing: -0.48px;
+      color: #000;
+    }
+
+    /* ─── SECTION CONTAINER ─── */
+    .ry-section { margin: 84px 72px 0; }
+
+    /* Clean image — no template border */
+    .ry-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 891px;
+      overflow: hidden;
+    }
+    .ry-img-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /*
+      Template crop: hides the white "BRAND DESIGN" page border.
+      The Roya template is a white page with small header text (~3% from top)
+      and thin margins (~3-4% each side). Scaling up and offsetting reveals
+      only the inner content area.
+    */
+    .ry-tpl-wrap {
+      position: relative;
+      width: 100%;
+      height: 891px;
+      overflow: hidden;
+    }
+    .ry-tpl-wrap img {
+      position: absolute;
+      width: 108%;
+      height: 120%;
+      left: -4%;
+      top: -11%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ─── TEXT SECTIONS ─── */
+    .ry-text-section { margin: 84px 72px 0; }
+    .ry-section-h2 {
+      font-size: 57.6px;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      font-weight: 400;
+      color: #000;
+      margin-bottom: 90px;
+    }
+    .ry-section-p {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      color: #000;
+      max-width: 744px;
+    }
+    .ry-section-p + .ry-section-p { margin-top: 35px; }
+
+    /* ─── SPLIT: text left, image right ─── */
+    .ry-split {
+      margin: 84px 72px 0;
+      display: flex;
+      height: 947.7px;
+    }
+    .ry-split-left {
+      flex: 0 0 804px;
+      padding-right: 60px;
+    }
+    .ry-split-left .ry-section-h2 {
+      line-height: 57.6px;
+      margin-bottom: 35px;
+    }
+    .ry-split-left .ry-section-p { max-width: 633px; }
+    .ry-split-left .ry-section-p + .ry-section-p { margin-top: 35px; }
+    .ry-split-right {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .ry-split-right .ry-tpl-wrap,
+    .ry-split-right .ry-img-wrap { height: 100%; }
+
+    /* ─── TWO-COL ─── */
+    .ry-two-col {
+      margin: 84px 72px 0;
+      display: flex;
+      height: 947.7px;
+    }
+    .ry-col {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .ry-col .ry-tpl-wrap,
+    .ry-col .ry-img-wrap { height: 100%; }
+
+    /* ─── FOOTER ─── */
+    .ry-footer {
+      margin-top: 84px;
+      height: 476px;
+      background: var(--c-footer);
+      overflow: hidden;
+    }
+    .ry-footer-inner {
+      height: 100%;
+      padding: 32px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ry-footer-logo img { height: 19.8px; width: auto; }
+    .ry-footer-blurb {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      max-width: 450px;
+      color: var(--c-dark);
+    }
+    .ry-footer-blurb .dim { color: var(--c-muted); }
+    .ry-footer-email-wrap {
+      display: inline-block;
+      position: relative;
+      margin-top: 28px;
+    }
+    .ry-footer-email {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      color: var(--c-dark);
+      transition: opacity 0.18s;
+    }
+    .ry-footer-email:hover { opacity: 0.6; }
+    .ry-footer-email-line {
+      position: absolute;
+      bottom: 4px; left: 0;
+      width: 15%; height: 2px;
+      background: var(--c-dark);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="ux.html">UX</a></li>
+      </ul>
+      <a href="#" class="btn">Let's Chat</a>
+    </div>
+  </nav>
+
+  <div class="ry-page">
+
+    <!-- ═══════════════════════════════════════
+         HERO — clean photography, no crop
+    ═══════════════════════════════════════ -->
+    <section class="ry-hero">
+      <div class="ry-hero-image">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Frame 1321317177.png" alt="Roya.ai brand on screen">
+      </div>
+
+      <div class="ry-hero-info">
+        <div class="ry-hero-left">
+          <p class="ry-client-name">Roya.ai</p>
+          <h1 class="ry-project-title">Stop Queueing.<br>Start Training.</h1>
+          <p class="ry-project-body">Instant access to high-performance GPUs, right from your terminal. A brand built for the infrastructure powering the next generation of AI.</p>
+        </div>
+        <div class="ry-hero-services">
+          <p class="ry-services-label">Services</p>
+          <div class="ry-services-list">
+            <p>Brand Strategy</p>
+            <p>Brand Identity</p>
+          </div>
+        </div>
+        <p class="ry-year">2024</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         LOGO CONSTRUCTION
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Brand proposal-4.png" alt="Roya.ai logo construction">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         BRAND STRATEGY TEXT
+    ═══════════════════════════════════════ -->
+    <div class="ry-text-section">
+      <h2 class="ry-section-h2">Infrastructure,<br>made visible.</h2>
+      <p class="ry-section-p">Roya.ai gives developers instant, on-demand GPU access — no queues, no overhead, at lower cost than major cloud providers. The brand needed to feel as direct and capable as the product itself.</p>
+      <p class="ry-section-p" style="max-width: 723px;">The halftone sphere logomark encodes the core idea: raw compute made visible — each dot a unit of power, organized into something precise and trustworthy. Source Code Pro as the primary typeface grounds the identity in the terminal world where Roya.ai actually lives.</p>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         LOGO VARIATIONS (4-up grid)
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Brand proposal.png" alt="Roya.ai logo variations">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         COLOR PALETTE
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Brand proposal-1.png" alt="Roya.ai color palette">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TYPOGRAPHY
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Brand proposal-2.png" alt="Roya.ai typography: Source Code Pro">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         BRAND TEXTURE / GRADIENT PATTERN
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-tpl-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/4.png" alt="Roya.ai brand gradient texture">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SPLIT: copy + brand posters
+    ═══════════════════════════════════════ -->
+    <div class="ry-split">
+      <div class="ry-split-left">
+        <h2 class="ry-section-h2">Built for the<br>terminal.</h2>
+        <p class="ry-section-p">The visual system extended across print and digital — vertical posters, business cards, brand decks. Each touchpoint carrying the halftone sphere and the spare, monospaced voice of Source Code Pro.</p>
+        <p class="ry-section-p">The palette — terracotta, teal, cream, and black — drew from a world older than cloud computing, suggesting the permanence of infrastructure alongside the immediacy of a command line.</p>
+      </div>
+      <div class="ry-split-right">
+        <div class="ry-tpl-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/3.png" alt="Roya.ai brand posters">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         SCREEN MOCKUP — clean photography
+    ═══════════════════════════════════════ -->
+    <div class="ry-section">
+      <div class="ry-img-wrap">
+        <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Frame 1321317178.png" alt="Roya.ai printed booklets">
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TWO-COL: booklets + business cards
+    ═══════════════════════════════════════ -->
+    <div class="ry-two-col">
+      <div class="ry-col">
+        <div class="ry-img-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Frame 1321317179.png" alt="Roya.ai business cards">
+        </div>
+      </div>
+      <div class="ry-col">
+        <div class="ry-tpl-wrap">
+          <img src="/Users/aishwaryasreenivas/Desktop/Brands/Roya/AllImages/Frame5-3.png" alt="Roya.ai brand collateral spread">
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer class="ry-footer">
+      <div class="ry-footer-inner">
+        <a href="index.html" class="ry-footer-logo">
+          <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+        </a>
+        <div>
+          <p class="ry-footer-blurb">
+            We'd love to hear from you —
+            <span class="dim"> whether you have a project in mind, or just want to say hi.</span>
+          </p>
+          <div class="ry-footer-email-wrap">
+            <a href="mailto:sreeni@patinaex.com" class="ry-footer-email">sreeni@patinaex.com</a>
+            <div class="ry-footer-email-line"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.ry-page -->
+
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+  </script>
+</body>
+</html>

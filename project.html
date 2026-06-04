@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project — Patina Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- NOTE: Figma asset URLs expire in 7 days. Replace with self-hosted images before production. -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-muted:  #5a6271;
+      --c-footer: #f7f9fc;
+      --f-inter:  'Inter', sans-serif;
+      --f-geist:  'Geist', 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    ul { list-style: none; }
+
+    /* ─── NAVBAR ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      height: 65px;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      height: 100%;
+      padding: 12px 32px 0;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      margin-left: auto;
+      margin-right: 60px;
+    }
+    .nav-links a {
+      font-family: var(--f-inter);
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--c-dark); }
+    .nav-links a.active { color: var(--c-dark); font-weight: 500; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      font-weight: 500;
+      font-size: 16.4px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      padding: 0 16px;
+      height: 37px;
+      transition: opacity 0.18s;
+    }
+    .btn:hover { opacity: 0.84; }
+    .btn img { width: 16px; height: 16px; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .proj-hero {
+      width: 100%;
+      height: 972px;
+      overflow: hidden;
+      background: #111;
+    }
+    .proj-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ─── INFO BLOCK ─────────────────────────────────── */
+    .proj-info {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 80px 72px 100px;
+      display: grid;
+      grid-template-columns: 1fr 220px 120px;
+      gap: 0 60px;
+      align-items: start;
+    }
+    .proj-name {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+      line-height: 28.8px;
+      margin-bottom: 18px;
+    }
+    .proj-headline {
+      font-size: 57.6px;
+      font-weight: 400;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      margin-bottom: 40px;
+    }
+    .proj-desc {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      max-width: 680px;
+    }
+    .proj-services-label {
+      font-size: 20.9px;
+      text-transform: uppercase;
+      color: #949494;
+      margin-bottom: 16px;
+      letter-spacing: 0;
+      line-height: 25.92px;
+    }
+    .proj-services p {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+      line-height: 28.8px;
+    }
+    .proj-year {
+      font-size: 24px;
+      letter-spacing: -0.48px;
+      line-height: 28.8px;
+      text-align: right;
+    }
+
+    /* ─── CONTENT SECTIONS ───────────────────────────── */
+    .proj-img-section {
+      margin: 0 72px 80px;
+      height: 891px;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #111;
+    }
+    .proj-img-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .proj-text-section {
+      max-width: 1728px;
+      margin: 0 auto 80px;
+      padding: 0 72px;
+    }
+    .proj-text-section h2 {
+      font-size: 57.6px;
+      font-weight: 400;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+    .proj-text-section p {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      max-width: 750px;
+      margin-bottom: 30px;
+    }
+    .proj-text-section p:last-child { margin-bottom: 0; }
+
+    /* text + image side-by-side (A New Optimism layout) */
+    .proj-text-image-section {
+      margin: 0 72px 80px;
+      min-height: 948px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .proj-text-image-section .ti-text {
+      padding: 80px 80px 80px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .proj-text-image-section .ti-text h2 {
+      font-size: 57.6px;
+      font-weight: 400;
+      line-height: 69.12px;
+      letter-spacing: -1.152px;
+      max-width: 500px;
+      margin-bottom: 40px;
+    }
+    .proj-text-image-section .ti-text p {
+      font-size: 21.6px;
+      line-height: 30.24px;
+      letter-spacing: -0.384px;
+      max-width: 640px;
+      margin-bottom: 30px;
+    }
+    .proj-text-image-section .ti-text p:last-child { margin-bottom: 0; }
+    .proj-text-image-section .ti-img {
+      overflow: hidden;
+      background: #111;
+    }
+    .proj-text-image-section .ti-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* 5 phone mockups on black */
+    .proj-phones-section {
+      margin: 0 72px 80px;
+      height: 895px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      overflow: hidden;
+    }
+    .proj-phone {
+      flex: 0 0 auto;
+      width: 260px;
+      height: 560px;
+      border-radius: 18px;
+      overflow: hidden;
+      background: #111;
+    }
+    .proj-phone img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* two images side by side (Tote+Tee, UI+Mobile) */
+    .proj-split-section {
+      margin: 0 72px 80px;
+      height: 948px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .proj-split-section > div {
+      overflow: hidden;
+      background: #111;
+    }
+    .proj-split-section img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer {
+      height: 476px;
+      background: var(--c-footer);
+      overflow: hidden;
+    }
+    .footer-inner {
+      height: 100%;
+      padding: 40px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .footer-logo img { height: 23.8px; width: auto; }
+    .footer-blurb {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      max-width: 450px;
+    }
+    .footer-blurb .dim { color: var(--c-muted); }
+    .footer-email-wrap { display: inline-block; position: relative; margin-top: 28px; }
+    .footer-email {
+      font-family: var(--f-inter);
+      font-size: 29.6px;
+      font-weight: 400;
+      line-height: 48px;
+      letter-spacing: -0.32px;
+      color: var(--c-dark);
+      transition: opacity 0.18s;
+    }
+    .footer-email:hover { opacity: 0.6; }
+    .footer-email-line {
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 15%;
+      height: 2px;
+      background: var(--c-dark);
+    }
+
+    /* ── COLOR PALETTE SECTION ───────────────────── */
+    .proj-colors {
+      margin: 0 72px 80px;
+      display: flex;
+      height: 300px;
+      border-radius: 8px;
+      overflow: hidden;
+      gap: 2px;
+    }
+    .proj-color-swatch {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px 20px;
+    }
+    .cs-name {
+      font-family: var(--f-inter);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      opacity: 0.6;
+      margin-bottom: 4px;
+    }
+    .cs-hex {
+      font-size: 11px;
+      font-family: ui-monospace, 'SF Mono', 'Consolas', monospace;
+      opacity: 0.8;
+    }
+    .cs-on-dark  { color: #fff; }
+    .cs-on-light { color: #111; }
+
+    /* ── LOGO SHOWCASE SECTION ───────────────────── */
+    .proj-logo-showcase {
+      margin: 0 72px 80px;
+      height: 360px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .proj-logo-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 48px;
+    }
+    .proj-logo-panel img { max-width: 240px; width: 100%; height: auto; }
+    .lp-light { background: #f5f5f5; }
+    .lp-dark  { background: #0d0d0d; }
+    .lp-blue  { background: linear-gradient(140deg, #B8C7FF 0%, #1444E0 100%); }
+
+    /* ── BUSINESS CARD SECTION ───────────────────── */
+    .proj-biz-card {
+      margin: 0 72px 80px;
+      height: 600px;
+      background: #060606;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .proj-biz-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(20,68,224,0.09) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .biz-card {
+      width: 380px;
+      height: 228px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .biz-card-front {
+      background: #0c0c0c;
+      transform: rotate(-4deg) translateY(-14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .biz-card-front img { width: 176px; height: auto; display: block; }
+    .biz-card-front::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: #1444E0;
+    }
+    .biz-card-back {
+      background: #131313;
+      transform: rotate(3.5deg) translateY(14px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 32px;
+    }
+    .biz-card-back-top { display: flex; justify-content: flex-end; }
+    .biz-card-back-top img { width: 24px; height: auto; opacity: 0.8; }
+    .biz-card-person-name {
+      font-family: var(--f-inter);
+      font-size: 14px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: -0.2px;
+      margin-bottom: 3px;
+    }
+    .biz-card-person-role {
+      font-size: 9.5px;
+      font-family: var(--f-inter);
+      color: rgba(255,255,255,0.42);
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      font-weight: 500;
+    }
+    .biz-card-rule {
+      width: 26px;
+      height: 2px;
+      background: #1444E0;
+      margin: 10px 0;
+    }
+    .biz-card-person-contact {
+      font-size: 9.5px;
+      font-family: ui-monospace, 'SF Mono', 'Consolas', monospace;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.9;
+    }
+
+    /* ── LETTERHEAD SECTION ──────────────────────── */
+    .proj-letterhead {
+      margin: 0 72px 80px;
+      min-height: 680px;
+      background: #e2e2e2;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 52px;
+      padding: 80px;
+    }
+    .lh-doc {
+      width: 380px;
+      height: 536px;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.13);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .lh-doc:nth-child(1) { transform: rotate(-2deg); }
+    .lh-doc:nth-child(2) { transform: rotate(1.5deg); }
+    .lh-bar { height: 5px; background: #1444E0; flex-shrink: 0; }
+    .lh-inner {
+      flex: 1;
+      padding: 28px 34px 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .lh-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .lh-head img { height: 16px; width: auto; }
+    .lh-head-meta {
+      font-size: 7.5px;
+      font-family: ui-monospace, 'SF Mono', 'Consolas', monospace;
+      color: #bbb;
+      text-align: right;
+      line-height: 1.7;
+    }
+    .lh-hr { height: 1px; background: #ebebeb; margin-bottom: 18px; }
+    .lh-to-label {
+      font-size: 7.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      color: #1444E0;
+      margin-bottom: 5px;
+    }
+    .lh-to-name {
+      font-size: 10.5px;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .lh-body-text {
+      font-size: 8px;
+      color: #777;
+      line-height: 1.8;
+      flex: 1;
+    }
+    .lh-foot {
+      padding: 11px 34px;
+      border-top: 1px solid #ebebeb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .lh-foot-contact {
+      font-size: 7px;
+      font-family: ui-monospace, 'SF Mono', 'Consolas', monospace;
+      color: #c4c4c4;
+      line-height: 1.7;
+    }
+    .lh-foot-dot { width: 7px; height: 7px; border-radius: 50%; background: #1444E0; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" id="nav-home">Home</a></li>
+        <li><a href="ux.html" id="nav-ux">UX</a></li>
+      </ul>
+      <a href="#" class="btn">
+        Let's Chat
+        <img src="https://www.figma.com/api/mcp/asset/e1ceec5a-302e-400c-b080-4c9e5cffeb27" alt="">
+      </a>
+    </div>
+  </nav>
+
+  <div id="proj-page"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="/Users/aishwaryasreenivas/Desktop/Business of Design/WebsiteCode/Images/ImageLogo.svg" alt="Patina">
+      </a>
+      <div>
+        <p class="footer-blurb">
+          We'd love to hear from you —
+          <span class="dim"> whether you have a project in mind, or just want to say hi.</span>
+        </p>
+        <div class="footer-email-wrap">
+          <a href="mailto:sreeni@patinaex.com" class="footer-email">sreeni@patinaex.com</a>
+          <div class="footer-email-line"></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const PROJECTS = {
+
+      /* ── BRANDING ─────────────────────────────────── */
+
+      phoenix: {
+        category: 'branding',
+        name: 'Phoenix',
+        headline: 'A Rebirth of Finance',
+        year: '2023',
+        services: ['Brand Strategy', 'Brand Identity', 'UI Design'],
+        description: 'Phoenix is bringing about a new era for finance on Web3. The first DeFi primitive from Ellipsis Labs, Phoenix is a fully on-chain limit order book exchange. On Solana, Phoenix offers users a secure and efficient experience that is non-custodial and crankless.',
+        hero: 'https://www.figma.com/api/mcp/asset/87747b3d-5c09-4315-a959-bd1ef0b54c02',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/429a3cc4-4d3d-4004-b343-3cadae56b087' },
+          { type: 'text', headline: 'Rising Together', paragraphs: [
+            'Considering Phoenix\'s audience — those seeking security, clarity, and professionalism for on-chain exchanges — our strategy work positions the brand as combining the efficiency of a professional financial primitive with the openness of a decentralized protocol.',
+            'To rise together, inspired by the mythological phoenix rising from the ashes, acknowledges that with the emergence of Web3, finance is transforming. At an individual level, users benefit when using a tool like Phoenix — it serves as a beacon for the next wave of long-term financial tools, aiming to benefit all.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/00b1448d-b7ca-4618-9960-3a926d04afcf' },
+          { type: 'text-image',
+            headline: 'A New Optimism',
+            paragraphs: [
+              'Using our brand strategy work as a foundation, we created a visual system that feels optimistic, sleek, and direct. Inspired by the fiery rebirth of a phoenix, we created a warm, glowing palette that brings energy to custom 3D designs representative of an order book. Together these elements convey that Phoenix is creating something new — Solana\'s first crankless limit order book DEX.',
+              'For Phoenix\'s new logomark, we drew inspiration from the element of cooperation that exists in any two-sided market, using symmetry to acknowledge the mutually beneficial relationships that happen through their on-chain, decentralized exchange. Additionally, the primary shape within the mark is a subtle homage to a soaring phoenix.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/67eef638-8ca4-48ea-a1cd-4635c89d1084'
+          },
+          { type: 'phones', images: [
+            'https://www.figma.com/api/mcp/asset/787727dc-ea5c-4327-aace-516db4af10fc',
+            'https://www.figma.com/api/mcp/asset/04affac9-cf4f-45ac-88da-2cc9540ab891',
+            'https://www.figma.com/api/mcp/asset/ae91ae99-6fae-46a4-b575-2137bad0aff5',
+            'https://www.figma.com/api/mcp/asset/1f9a3570-bbbe-4f53-bebb-951a898d7f91',
+            'https://www.figma.com/api/mcp/asset/6253496b-ca95-47d5-81c0-61c70ca4a91d'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/46a073ce-9ff9-40db-8ace-64165ff024fe' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/959acae8-91ba-4609-bb1a-988c49331f67' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/68c32dff-0054-49af-b64d-3120365c6ce3' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/374336ad-78e5-4b1c-b9ea-428b02aa5c15',
+            right: 'https://www.figma.com/api/mcp/asset/ec82faff-3cfa-419d-a45c-4e379e653e85'
+          },
+          { type: 'text', headline: 'Building Up & Out', paragraphs: [
+            'We incorporated Phoenix\'s new brand visuals into a robust UI component library, bringing together the feel of the external brand with that of the product visuals. Even here, our strategy work acted as a guide, leading to UI designs that feel direct, professional, and intellectually honest, while remaining in line with our larger brand system.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/8813f16c-a2d6-4b8b-bf3f-5bc869fb6f38' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/a99195ee-e298-44e3-a325-0ca1e3151370',
+            right: 'https://www.figma.com/api/mcp/asset/f135dfac-0d4e-41ca-ac14-ae22662782ca'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3713e36a-37a6-446e-ab39-1731e5ef0e96' },
+        ]
+      },
+
+      freedom: {
+        category: 'branding',
+        name: 'Freedom',
+        headline: 'Bold Identity,\nBolder Vision',
+        year: '2023',
+        services: ['Brand Strategy', 'Brand Identity'],
+        description: 'Freedom required an identity as powerful as the movement it represents. We built a brand system that commands attention — stark, bold, and undeniably memorable across every touchpoint from storefronts to digital screens.',
+        hero: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04' },
+          { type: 'text', headline: 'Standing Out', paragraphs: [
+            'An identity that commands attention and holds it. The Freedom mark distills a complex ethos into a single, unforgettable symbol — built to scale from a business card to a billboard without losing its edge.',
+            'We leaned into contrast: deep blacks against crisp whites, bold geometry against negative space. Every choice was deliberate, every element load-bearing.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04' },
+          { type: 'text-image',
+            headline: 'Making a Statement',
+            paragraphs: [
+              'The logomark is built to live anywhere — embossed on matte black packaging, reversed out of a full-bleed poster, or rendered at 16px on a digital interface. Every application was pressure-tested during design, not after.',
+              'Typography was chosen for the same reason: a single weight, a single size, applied with discipline. Restriction, used intentionally, creates strength.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04',
+            right: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04'
+          },
+          { type: 'text', headline: 'Built to Last', paragraphs: [
+            'Great brand identity isn\'t just about looking good on launch day. It\'s about holding up under real-world conditions — across media, over time, in the hands of people other than the designers who made it. Freedom\'s system was built with exactly that durability in mind.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3439861b-69d7-4666-8f1a-b37867a82e04' },
+        ]
+      },
+
+      aris: {
+        category: 'branding',
+        name: 'Aris',
+        headline: 'Architecture\nof Trust',
+        year: '2024',
+        services: ['Brand Strategy', 'Brand Identity'],
+        description: 'Aris is building infrastructure for the next generation of financial systems. Their brand needed to convey precision, stability, and the kind of quiet confidence that enterprise clients demand.',
+        hero: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c' },
+          { type: 'text', headline: 'Building Credibility', paragraphs: [
+            'The Aris wordmark is engineered for trust. Clean geometry, precise spacing, and a palette drawn from institutional finance — every decision signals that Aris operates at the highest level.',
+            'We built a brand system flexible enough to work across pitch decks, product interfaces, and physical environments, while maintaining the coherence that enterprise buyers expect.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c' },
+          { type: 'text-image',
+            headline: 'Precision\nby Design',
+            paragraphs: [
+              'The Aris mark began as a structural problem: how do you create a symbol that reads as both human and institutional? The answer was found in geometry — forms that are precise enough to feel engineered, but proportioned in a way that feels considered, not cold.',
+              'Colour was equally deliberate. A palette of deep neutrals with a single accent — enough to signal warmth without sacrificing the authority that enterprise clients demand.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c',
+            right: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c'
+          },
+          { type: 'text', headline: 'A System for Scale', paragraphs: [
+            'The final brand system ships with a full motion language, a set of UI component guidelines for the product team, and an asset library structured around real-world usage. Every artifact was designed to be handed off cleanly and used confidently, without Patina in the room.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ac5156d4-0cbe-4d3a-84e7-44c16097aa9c' },
+        ]
+      },
+
+      ember: {
+        category: 'branding',
+        name: 'Ember',
+        headline: 'Warmth at Scale',
+        year: '2024',
+        services: ['Brand Identity', 'Visual Design'],
+        description: 'Ember connects people through shared experiences. The challenge was to create a brand warm enough for intimate moments yet scalable enough for a global audience — approachable without being naive.',
+        hero: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321' },
+          { type: 'text', headline: 'Crafting Connection', paragraphs: [
+            'We built the Ember visual language around warmth and motion — a palette of amber and terracotta, typefaces with personality, and a system of illustration that brings humanity to digital moments.',
+            'The result is a brand that feels personal at scale, capable of serving millions of users without losing the sense that it was made for you specifically.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321' },
+          { type: 'text-image',
+            headline: 'Warmth in\nEvery Detail',
+            paragraphs: [
+              'The illustration system was the centrepiece of the Ember identity — a modular library of characters and environments that could be combined infinitely, always feeling handcrafted but never inconsistent.',
+              'Motion guidelines ensured that even micro-interactions carry the brand\'s warmth: transitions that ease gently, feedback that feels responsive rather than mechanical, moments of delight at exactly the right time.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321',
+            right: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321'
+          },
+          { type: 'text', headline: 'Scaling Humanity', paragraphs: [
+            'The final brand system was delivered with a comprehensive rollout guide: how to use the illustration library, where the motion guidelines apply, and how the system adapts as Ember grows into new markets. A brand built not just for today, but for wherever the product goes next.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ad88b57f-e574-4469-a321-2af53c0b4321' },
+        ]
+      },
+
+      parity: {
+        category: 'branding',
+        name: 'Parity',
+        headline: 'Balance\nby Design',
+        year: '2024',
+        services: ['Brand Strategy', 'Brand Identity'],
+        description: 'Parity is redefining how organizations think about equity and inclusion. Their brand needed to embody the very principles the company champions — balance, clarity, and the belief that good systems create good outcomes.',
+        hero: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d' },
+          { type: 'text', headline: 'Finding Equilibrium', paragraphs: [
+            'The Parity mark is built on symmetry and system — a logomark that visually embodies the concept of balance while functioning as a clear, ownable symbol in the market.',
+            'We extended this philosophy across the full brand system: a duotone palette, geometric typography, and a layout grid that emphasizes structure without rigidity.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d' },
+          { type: 'text-image',
+            headline: 'Symmetry\nas Strategy',
+            paragraphs: [
+              'The brand strategy for Parity is rooted in a single idea: that balance isn\'t just a value, it\'s a methodology. Every creative decision — from the logomark\'s bilateral symmetry to the equal weight given to each typeface pairing — was made to demonstrate that belief, not just describe it.',
+              'We built the visual identity to function as proof of concept. If Parity\'s brand doesn\'t feel balanced, the claim rings hollow. So we designed it to feel exactly like what it says it is.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d',
+            right: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d'
+          },
+          { type: 'text', headline: 'A Framework\nfor Balance', paragraphs: [
+            'The Parity brand system includes a set of layout principles that extend the symmetry concept into every application — from slide decks to product UI. It\'s not a rigid grid, but a flexible set of tensions: always pulling toward centre, always resolving into clarity.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/9890cfcb-42dc-4720-a9cf-5b8a1e76e85d' },
+        ]
+      },
+
+      lucidic: {
+        category: 'branding',
+        name: 'Lucidic',
+        headline: 'Many Agents.\nOne System.',
+        year: '2025',
+        services: ['Brand Strategy', 'Brand Identity', 'Visual System'],
+        description: 'Lucidic is building the training platform for reliable AI agents — enabling teams to debug, test, and systematically improve agent pipelines. Their brand needed to capture the tension at the core of what they do: turning fragmented, unstructured inputs into a single reliable output. We built an identity that embodies that transformation.',
+        hero: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 11.png',
+        sections: [
+          { type: 'image', src: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 7.png' },
+          { type: 'text', headline: 'From Noise\nto Clarity', paragraphs: [
+            'The Lucidic logomark is a modular grid of pixels — dense and anchored at its core, dispersing outward toward the top right. The tight cluster establishes recognition and stability; the scatter suggests transformation, from fragmented inputs to clear, reliable outputs.',
+            'This tension between noise and order, encoded in a single geometric form, is the visual expression of Lucidic\'s core proposition. Many agents operating independently, converging into one system you can trust.'
+          ]},
+          { type: 'logo-showcase',
+            black: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/PNG/Lucidic_Logo_Mark_Black_Horizontal.png',
+            white: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/PNG/Lucidic_Logo_Mark_White_Horizontal.png'
+          },
+          { type: 'image', src: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 17.png' },
+          { type: 'text-image',
+            headline: 'A Bold Blue-Led\nSystem',
+            paragraphs: [
+              'The palette is built around a saturated cobalt — direct, modern, and unmistakably digital. Paired with a soft periwinkle for gradient moments and a strict neutral scale, the system is high-contrast, system-ready, and immediately recognisable at any scale.',
+              'Typography follows the same logic. Space Grotesk leads with personality in headings — expressive but never decorative. Geist Mono adds technical texture in tags and metadata, grounding the brand in its engineering origin. Inter handles body text with quiet precision.'
+            ],
+            imageSrc: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 9.png'
+          },
+          { type: 'colors', colors: [
+            { hex: '#1444E0', name: 'Primary Blue',  dark: true  },
+            { hex: '#B8C7FF', name: 'Light Blue',    dark: false },
+            { hex: '#000000', name: 'Black',         dark: true  },
+            { hex: '#606065', name: 'Dark Gray',     dark: true  },
+            { hex: '#E2E4EA', name: 'Light Gray',    dark: false }
+          ]},
+          { type: 'image', src: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 10.png' },
+          { type: 'biz-card',
+            logoWhite: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/PNG/Lucidic_Logo_Mark_White_Horizontal.png',
+            markWhite: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/PNG/Lucidic_Logo_Mark_White.png'
+          },
+          { type: 'letterhead',
+            logoBlack: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/PNG/Lucidic_Logo_Mark_Black_Horizontal.png'
+          },
+          { type: 'split',
+            left:  '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 9.png',
+            right: '/Users/aishwaryasreenivas/Desktop/Brands/Lucidic/Final/Prev/PrevSlides/Slide 16_9 - 8.png'
+          },
+          { type: 'text', headline: 'Unstructured\nto Unified', paragraphs: [
+            'The Lucidic brand system works across print, digital, and environmental applications — each governed by the same underlying logic. The logomark scales from 16px in a browser tab to 16 feet on a construction hoarding without losing its clarity or intent.',
+            'Every application reinforces the same message: Lucidic takes the messy, unpredictable reality of AI agent development and makes it tractable. The brand doesn\'t just describe that promise — it demonstrates it.'
+          ]},
+        ]
+      },
+
+      /* ── UX ───────────────────────────────────────── */
+
+      freelan: {
+        category: 'ux',
+        name: 'Freelan',
+        headline: 'Hire, Pay &\nInsure Your Team',
+        year: '2024',
+        services: ['UX Architecture', 'Design Systems', 'UI Design'],
+        description: 'Freelan simplifies workforce management for modern companies. We designed an end-to-end product experience that makes it easy to onboard contractors, manage payments, and ensure compliance — all from a single, intuitive interface.',
+        hero: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8' },
+          { type: 'text', headline: 'Simplifying Complexity', paragraphs: [
+            'HR and payroll are notoriously complex. Our challenge was to distill years of compliance requirements, international payment rails, and workforce management workflows into something a non-expert could navigate on day one.',
+            'We started with deep user research, mapping the full lifecycle of a contractor relationship — from first contact to final payment — and identifying every friction point along the way.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8' },
+          { type: 'text-image',
+            headline: 'One Flow,\nEnd to End',
+            paragraphs: [
+              'We rebuilt the onboarding flow from scratch, reducing a 14-step process to 4 — without removing a single required field. Every screen was pressure-tested against real compliance requirements before any visual design began.',
+              'The resulting information architecture is built around the contractor\'s mental model, not the system\'s data model. Users think about people, not records. Freelan now reflects that distinction at every touchpoint.'
+            ],
+            imageSrc: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8'
+          },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8' },
+          { type: 'split',
+            left:  'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8',
+            right: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8'
+          },
+          { type: 'text', headline: 'A System\nthat Scales', paragraphs: [
+            'The design system we built for Freelan covers 200+ components across desktop and mobile, with full documentation for each. It\'s built to grow alongside the product — new features slot into the existing structure without requiring redesigns of what\'s already there.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/3521149b-be6f-4a7f-bc6d-6376a51e4cb8' },
+        ]
+      },
+
+      voyager: {
+        category: 'ux',
+        name: 'Voyager',
+        headline: 'Navigate\nthe Unknown',
+        year: '2023',
+        services: ['UX Architecture', 'UI Design'],
+        description: 'Voyager is a next-generation navigation platform for maritime and aviation industries. We built an interface that surfaces critical information at exactly the right moment — without overwhelming operators in high-stakes environments.',
+        hero: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+          { type: 'text', headline: 'Charting New Paths', paragraphs: [
+            'In high-stakes navigation environments, clarity is a safety requirement. We designed Voyager around a strict hierarchy of information — critical alerts front and center, supporting data one tap away.',
+            'The design system was built for extreme conditions: high contrast for bright sunlight, large touch targets for rough weather, and an information architecture that eliminates decision fatigue during critical maneuvers.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+          { type: 'text-image', headline: 'Precision at Every Scale', paragraphs: [
+            'Whether on a bridge display spanning two meters or a tablet mounted to a cockpit, Voyager had to work. We designed adaptive layouts that reorganize information density based on screen real estate — never sacrificing legibility for completeness.',
+            'Every interaction was pressure-tested against real operator workflows. The result is a product that feels instinctive even in the most demanding environments.'
+          ], imageSrc: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+          { type: 'split', left: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec', right: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+          { type: 'text', headline: 'Trusted by Operators', paragraphs: [
+            'Voyager launched with a leading maritime operator and has since expanded to three additional fleet operators across Europe and Asia-Pacific — a testament to the product\'s reliability in the field.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/73954c2c-2f4a-40aa-b254-92abf9191aec' },
+        ]
+      },
+
+      pulse: {
+        category: 'ux',
+        name: 'Pulse',
+        headline: 'Health Data,\nHumanized',
+        year: '2024',
+        services: ['UX Architecture', 'Design Systems'],
+        description: 'Pulse makes health data legible for the people who need it most — patients. We designed a platform that translates complex medical data into clear, actionable insights without sacrificing clinical accuracy.',
+        hero: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+          { type: 'text', headline: 'Data with Empathy', paragraphs: [
+            'Health data is deeply personal. We approached the design of Pulse with the understanding that numbers on a screen carry real emotional weight for patients — and designed accordingly.',
+            'Our information architecture surfaces the most important metrics clearly, provides progressive disclosure for those who want to go deeper, and always contextualizes data with plain-language explanations that a patient — not a clinician — would understand.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+          { type: 'text-image', headline: 'Designed for Real Life', paragraphs: [
+            'Patients check their health apps in waiting rooms, at bedside, and during moments of real anxiety. We designed Pulse to meet them there — calm, readable typography, clear progress indicators, and a tone that reassures rather than alarms.',
+            'The notification system went through eight iterations before we got the balance right: informative without being intrusive, urgent without causing panic.'
+          ], imageSrc: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+          { type: 'split', left: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750', right: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+          { type: 'text', headline: 'Outcomes That Matter', paragraphs: [
+            'Clinical partners reported a 34% increase in patient engagement with their health data within the first three months of Pulse going live — translating directly into better adherence and improved health outcomes.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/a2719570-79e0-425a-8bb8-f1f401f75750' },
+        ]
+      },
+
+      drift: {
+        category: 'ux',
+        name: 'Drift',
+        headline: 'Analytics\nat a Glance',
+        year: '2024',
+        services: ['UX Architecture', 'UI Design'],
+        description: 'Drift gives growth teams instant clarity on what\'s working. We designed a dashboard experience that surfaces the metrics that matter, eliminates reporting noise, and empowers non-technical users to make data-driven decisions without writing a single query.',
+        hero: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+          { type: 'text', headline: 'Clarity Through\nComplexity', paragraphs: [
+            'Analytics products tend to accumulate features over time, making them powerful for analysts and impenetrable for everyone else. Drift needed to break that pattern.',
+            'We audited existing user behavior, identified the 20% of features that drove 80% of value, and rebuilt the information architecture around those core workflows — making the essential easy to find and the advanced always one layer deeper.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+          { type: 'text-image', headline: 'Speed as a Feature', paragraphs: [
+            'Growth teams move fast. Drift\'s dashboard was engineered to surface the previous week\'s performance in under two seconds — with filters, comparisons, and drill-downs that respond instantly.',
+            'We worked closely with the engineering team to align on what was technically feasible, then designed within those constraints to create an experience that felt fast even when data was loading.'
+          ], imageSrc: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+          { type: 'split', left: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb', right: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+          { type: 'text', headline: 'Insight at Every Level', paragraphs: [
+            'Drift is now used by over 200 growth teams globally. The platform has reduced average reporting time from 3 hours per week to under 20 minutes — giving teams back the time they need to act on insights, not just find them.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/e1e6d9af-142a-45d7-9c75-db2980a8eefb' },
+        ]
+      },
+
+      apex: {
+        category: 'ux',
+        name: 'Apex',
+        headline: 'Connect,\nCreate, Grow',
+        year: '2023',
+        services: ['UX Architecture', 'Design Systems', 'UI Design'],
+        description: 'Apex is a creator-first social platform built for niche communities. We designed a product that makes it effortless to share, connect, and build — whether you\'re growing an audience of 100 or 100,000.',
+        hero: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916',
+        sections: [
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+          { type: 'text', headline: 'Building\nCommunities', paragraphs: [
+            'Social products live or die on the quality of their core loops. For Apex, we spent weeks mapping what makes creators feel rewarded, what makes audiences feel heard, and what makes communities feel alive.',
+            'The resulting design system prioritizes creation — making it frictionless to share content, start conversations, and build the kind of genuine connections that keep both creators and audiences coming back.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+          { type: 'text-image', headline: 'A System Built to Scale', paragraphs: [
+            'Apex needed a design system that could grow as fast as its communities. We built a component library with enough flexibility to support radically different content types — long-form essays, short video clips, live events, and merchandise — without losing visual coherence.',
+            'Every component was designed mobile-first, then adapted for desktop. The result is a product that feels native on every device creators actually use.'
+          ], imageSrc: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+          { type: 'split', left: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916', right: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+          { type: 'text', headline: 'Creators First, Always', paragraphs: [
+            'Since launch, Apex has onboarded over 12,000 creators and more than 400,000 community members. Retention rates are 2x the industry average — evidence that when you get the core product right, growth follows naturally.'
+          ]},
+          { type: 'image', src: 'https://www.figma.com/api/mcp/asset/ede5a149-52f8-44d7-b786-9cf31a22d916' },
+        ]
+      }
+    };
+
+    function render() {
+      const id  = new URLSearchParams(window.location.search).get('id');
+      const proj = PROJECTS[id];
+      if (!proj) { window.location.href = 'index.html'; return; }
+
+      document.title = proj.name + ' — Patina Design Studio';
+
+      if (proj.category === 'ux') {
+        document.getElementById('nav-ux').classList.add('active');
+      } else {
+        document.getElementById('nav-branding').classList.add('active');
+      }
+
+      let html = `
+        <section class="proj-hero">
+          <img src="${proj.hero}" alt="${proj.name}">
+        </section>
+
+        <div class="proj-info">
+          <div class="proj-info-left">
+            <p class="proj-name">${proj.name}</p>
+            <h1 class="proj-headline">${proj.headline.replace(/\n/g, '<br>')}</h1>
+            <p class="proj-desc">${proj.description}</p>
+          </div>
+          <div class="proj-info-mid">
+            <p class="proj-services-label">Services</p>
+            <div class="proj-services">
+              ${proj.services.map(s => `<p>${s}</p>`).join('')}
+            </div>
+          </div>
+          <div class="proj-info-right">
+            <p class="proj-year">${proj.year}</p>
+          </div>
+        </div>
+      `;
+
+      proj.sections.forEach(sec => {
+        if (sec.type === 'image') {
+          html += `
+            <section class="proj-img-section">
+              <img src="${sec.src}" alt="">
+            </section>
+          `;
+        } else if (sec.type === 'text') {
+          html += `
+            <section class="proj-text-section">
+              <h2>${sec.headline.replace(/\n/g, '<br>')}</h2>
+              ${sec.paragraphs.map(p => `<p>${p}</p>`).join('')}
+            </section>
+          `;
+        } else if (sec.type === 'text-image') {
+          html += `
+            <section class="proj-text-image-section">
+              <div class="ti-text">
+                <h2>${sec.headline.replace(/\n/g, '<br>')}</h2>
+                ${sec.paragraphs.map(p => `<p>${p}</p>`).join('')}
+              </div>
+              <div class="ti-img">
+                <img src="${sec.imageSrc}" alt="">
+              </div>
+            </section>
+          `;
+        } else if (sec.type === 'phones') {
+          html += `
+            <section class="proj-phones-section">
+              ${sec.images.map(src => `
+                <div class="proj-phone">
+                  <img src="${src}" alt="">
+                </div>
+              `).join('')}
+            </section>
+          `;
+        } else if (sec.type === 'split') {
+          html += `
+            <section class="proj-split-section">
+              <div><img src="${sec.left}" alt=""></div>
+              <div><img src="${sec.right}" alt=""></div>
+            </section>
+          `;
+        } else if (sec.type === 'colors') {
+          const swatches = sec.colors.map(c => `
+            <div class="proj-color-swatch" style="background:${c.hex}">
+              <span class="cs-name ${c.dark ? 'cs-on-dark' : 'cs-on-light'}">${c.name}</span>
+              <span class="cs-hex ${c.dark ? 'cs-on-dark' : 'cs-on-light'}">${c.hex}</span>
+            </div>
+          `).join('');
+          html += `<section class="proj-colors">${swatches}</section>`;
+        } else if (sec.type === 'logo-showcase') {
+          html += `
+            <section class="proj-logo-showcase">
+              <div class="proj-logo-panel lp-light">
+                <img src="${sec.black}" alt="Logo on light">
+              </div>
+              <div class="proj-logo-panel lp-dark">
+                <img src="${sec.white}" alt="Logo on dark">
+              </div>
+              <div class="proj-logo-panel lp-blue">
+                <img src="${sec.white}" alt="Logo on blue">
+              </div>
+            </section>
+          `;
+        } else if (sec.type === 'biz-card') {
+          html += `
+            <section class="proj-biz-card">
+              <div class="biz-card biz-card-front">
+                <img src="${sec.logoWhite}" alt="Lucidic">
+              </div>
+              <div class="biz-card biz-card-back">
+                <div class="biz-card-back-top">
+                  <img src="${sec.markWhite}" alt="">
+                </div>
+                <div>
+                  <div class="biz-card-person-name">Jordan Park</div>
+                  <div class="biz-card-person-role">Co-Founder &amp; CEO</div>
+                  <div class="biz-card-rule"></div>
+                  <div class="biz-card-person-contact">jordan@lucidic.ai<br>lucidic.ai</div>
+                </div>
+              </div>
+            </section>
+          `;
+        } else if (sec.type === 'letterhead') {
+          html += `
+            <section class="proj-letterhead">
+              <div class="lh-doc">
+                <div class="lh-bar"></div>
+                <div class="lh-inner">
+                  <div class="lh-head">
+                    <img src="${sec.logoBlack}" alt="Lucidic">
+                    <div class="lh-head-meta">May 2025<br>Ref: LC-0042</div>
+                  </div>
+                  <div class="lh-hr"></div>
+                  <div class="lh-to-label">To</div>
+                  <div class="lh-to-name">Andreessen Horowitz<br>Menlo Park, CA 94025</div>
+                  <div class="lh-body-text">
+                    We are pleased to share the enclosed proposal for our Series A financing. Lucidic is building the training platform for reliable AI agents — enabling developers to debug, test, and improve agent pipelines systematically at scale.<br><br>
+                    Our approach addresses the core reliability problem facing production AI systems: agents that fail unpredictably, in ways that are difficult to diagnose and systematically resolve. We provide the infrastructure to make that tractable.<br><br>
+                    We look forward to discussing at your earliest convenience.
+                  </div>
+                </div>
+                <div class="lh-foot">
+                  <div class="lh-foot-contact">hello@lucidic.ai<br>lucidic.ai</div>
+                  <div class="lh-foot-dot"></div>
+                </div>
+              </div>
+              <div class="lh-doc">
+                <div class="lh-bar"></div>
+                <div class="lh-inner">
+                  <div class="lh-head">
+                    <img src="${sec.logoBlack}" alt="Lucidic">
+                    <div class="lh-head-meta">April 2025<br>Ref: LC-0039</div>
+                  </div>
+                  <div class="lh-hr"></div>
+                  <div class="lh-to-label">Re</div>
+                  <div class="lh-to-name">Pilot Partnership Agreement<br>Enterprise Integration — Q2 2025</div>
+                  <div class="lh-body-text">
+                    Thank you for your continued interest in Lucidic's enterprise offering. Per our discussion, this letter outlines the terms of our pilot partnership for the second quarter of 2025.<br><br>
+                    Access will be provisioned to five engineering teams across your organisation, with full telemetry, session replay, and dashboard access enabled within 48 hours of agreement execution.<br><br>
+                    Please find our standard MSA enclosed for your review and countersignature.
+                  </div>
+                </div>
+                <div class="lh-foot">
+                  <div class="lh-foot-contact">hello@lucidic.ai<br>lucidic.ai</div>
+                  <div class="lh-foot-dot"></div>
+                </div>
+              </div>
+            </section>
+          `;
+        }
+      });
+
+      document.getElementById('proj-page').innerHTML = html;
+    }
+
+    render();
+  </script>
+
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+  </script>
+</body>
+</html>
