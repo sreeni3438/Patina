@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Patina — Design Studio</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
@@ -117,11 +119,18 @@
     .btn-lg { padding: 12px 20px; }
     .btn-sm { padding: 12px 20px; }
 
+    .nav .btn {
+      font-size: 16px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      gap: 7px;
+    }
+    .nav .btn img, .nav .btn svg { width: 15px; height: 15px; }
+
     /* ─── NAVBAR ─────────────────────────────────────── */
     .nav {
       position: fixed;
       inset: 0 0 auto;
-      height: 65px;
       z-index: 200;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -131,8 +140,7 @@
     .nav-inner {
       max-width: 1728px;
       margin: 0 auto;
-      height: 100%;
-      padding: 12px 32px 0;
+      padding: 14px 32px 18px;
       display: flex;
       align-items: center;
     }
@@ -523,39 +531,70 @@
       color: var(--c-dark);
     }
 
-    .ww-row {
+    .ww-grid {
       display: grid;
-      grid-template-columns: 200px 1fr;
-      gap: 40px;
-      padding: 40px 0;
-      border-top: 1px solid var(--c-border);
-      align-items: start;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+
+    .ww-card {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 16px;
+      height: 300px;
+      padding: 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.2s ease;
     }
 
-    .ww-row.visible {
+    .ww-card.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
-    .ww-row:last-child { border-bottom: 1px solid var(--c-border); }
+    .ww-card:hover { border-color: #c8c8c8; }
 
-    .ww-row-name {
-      font-family: var(--f-inter);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--c-dark);
-      padding-top: 2px;
+    .ww-card-spacer {
+      flex: 1;
     }
 
-    .ww-row-body {
-      font-size: 22px;
+    .ww-card-title {
+      font-family: var(--f-inter);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--c-dark);
+      margin-top: auto;
+    }
+
+    .ww-card-desc {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      right: 32px;
+      bottom: 32px;
+      font-size: 18px;
       font-weight: 300;
-      line-height: 34px;
+      line-height: 28px;
       color: var(--c-muted);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .ww-card:hover .ww-card-desc {
+      opacity: 1;
+    }
+
+    .ww-card.default-open .ww-card-desc {
+      opacity: 1;
     }
 
     .ww-tags {
@@ -678,7 +717,7 @@
 
     /* ── Tablet: ≤ 1100px ── */
     @media (max-width: 1100px) {
-      .nav-inner { padding: 12px 28px 0; }
+      .nav-inner { padding: 14px 28px 18px; }
 
       .hero { padding: 100px 40px 80px; }
       .hero h1 { font-size: 44px; line-height: 56px; }
@@ -712,7 +751,11 @@
 
       .ww-section { padding: 80px 40px; }
       .ww-desc, .ww-with { font-size: 19px; line-height: 30px; }
-      .ww-row-name, .ww-row-body { font-size: 19px; line-height: 30px; }
+      .ww-section { padding: 80px 40px; }
+      .ww-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .ww-card { height: 280px; padding: 28px; }
+      .ww-card-title { font-size: 22px; }
+      .ww-card-desc { font-size: 16px; line-height: 26px; }
 
       .full-img-section { padding: 0 40px; }
 
@@ -726,8 +769,9 @@
 
     /* ── Mobile: ≤ 640px ── */
     @media (max-width: 640px) {
-      .nav-inner { padding: 12px 20px 0; }
+      .nav-inner { padding: 14px 20px 18px; }
       .nav-links { display: none; }
+      .nav .btn { margin-left: auto; }
 
       .hero { padding: 88px 20px 56px; }
       .hero h1 { font-size: 30px; line-height: 40px; max-width: 100%; }
@@ -761,9 +805,11 @@
       .ww-section { padding: 56px 20px; }
       .ww-tab { font-size: 16px; padding: 6px 14px; }
       .ww-desc, .ww-with { font-size: 16px; line-height: 26px; }
-      .ww-row { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
-      .ww-row-name { font-size: 15px; font-weight: 500; color: var(--c-dark); }
-      .ww-row-body { font-size: 15px; line-height: 24px; }
+      .ww-grid { grid-template-columns: 1fr; gap: 12px; }
+      .ww-card { height: auto; padding: 20px; }
+      .ww-card-spacer { flex: 0; }
+      .ww-card-title { font-size: 18px; margin-top: 0; }
+      .ww-card-desc { position: static; opacity: 1; font-size: 15px; line-height: 24px; }
 
       .full-img-section { padding: 0 16px; }
       .full-img { border-radius: 20px; }
@@ -783,7 +829,7 @@
 <div id="custom-cursor"></div>
 
   <!-- ─── NAVBAR ─── -->
-  <nav>
+  <nav class="nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <img
@@ -793,7 +839,7 @@
       </a>
       <ul class="nav-links">
       </ul>
-      <a href="#" class="btn btn-sm">
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm">
         Let's Chat
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -809,7 +855,7 @@
       </h1>
       <p class="hero-sub">We embed a design lead and senior designer, who've done it before for YC and a16z-backed startups, directly into your team and show you a first MVP design in 10 days</p>
       <div>
-        <a href="#" class="btn btn-lg">
+        <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg">
           Let's Chat
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -939,25 +985,32 @@
 <!-- ─── WHO WE'RE FOR ─── -->
     <section class="ww-section">
       <h2 class="why-label reveal">How we work</h2>
-      <div class="ww-row">
-        <div class="ww-row-name">Your Design Team</div>
-        <div class="ww-row-body">Every engagement is led by a design lead with experience as a founding designer and a senior designer. We embed into your team by owning design, joining Slack, sending async updates, and running feedback sessions once a week.</div>
-      </div>
-      <div class="ww-row">
-        <div class="ww-row-name">User Research</div>
-        <div class="ww-row-body">Before touching visuals, we dig into your user interviews, business model, and competitive landscape to understand where friction lives and what a truly seamless experience looks like.</div>
-      </div>
-      <div class="ww-row">
-        <div class="ww-row-name">Prototypes</div>
-        <div class="ww-row-body">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. Every interaction is considered so the experience feels seamless.</div>
-      </div>
-      <div class="ww-row">
-        <div class="ww-row-name">User Tests</div>
-        <div class="ww-row-body">We test designs with real users before anything gets built — we identify where people hesitate, get confused, or drop off, and refine until the experience is genuinely frictionless.</div>
-      </div>
-      <div class="ww-row">
-        <div class="ww-row-name">Design systems</div>
-        <div class="ww-row-body">We create and manage a scalable design system, making it easy for your engineering team to ship on brand. Teams get value from this beyond our engagement.</div>
+      <div class="ww-grid">
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Design lead and senior designer</div>
+          <div class="ww-card-desc">Every engagement is led by a design lead with experience as a founding designer and a senior designer. We embed into your team by owning design, joining Slack, sending async updates, and running feedback sessions once a week.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Research and understand your users</div>
+          <div class="ww-card-desc">Before touching visuals, we dig into your user interviews, business model, and competitive landscape to understand where friction lives and what a truly seamless experience looks like.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Build interactive prototypes quickly</div>
+          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. Every interaction is considered so the experience feels seamless.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Test designs with real users</div>
+          <div class="ww-card-desc">We test designs with real users before anything gets built — we identify where people hesitate, get confused, or drop off, and refine until the experience is genuinely frictionless.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Build scalable design system</div>
+          <div class="ww-card-desc">We create and manage a scalable design system, making it easy for your engineering team to ship on brand. Teams get value from this beyond our engagement.</div>
+        </div>
       </div>
     </section>
 
@@ -1065,10 +1118,33 @@
 
     /* Individual cards + all reveal elements */
     document.querySelectorAll('.p-card, .reveal').forEach(el => observer.observe(el));
-    document.querySelectorAll('.ww-row').forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.1) + 's';
+    const wwCards = document.querySelectorAll('.ww-card');
+    wwCards.forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.08) + 's';
       observer.observe(el);
     });
+
+    /* ── First card open by default ── */
+    if (wwCards.length > 0) {
+      wwCards[0].classList.add('default-open');
+
+      wwCards.forEach((card, idx) => {
+        card.addEventListener('mouseenter', () => {
+          if (idx !== 0) {
+            wwCards[0].classList.remove('default-open');
+          }
+        });
+        card.addEventListener('mouseleave', () => {
+          let anyOtherHovered = false;
+          wwCards.forEach((c, i) => {
+            if (i !== 0 && c.matches(':hover')) anyOtherHovered = true;
+          });
+          if (!anyOtherHovered) {
+            wwCards[0].classList.add('default-open');
+          }
+        });
+      });
+    }
 
     /* ── Custom cursor ── */
     const cursor = document.getElementById('custom-cursor');
