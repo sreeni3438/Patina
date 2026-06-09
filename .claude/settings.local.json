@@ -3,7 +3,9 @@
     "allow": [
       "mcp__claude_ai_Figma__get_design_context",
       "WebFetch(domain:mapo.studio)",
-      "Read(//Users/aishwaryasreenivas/Downloads/**)"
+      "Read(//Users/aishwaryasreenivas/Downloads/**)",
+      "Bash(python3 -m http.server 8000)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless=new --screenshot=/tmp/index_updated.png --window-size=1280,900 --device-scale-factor=1 http://localhost:8000/index.html)"
     ]
   }
 }

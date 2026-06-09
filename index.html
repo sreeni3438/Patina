@@ -124,7 +124,6 @@
       padding: 9px 16px;
       border-radius: 8px;
       gap: 7px;
-      margin-left: auto;
     }
     .nav .btn img, .nav .btn svg { width: 15px; height: 15px; }
 
@@ -164,10 +163,9 @@
     }
     .nav-links a:hover { color: var(--c-dark); }
 
-
     /* ─── HERO ───────────────────────────────────────── */
     .hero {
-      padding: 120px 144px 120px 64px;
+      padding: 200px 144px 120px 64px;
       background: #fff;
       display: flex;
       flex-direction: column;
@@ -433,10 +431,10 @@
       overflow: hidden;
     }
 
-    .svc-c1 { background: #f6f2fc; }
-    .svc-c2 { background: #faefde; }
-    .svc-c3 { background: #ffebeb; }
-    .svc-c4 { background: #eefae6; }
+    .svc-c1 { background: #faf8fe; }
+    .svc-c2 { background: #fdf7ed; }
+    .svc-c3 { background: #fff3f3; }
+    .svc-c4 { background: #f6fef3; }
 
     .svc-label {
       font-size: 23.1px;
@@ -492,6 +490,55 @@
     .ww-section {
       background: #fff;
       padding: 120px 64px;
+    }
+
+    .ww-section--dark {
+      background: var(--c-footer);
+      color: var(--c-dark);
+    }
+
+    .ww-section--dark .why-label {
+      color: var(--c-dark);
+    }
+
+    .ww-section--dark .ww-card {
+      background: #fff;
+      border-color: #e8e8e8;
+    }
+
+    .ww-section--dark .ww-card-title {
+      color: var(--c-dark);
+      font-weight: 400;
+    }
+
+    .ww-section--dark .ww-card-desc {
+      color: var(--c-muted);
+    }
+
+    .ww-section--dark a {
+      color: var(--c-dark);
+    }
+
+    .ww-section--dark a:hover {
+      color: var(--c-mid);
+    }
+
+    .why-label-secondary {
+      display: block;
+      color: var(--c-mid);
+    }
+
+    .ww-section--dark .why-label-secondary {
+      color: var(--c-mid);
+    }
+
+    .ww-section--dark .ww-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .ww-section--dark .ww-card {
+      height: 380px;
+      padding: 24px;
     }
 
     .ww-tabs {
@@ -626,6 +673,14 @@
       border: 1px solid var(--c-border);
       border-radius: 100px;
       padding: 3px 10px;
+    }
+
+    .ww-grid-4col {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .ww-grid-4col .ww-card {
+      height: 380px;
     }
 
     /* ─── FULL WIDTH IMAGE ───────────────────────────── */
@@ -786,9 +841,11 @@
     @media (max-width: 640px) {
       .nav-inner { padding: 14px 20px 18px; }
       .nav-links { display: none; }
+      .nav .btn { margin-left: auto; }
 
       .hero { padding: 88px 20px 56px; }
       .hero h1 { font-size: 30px; line-height: 40px; max-width: 100%; }
+      .hero-pill { font-size: 12px; }
       .hero-sub { font-size: 16px; line-height: 26px; max-width: 100%; margin-bottom: 36px; }
 
       .features-grid {
@@ -825,6 +882,42 @@
       .ww-card-title { font-size: 18px; margin-top: 0; }
       .ww-card-desc { position: static; opacity: 1; font-size: 15px; line-height: 24px; }
 
+      .ww-section--dark {
+        position: relative;
+      }
+
+      .ww-section--dark .ww-grid {
+        grid-template-columns: repeat(4, minmax(280px, 1fr));
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        gap: 12px;
+        padding-right: 60px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+
+      .ww-section--dark .ww-card {
+        height: 280px;
+        padding: 20px;
+        min-width: 280px;
+        scroll-snap-align: start;
+      }
+
+      .ww-section--dark .ww-grid::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .ww-section--dark .ww-grid::-webkit-scrollbar-track {
+        background: #e0e0e0;
+        border-radius: 10px;
+      }
+
+      .ww-section--dark .ww-grid::-webkit-scrollbar-thumb {
+        background: #999;
+        border-radius: 10px;
+      }
+
       .full-img-section { padding: 0 16px; }
       .full-img { border-radius: 20px; }
 
@@ -851,7 +944,7 @@
           alt="Patina"
         >
       </a>
-      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm">
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left: auto;">
         Let's Chat
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -864,9 +957,9 @@
     <section class="hero">
       <div class="hero-pill">Trusted by teams backed by YC, a16z, 10VC, and more.</div>
       <h1 style="max-width: 60vw;">
-        <span class="hero-line">Design products your users love</span>
+        <span class="hero-line">Design Partner for Venture Backed Startups</span>
       </h1>
-      <p class="hero-sub">Get a design lead and senior designer embedded into your team. Backed by experience from NVIDIA, Google, and $700M+ startups.</p>
+      <p class="hero-sub">Our team with previous experience from NVIDIA, Google, and $700M+ startups will embed into your team. See your first designs in 10 days.</p>
       <div>
         <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg">
           Let's Chat
@@ -884,7 +977,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Trenli</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Trenli is a property management tool built for real estate companies to track and oversee their entire building portfolio. We designed an intuitive user experience that brings occupancy, maintenance, and lease data into one unified view.</p>
+            <p class="p-card-description">Trenli is a property management tool built for real estate companies to track and oversee their entire building portfolio.</p>
           </div>
         </div>
         <div class="p-card p2">
@@ -892,7 +985,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Ribbit AI</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Ribbit AI is a consumer investing tool that makes it easy to understand your stock portfolio at a glance. An AI layer surfaces personalized recommendations so you always know what to act on next.</p>
+            <p class="p-card-description">Ribbit AI is a consumer investing tool that makes it easy to understand your stock portfolio at a glance.</p>
           </div>
         </div>
         <!-- Row 2: narrow left | wide right -->
@@ -901,7 +994,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Freedom HR</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Freedom HR is a free, all-in-one HR platform that helps companies manage their people, payroll, and operations without the cost of enterprise software. We designed a clean, approachable experience that makes complex HR workflows feel simple.</p>
+            <p class="p-card-description">Freedom HR is a free, all-in-one HR platform that helps companies manage their people, payroll, and operations without the cost of enterprise software.</p>
           </div>
         </div>
         <div class="p-card p4">
@@ -909,7 +1002,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Quill</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Quill is an enterprise productivity tool that learns your company's context to automatically assign tasks and track action items from meetings. We designed an experience that keeps teams aligned without the manual overhead of traditional project management.</p>
+            <p class="p-card-description">Quill is an enterprise productivity tool that learns your company's context to automatically assign tasks and track action items from meetings.</p>
           </div>
         </div>
         <!-- Row 3: wide left | narrow right -->
@@ -918,7 +1011,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Cayda</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems. We designed a centralized experience that gives teams clear visibility into project health, timelines, and financial exposure.</p>
+            <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems.</p>
           </div>
         </div>
         <div class="p-card p6">
@@ -926,7 +1019,7 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Luna</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements. We designed an experience that feels personal and empowering, adapting in real time as the body changes throughout the month.</p>
+            <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements.</p>
           </div>
         </div>
       </div>
@@ -947,6 +1040,9 @@
           <span class="hi">South Park Commons</span>,
           <span class="hi">10VC</span>
           and other leading funds.
+        </p>
+        <p class="reveal" style="--reveal-delay: 0.3s">
+          Our founder taught <span class="hi">"The Business of Design"</span> at <span class="hi">Harvard</span>. We design for <span class="hi">outcomes</span> — not just how things look, but how they drive engagement, retention, and revenue.
         </p>
       </div>
     </section>
@@ -995,9 +1091,9 @@
       </div>
     </section>
 
-<!-- ─── WHO WE'RE FOR ─── -->
-    <section class="ww-section">
-      <h2 class="why-label reveal">How we work</h2>
+    <!-- ─── WHO WE'RE FOR ─── -->
+    <section class="ww-section ww-section--dark">
+      <h2 class="why-label reveal">See your first designs in 10 days<br><span class="why-label-secondary">How it works</span></h2>
       <div class="ww-grid">
         <div class="ww-card">
           <div class="ww-card-spacer"></div>
@@ -1006,23 +1102,18 @@
         </div>
         <div class="ww-card">
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Research and understand your users</div>
-          <div class="ww-card-desc">Before touching visuals, we dig into your user interviews, business model, and competitive landscape to understand where friction lives and what a truly seamless experience looks like.</div>
+          <div class="ww-card-title">User research and first designs</div>
+          <div class="ww-card-desc">We dig into your user interviews, business model, and competitive landscape to understand where friction lives. Then we'll give you the first 5 screens for review within 10 days of the engagement.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Build interactive prototypes quickly</div>
-          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. Every interaction is considered so the experience feels seamless.</div>
+          <div class="ww-card-title">Interactive prototypes and test</div>
+          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. We test designs with real users and refine until the experience is genuinely frictionless.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Test designs with real users</div>
-          <div class="ww-card-desc">We test designs with real users before anything gets built — we identify where people hesitate, get confused, or drop off, and refine until the experience is genuinely frictionless.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Build scalable design system</div>
-          <div class="ww-card-desc">We create and manage a scalable design system, making it easy for your engineering team to ship on brand. Teams get value from this beyond our engagement.</div>
+          <div class="ww-card-title">Own designs end to end</div>
+          <div class="ww-card-desc">We own the design from conception to implementation. We work alongside your engineering team to ensure designs are executed perfectly and create a design system that scales your workflow.</div>
         </div>
       </div>
     </section>
@@ -1044,7 +1135,7 @@
     <!-- ─── FOOTER ─── -->
     <footer>
       <div class="footer-inner">
-        <a href="#" class="footer-logo">
+        <a href="index.html" class="footer-logo">
           <img
             src="images/logo/ImageLogo.svg"
             alt="Patina"
