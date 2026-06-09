@@ -683,6 +683,10 @@
       height: 380px;
     }
 
+    .ww-section--dark .c-btn {
+      display: none;
+    }
+
     /* ─── FULL WIDTH IMAGE ───────────────────────────── */
     .full-img-section {
       padding: 0 64px;
@@ -876,7 +880,7 @@
       .ww-section { padding: 56px 20px; }
       .ww-tab { font-size: 16px; padding: 6px 14px; }
       .ww-desc, .ww-with { font-size: 16px; line-height: 26px; }
-      .ww-grid { grid-template-columns: 1fr; gap: 12px; }
+      .ww-grid { gap: 12px; }
       .ww-card { height: auto; padding: 20px; }
       .ww-card-spacer { flex: 0; }
       .ww-card-title { font-size: 18px; margin-top: 0; }
@@ -886,13 +890,21 @@
         position: relative;
       }
 
+      .ww-section--dark .carousel-outer {
+        position: relative;
+        margin-top: 32px;
+      }
+
+      .ww-section--dark .c-btn {
+        display: block;
+      }
+
       .ww-section--dark .ww-grid {
-        grid-template-columns: repeat(4, minmax(280px, 1fr));
+        display: flex;
         overflow-x: auto;
         overflow-y: hidden;
         scroll-behavior: smooth;
         gap: 12px;
-        padding-right: 60px;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: x mandatory;
       }
@@ -900,22 +912,16 @@
       .ww-section--dark .ww-card {
         height: 280px;
         padding: 20px;
-        min-width: 280px;
+        flex: 0 0 calc(85% - 6px);
         scroll-snap-align: start;
       }
 
+      .ww-section--dark .ww-grid {
+        scrollbar-width: none;
+      }
+
       .ww-section--dark .ww-grid::-webkit-scrollbar {
-        height: 4px;
-      }
-
-      .ww-section--dark .ww-grid::-webkit-scrollbar-track {
-        background: #e0e0e0;
-        border-radius: 10px;
-      }
-
-      .ww-section--dark .ww-grid::-webkit-scrollbar-thumb {
-        background: #999;
-        border-radius: 10px;
+        display: none;
       }
 
       .full-img-section { padding: 0 16px; }
@@ -1094,7 +1100,11 @@
     <!-- ─── WHO WE'RE FOR ─── -->
     <section class="ww-section ww-section--dark">
       <h2 class="why-label reveal">See your first designs in 10 days<br><span class="why-label-secondary">How it works</span></h2>
-      <div class="ww-grid">
+      <div class="carousel-outer">
+        <button class="c-btn c-btn-prev" id="ww-prevBtn" aria-label="Previous" hidden>
+          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 25H16M21 18l-7 7 7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      <div class="ww-grid" id="ww-track">
         <div class="ww-card">
           <div class="ww-card-spacer"></div>
           <div class="ww-card-title">Design lead and senior designer</div>
@@ -1115,6 +1125,10 @@
           <div class="ww-card-title">Own designs end to end</div>
           <div class="ww-card-desc">We own the design from conception to implementation. We work alongside your engineering team to ensure designs are executed perfectly and create a design system that scales your workflow.</div>
         </div>
+      </div>
+        <button class="c-btn c-btn-next" id="ww-nextBtn" aria-label="Next">
+          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 25h14M29 18l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
     </section>
 
@@ -1193,6 +1207,45 @@
     window.addEventListener('resize', render);
 
     render();
+
+    /* ─── WHO WE'RE FOR Carousel (Mobile) ─── */
+    const wwTrack = document.getElementById('ww-track');
+    const wwPrevBtn = document.getElementById('ww-prevBtn');
+    const wwNextBtn = document.getElementById('ww-nextBtn');
+    const WW_TOTAL = 4;
+    let wwIdx = 0;
+
+    function getWWStep() {
+      const card = wwTrack.children[0];
+      if (!card) return 308;
+      const gap = parseFloat(window.getComputedStyle(wwTrack).gap) || 12;
+      return card.offsetWidth + gap;
+    }
+
+    function getWWMaxIdx() {
+      const vp = wwTrack.parentElement;
+      if (!vp) return 0;
+      const step = getWWStep();
+      const visible = Math.max(1, Math.floor(vp.offsetWidth / step));
+      return Math.max(0, WW_TOTAL - visible);
+    }
+
+    function renderWW() {
+      const step = getWWStep();
+      const maxIdx = getWWMaxIdx();
+      if (wwIdx > maxIdx) wwIdx = maxIdx;
+      wwTrack.style.scrollBehavior = 'smooth';
+      wwTrack.scrollLeft = wwIdx * step;
+      wwPrevBtn.hidden = wwIdx === 0;
+      wwNextBtn.hidden = wwIdx >= maxIdx;
+    }
+
+    if (wwPrevBtn && wwNextBtn) {
+      wwPrevBtn.addEventListener('click', () => { if (wwIdx > 0) { wwIdx--; renderWW(); } });
+      wwNextBtn.addEventListener('click', () => { if (wwIdx < getWWMaxIdx()) { wwIdx++; renderWW(); } });
+      window.addEventListener('resize', renderWW);
+      renderWW();
+    }
   </script>
 
   <script>
