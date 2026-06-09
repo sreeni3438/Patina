@@ -163,7 +163,6 @@
     }
     .nav-links a:hover { color: var(--c-dark); }
 
-
     /* ─── HERO ───────────────────────────────────────── */
     .hero {
       padding: 120px 144px 120px 64px;
@@ -627,6 +626,14 @@
       padding: 3px 10px;
     }
 
+    .ww-grid-4col {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+
+    .ww-grid-4col .ww-card {
+      height: 380px;
+    }
+
     /* ─── FULL WIDTH IMAGE ───────────────────────────── */
     .full-img-section {
       padding: 0 64px;
@@ -871,7 +878,7 @@
       <h1 style="max-width: 60vw;">
         <span class="hero-line">Design products your users love</span>
       </h1>
-      <p class="hero-sub">Get a design lead and senior designer embedded into your team. Backed by experience from NVIDIA, Google, and $700M+ startups.</p>
+      <p class="hero-sub">Get a Design Lead and Senior Designer embedded into your team. Backed by experience from NVIDIA, Google, and $700M+ startups.</p>
       <div>
         <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg">
           Let's Chat
@@ -937,6 +944,43 @@
       </div>
     </section>
 
+<!-- ─── WHO WE'RE FOR ─── -->
+    <section class="ww-section">
+      <h2 class="why-label reveal">See your first designs in 10 days or you don't pay until you do</h2>
+      <div class="ww-grid">
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Design lead and senior designer</div>
+          <div class="ww-card-desc">Every engagement is led by a design lead with experience as a founding designer and a senior designer. We embed into your team by owning design, joining Slack, sending async updates, and running feedback sessions once a week.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Research and understand your users</div>
+          <div class="ww-card-desc">Before touching visuals, we dig into your user interviews, business model, and competitive landscape to understand where friction lives and what a truly seamless experience looks like.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Your first designs</div>
+          <div class="ww-card-desc">We'll give you the first 5 screens for review within 10 days of the engagement. You review and give feedback so we can refine the direction.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Build interactive prototypes quickly</div>
+          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. Every interaction is considered so the experience feels seamless.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Test designs with real users</div>
+          <div class="ww-card-desc">We test designs with real users before anything gets built — we identify where people hesitate, get confused, or drop off, and refine until the experience is genuinely frictionless.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Build scalable design system</div>
+          <div class="ww-card-desc">We create and manage a scalable design system, making it easy for your engineering team to ship on brand. Teams get value from this beyond our engagement.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- ─── WHY PATINA ─── -->
     <section class="why">
       <h2 class="why-label reveal">Why Patina?</h2>
@@ -952,6 +996,9 @@
           <span class="hi">South Park Commons</span>,
           <span class="hi">10VC</span>
           and other leading funds.
+        </p>
+        <p class="reveal" style="--reveal-delay: 0.3s">
+          Our founder taught <span class="hi">"The Business of Design"</span> at <span class="hi">Harvard</span>. We design for <span class="hi">outcomes</span> — not just how things look, but how they drive engagement, retention, and revenue.
         </p>
       </div>
     </section>
@@ -1000,38 +1047,6 @@
       </div>
     </section>
 
-<!-- ─── WHO WE'RE FOR ─── -->
-    <section class="ww-section">
-      <h2 class="why-label reveal">How we work</h2>
-      <div class="ww-grid">
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Design lead and senior designer</div>
-          <div class="ww-card-desc">Every engagement is led by a design lead with experience as a founding designer and a senior designer. We embed into your team by owning design, joining Slack, sending async updates, and running feedback sessions once a week.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Research and understand your users</div>
-          <div class="ww-card-desc">Before touching visuals, we dig into your user interviews, business model, and competitive landscape to understand where friction lives and what a truly seamless experience looks like.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Build interactive prototypes quickly</div>
-          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. Every interaction is considered so the experience feels seamless.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Test designs with real users</div>
-          <div class="ww-card-desc">We test designs with real users before anything gets built — we identify where people hesitate, get confused, or drop off, and refine until the experience is genuinely frictionless.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Build scalable design system</div>
-          <div class="ww-card-desc">We create and manage a scalable design system, making it easy for your engineering team to ship on brand. Teams get value from this beyond our engagement.</div>
-        </div>
-      </div>
-    </section>
-
     <!-- ─── CTA ─── -->
     <section class="cta">
       <div class="cta-inner">
@@ -1049,7 +1064,7 @@
     <!-- ─── FOOTER ─── -->
     <footer>
       <div class="footer-inner">
-        <a href="#" class="footer-logo">
+        <a href="index.html" class="footer-logo">
           <img
             src="images/logo/ImageLogo.svg"
             alt="Patina"
