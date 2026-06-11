@@ -50,6 +50,7 @@
       color: var(--c-dark);
       background: #fff;
       overflow-x: hidden;
+      max-width: 100vw;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -94,6 +95,7 @@
     .page {
       max-width: 1728px;
       margin: 0 auto;
+      width: 100%;
     }
 
     /* ─── BUTTON ─────────────────────────────────────── */
@@ -782,6 +784,12 @@
     }
 
     /* ─── RESPONSIVE ────────────────────────────────── */
+
+    /* Ultra-wide screens: add horizontal padding */
+    @media (min-width: 1900px) {
+      .page { padding: 0 calc((100% - 1728px) / 2); }
+      .nav-inner { padding-left: calc(32px + (100% - 1728px) / 2); padding-right: calc(32px + (100% - 1728px) / 2); }
+    }
 
     /* Hide custom cursor on touch/pointer-coarse devices */
     @media (hover: none), (pointer: coarse) {
