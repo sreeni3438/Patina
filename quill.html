@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patina — Freedom</title>
+  <title>Patina — Quill</title>
   <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,8 +109,7 @@
     }
     .full-dark img {
       width: 100%;
-      aspect-ratio: 1728 / 940;
-      object-fit: cover;
+      height: auto;
     }
 
     /* ─── SCREEN MOCKUP SECTIONS ─── */
@@ -129,8 +128,6 @@
     .screen-col img {
       width: 100%;
       height: auto;
-      border-radius: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
     }
 
     .screen-text {
@@ -163,8 +160,6 @@
       margin-left: 13.25%;
       width: 73.5%;
       margin-right: 13.25%;
-      border-radius: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
     }
 
     /* ─── RESPONSIVE ─── */
@@ -190,6 +185,17 @@
       .strip { padding: 40px 0; }
       .strip img { margin-left: 4%; width: 92%; }
     }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -211,92 +217,102 @@
   <section class="hero">
     <img
       class="hero-img"
-      src="images/projects/freedom/Freedom1.png"
-      alt="Freedom HR">
+      src="images/projects/quill/MacBook.png"
+      alt="Quill">
   </section>
 
   <!-- ─── THE BRIEF ─── -->
   <section class="why">
     <div class="why-inner">
-      <h2>Freedom</h2>
-      <p>Serro is an AI workstream reporting tool built for engineering and product teams. Status updates are time-consuming, scattered across emails, Slack threads, and meeting notes — Serro aggregates it all and drafts your reports automatically.</p>
-      <p>We designed Serro to feel effortless. The interface needed to be minimal enough to disappear, letting the AI do the heavy lifting while keeping humans firmly in control of the final output.</p>
+      <h2>Quill</h2>
+      <p>Quill is an AI meeting assistant that joins your calls, listens, and turns every conversation into structured notes — decisions, action items, and sourced claims — without anyone taking a single manual note.</p>
+      <p>We designed Quill to disappear into the workflow. The challenge was building something powerful enough to be trusted, yet minimal enough to never get in the way.</p>
     </div>
   </section>
 
-  <!-- ─── TASK DASHBOARD — full-width ─── -->
+  <!-- ─── FULL-WIDTH ─── -->
   <section class="full-dark">
     <img
-      src="https://www.figma.com/api/mcp/asset/d946434a-b709-441f-b086-38c3cf0b0987"
-      alt="Serro task dashboard">
+      src="images/projects/quill/Frame1.png"
+      alt="Quill">
   </section>
 
-  <!-- ─── STRUCTURED REPORTING ─── -->
+  <!-- ─── EVERY MEETING, CAPTURED ─── -->
   <section class="why">
     <div class="why-inner">
-      <h2>Structured Reporting</h2>
-      <p>Every workstream update follows a consistent structure — workstream name, type, target date, engineers, designers, PRD links, risks, path to green, confidence, and milestones. Serro pre-fills what it knows and flags what it doesn't, so your reports are always complete and audit-ready.</p>
+      <h2>Every Meeting, Captured</h2>
+      <p>Connect your calendar and Quill quietly joins every eligible meeting. It listens, structures what was said, and has clean notes ready before the call even ends — decisions surfaced, action items assigned, nothing lost.</p>
     </div>
   </section>
 
-  <!-- ─── SCREEN ROW A: clean report form, screen left ─── -->
+  <!-- ─── SCREEN ROW A: onboarding, screen left ─── -->
   <section class="screen-row">
     <div class="screen-col">
       <img
-        src="https://www.figma.com/api/mcp/asset/060dba31-8915-420b-87fe-1a865215cd34"
-        alt="Workstream report form">
+        src="images/projects/quill/img10.png"
+        alt="Quill calendar onboarding">
     </div>
-    <p class="screen-text">The report editor surfaces exactly what stakeholders need to see. Rich-text formatting, structured fields, and inline team tags combine into a single coherent document — ready to confirm and send in one click.</p>
+    <p class="screen-text">Setup takes under a minute. Connect Google Calendar, Outlook, or Zoom and Quill starts joining automatically — no extensions, no manual invites, no friction.</p>
   </section>
 
-  <!-- ─── SCREEN ROW B: source tooltip close-up, screen right ─── -->
+  <!-- ─── SCREEN ROW B: meeting prep, screen right ─── -->
   <section class="screen-row reversed">
     <div class="screen-col">
       <img
-        src="https://www.figma.com/api/mcp/asset/5f570472-bace-4dc3-87d1-7fb2c1f30d79"
-        alt="Source attribution tooltip">
+        src="images/projects/quill/img9.png"
+        alt="Quill meeting briefing">
     </div>
-    <p class="screen-text">Every AI-generated field cites its source. Hover any populated value to see exactly which document, email, or transcript it came from — building trust without slowing anyone down.</p>
+    <p class="screen-text">Before a call begins, Quill builds a briefing — pulling context from Salesforce, prior emails, and past meetings so you walk in informed. Nothing to prepare. Everything already there.</p>
   </section>
 
-  <!-- ─── SCREEN ROW C: AI-generated result, screen left ─── -->
+  <!-- ─── FULL-WIDTH: notes + transcript ─── -->
+  <section class="full-dark">
+    <img
+      src="images/projects/quill/img5.png"
+      alt="Quill meeting notes with transcript">
+  </section>
+
+  <!-- ─── SCREEN ROW C: meeting notes, screen left ─── -->
   <section class="screen-row">
     <div class="screen-col">
       <img
-        src="https://www.figma.com/api/mcp/asset/cd4e52dc-6c8a-482f-b075-2b254f413eaa"
-        alt="AI-generated launch date field">
+        src="images/projects/quill/img2.png"
+        alt="Quill meeting notes">
     </div>
-    <p class="screen-text">The AI panel sits alongside your report — always accessible, never intrusive. Ask Serro to fill in a missing field and it searches your connected sources, surfaces the answer, and populates the form with a single click.</p>
+    <p class="screen-text">Every meeting becomes a structured document — a summary, key decisions, and action items with owners and due dates. Quill infers the structure from the conversation, not a template.</p>
   </section>
 
-  <!-- ─── SCHEDULE WORKFLOW — full-width ─── -->
-  <section class="full-dark">
-    <img
-      src="https://www.figma.com/api/mcp/asset/ee768589-2aef-4d44-a304-03d0348e6dba"
-      alt="Schedule workflow panel">
+  <!-- ─── SCREEN ROW D: source tooltip, screen right ─── -->
+  <section class="screen-row reversed">
+    <div class="screen-col">
+      <img
+        src="images/projects/quill/img4.png"
+        alt="Quill source attribution">
+    </div>
+    <p class="screen-text">Every decision and action item links back to the exact moment it was said. Hover any item to see the quote, who said it, and when — so nothing gets disputed after the fact.</p>
   </section>
 
   <!-- ─── THE OUTCOME ─── -->
   <section class="why">
     <div class="why-inner">
       <h2>The Outcome</h2>
-      <p>Once a report is confirmed, Serro can schedule it to send automatically on any cadence — every Monday, twice a week until launch, or on a custom schedule you define. Status reporting becomes a system, not a task.</p>
-      <p>Teams using Serro reduced time spent on status reporting by over 60%. Reports that used to take 45 minutes are generated in under 5 — with full source attribution so every stakeholder stays aligned.</p>
+      <p>Action items don't live in notes — they go directly into Jira, Notion, or Linear with a single click, pre-filled with the context Quill already captured. The meeting ends and the work is already in the right place.</p>
+      <p>Teams using Quill reclaimed hours of post-meeting admin every week. Notes that used to take 30 minutes to write are generated instantly, with full attribution so every stakeholder stays aligned.</p>
     </div>
   </section>
 
-  <!-- ─── SIDEBAR STRIP ─── -->
+  <!-- ─── STRIP: action items close-up ─── -->
   <section class="strip">
     <img
-      src="https://www.figma.com/api/mcp/asset/6ca72d53-880c-4dce-a898-3dee149aa30f"
-      alt="Serro navigation and email connection">
+      src="images/projects/quill/img3.png"
+      alt="Quill action item suggestion">
   </section>
 
-  <!-- ─── SIDEBAR STRIP 2 ─── -->
+  <!-- ─── STRIP: search ─── -->
   <section class="strip">
     <img
-      src="https://www.figma.com/api/mcp/asset/6ca72d53-880c-4dce-a898-3dee149aa30f"
-      alt="Serro navigation and email connection">
+      src="images/projects/quill/img7.png"
+      alt="Quill search">
   </section>
 
   <script>
@@ -310,6 +326,15 @@
         setTimeout(() => { window.location.href = href; }, 260);
       });
     });
+
+    const revealSections = document.querySelectorAll('section:not(.hero)');
+    revealSections.forEach(el => el.classList.add('section-reveal'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -200px 0px', threshold: 0 });
+    revealSections.forEach(el => revealObserver.observe(el));
   </script>
 
 </body>

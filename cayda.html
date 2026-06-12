@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patina — Cayda</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --f-raleway: 'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-raleway);
+      color: var(--c-dark);
+      background: #fff;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAVBAR ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 14px 32px 18px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-raleway);
+      font-weight: 200;
+      font-size: 16px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      border: none;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      margin-left: auto;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+
+    /* ─── HERO ─── */
+    .hero { padding-top: 68.5px; }
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 1728 / 940;
+      object-fit: cover;
+    }
+
+    /* ─── TEXT SECTIONS ─── */
+    .why {
+      padding: 160px 0;
+      background: #fff;
+    }
+    .why-inner {
+      padding-left: 13.25%;
+      padding-right: 13.25%;
+    }
+    .why h2 {
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 72px;
+      letter-spacing: -0.96px;
+      margin-bottom: 48px;
+      color: var(--c-dark);
+    }
+    .why p {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 34px;
+      color: var(--c-dark);
+      max-width: 61.8%;
+    }
+    .why p + p { margin-top: 48px; }
+
+    /* ─── FULL-WIDTH ─── */
+    .full-dark {
+      padding: 120px 0;
+    }
+    .full-dark img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* ─── SCREEN ROWS ─── */
+    .screen-row {
+      display: flex;
+      align-items: flex-start;
+      padding-bottom: 210px;
+      background: #fff;
+    }
+    .screen-col {
+      flex: 0 0 73.5%;
+      margin-left: 13.25%;
+    }
+    .screen-col img {
+      width: 100%;
+      height: auto;
+    }
+    .caption {
+      margin-top: 16px;
+      font-size: 19px;
+      font-weight: 200;
+      line-height: 24px;
+      color: var(--c-mid);
+    }
+    .screen-text {
+      flex: 0 0 24%;
+      margin-left: 3%;
+      padding-top: 4%;
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 34px;
+    }
+    .screen-row.reversed .screen-col {
+      order: 2;
+      margin-left: 3%;
+      flex: 0 0 47%;
+    }
+    .screen-row.reversed .screen-text {
+      order: 1;
+      margin-left: 13.25%;
+      padding-top: 3%;
+    }
+
+    /* ─── STRIP ─── */
+    .strip {
+      padding: 0 0 100px;
+      background: #fff;
+    }
+    .strip img {
+      margin-left: 13.25%;
+      width: 73.5%;
+      height: auto;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .why h2 { font-size: 38px; line-height: 54px; }
+      .why p { font-size: 19px; line-height: 30px; max-width: 80%; }
+      .why-inner { padding-left: 8%; padding-right: 8%; }
+      .why p { max-width: 100%; }
+      .screen-row { flex-direction: column; padding: 0 40px 80px; }
+      .screen-col { flex: 0 0 auto; margin-left: 0; width: 100%; }
+      .screen-text { margin-left: 0; padding-top: 32px; flex: 0 0 auto; width: 100%; }
+      .screen-row.reversed .screen-col { order: 1; margin-left: 0; }
+      .screen-row.reversed .screen-text { order: 2; margin-left: 0; padding-top: 32px; }
+      .strip img { margin-left: 4%; width: 92%; }
+    }
+
+    @media (max-width: 640px) {
+      .why { padding: 60px 0; }
+      .why-inner { padding-left: 20px; padding-right: 20px; }
+      .why h2 { font-size: 26px; line-height: 38px; margin-bottom: 24px; }
+      .why p { font-size: 16px; line-height: 26px; }
+      .screen-row { padding: 0 20px 48px; }
+      .strip { padding: 40px 0; }
+      .strip img { margin-left: 4%; width: 92%; }
+    }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo/ImageLogo.svg" alt="Patina">
+      </a>
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn">
+        Let's Chat
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <img
+      class="hero-img"
+      src="images/projects/cayda/Test42.png"
+      alt="Cayda — real estate development intelligence">
+  </section>
+
+  <!-- ─── THE BRIEF ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>Cayda</h2>
+      <p>Real estate development runs on numbers and drawings — and the margin for error in both is effectively zero. A conflict between a structural drawing and a specification, or a miscalculation buried in a pro forma, can cascade into change orders, delays, and seven-figure cost overruns.</p>
+      <p>Cayda was built to catch those problems before construction starts. An AI platform for developers that reads across drawing sets, specifications, and financial models simultaneously — flagging errors, surfacing conflicts, and automating the reviews that used to take weeks.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW A ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default.png" alt="Cayda drawing conflict detection">
+      <p class="caption">Conflict dashboard — all flagged issues across the drawing set, sorted by severity and discipline.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW B ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-1.png" alt="Cayda drawing detail view">
+      <p class="caption">Drill-down view showing exact discrepancies between drawing sheets and specifications, side by side.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW C ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-2.png" alt="Cayda specification review">
+      <p class="caption">Automated specification review flagging every material call-out and performance requirement that doesn't reconcile with the drawings.</p>
+    </div>
+  </section>
+
+  <!-- ─── AUTOMATE THE REVIEW CYCLE ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>Automate the Review Cycle</h2>
+      <p>Design review isn't a one-time event — it happens in rounds, across disciplines, over months. Cayda tracks every revision, re-runs the checks automatically when new drawings are uploaded, and shows exactly what changed and what new issues were introduced. The review cycle becomes a continuous process, not a bottleneck.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW D ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-3.png" alt="Cayda revision tracking">
+      <p class="caption">Revision tracker highlighting new conflicts in red and resolved items in green across drawing rounds.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW E ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-4.png" alt="Cayda team review workflow">
+      <p class="caption">Issue assignment interface — each conflict tracked to an owner with full response and resolution history.</p>
+    </div>
+  </section>
+
+  <!-- ─── FINANCIAL MODELS, VERIFIED ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>Financial Models, Verified</h2>
+      <p>Construction budgets fail when assumptions in the pro forma don't match what the drawings actually show. Cayda reads the financial model alongside the design — checking that the scope priced in the budget aligns with the scope shown on the drawings, and flagging every line item where they diverge.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW F ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-5.png" alt="Cayda financial model review">
+      <p class="caption">Financial review layer cross-referencing pro forma assumptions against the drawn scope, with estimated cost impact per discrepancy.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW G ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-6.png" alt="Cayda cost variance analysis">
+      <p class="caption">Cost variance dashboard tracking the delta between budgeted and drawn scope in real time across design rounds.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW H ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/default-7.png" alt="Cayda executive summary report">
+      <p class="caption">One-click executive summary compiling open conflicts, financial variances, and outstanding RFIs for lenders and ownership.</p>
+    </div>
+  </section>
+
+  <!-- ─── TEST5 ─── -->
+  <section class="screen-row">
+    <div class="screen-col">
+      <img src="images/projects/cayda/Test5.png" alt="Cayda platform detail">
+      <p class="caption">Unified project view — design, specifications, and financials reviewed together in a single platform.</p>
+    </div>
+  </section>
+
+  <!-- ─── THE OUTCOME ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>The Outcome</h2>
+      <p>Development teams using Cayda reduced design-phase review time by over 70% and caught an average of 34 drawing conflicts per project that had gone undetected through traditional coordination. Financial variances surfaced before construction start saved an average of 4–8% of total project cost.</p>
+      <p>Cayda turns the review process from a manual bottleneck into an automated checkpoint — so developers build with confidence, not surprises.</p>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+
+    const revealSections = document.querySelectorAll('section:not(.hero)');
+    revealSections.forEach(el => el.classList.add('section-reveal'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -200px 0px', threshold: 0 });
+    revealSections.forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>

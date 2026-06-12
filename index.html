@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
   <!-- NOTE: Figma asset URLs expire in 7 days. Replace with self-hosted images before production. -->
 
@@ -25,6 +25,7 @@
       --c-footer: #f7f9fc;
       --f-inter:  'Inter', sans-serif;
       --f-geist:  'Geist', 'Inter', sans-serif;
+      --f-instrument: 'Raleway', sans-serif;
     }
 
     html { scroll-behavior: smooth; scrollbar-gutter: stable; cursor: none !important; }
@@ -46,7 +47,7 @@
     }
 
     body {
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       color: var(--c-dark);
       background: #fff;
       overflow-x: hidden;
@@ -106,8 +107,8 @@
       background: var(--c-dark);
       color: #fff;
       border-radius: 8px;
-      font-family: var(--f-inter);
-      font-weight: 500;
+      font-family: var(--f-instrument);
+      font-weight: 200;
       font-size: 16.4px;
       letter-spacing: -0.352px;
       white-space: nowrap;
@@ -159,7 +160,7 @@
 
     .nav-links a {
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 200;
       color: var(--c-mid);
       transition: color 0.18s;
     }
@@ -174,6 +175,7 @@
     }
 
     .hero h1 {
+      font-family: var(--f-instrument);
       font-size: 56px;
       font-weight: 400;
       line-height: 68px;
@@ -207,14 +209,14 @@
       padding: 8px 16px;
       border: none;
       border-radius: 100px;
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 18px;
+      font-weight: 200;
       margin-bottom: 24px;
     }
 
     .hero-sub {
       font-size: 22px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 34px;
       color: #555;
       max-width: 620px;
@@ -242,7 +244,7 @@
     /* ─── PORTFOLIO GRID ─────────────────────────────── */
     .features {
       background: #fff;
-      height: 2480px;
+      height: 3240px;
       position: relative;
       overflow: visible;
     }
@@ -298,6 +300,7 @@
     .p-card:hover .p-card-overlay { opacity: 1; transform: scale(1); }
 
     .p-card-title {
+      font-family: var(--f-instrument);
       font-size: 28px;
       font-weight: 400;
       color: #1e1e1e;
@@ -306,7 +309,7 @@
 
     .p-card-category {
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 200;
       color: #1e1e1e;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -315,7 +318,7 @@
 
     .p-card-description {
       font-size: 16px;
-      font-weight: 300;
+      font-weight: 200;
       color: #5a6271;
       line-height: 24px;
       max-width: 280px;
@@ -330,6 +333,9 @@
     /* Row 3  (top: 1520) — wide-left / narrow-right */
     .p5 { top: 1520px; left: 0;      right: 688px;  }
     .p6 { top: 1520px; left: 1020px; right: 0;      }
+    /* Row 4  (top: 2280) — equal 50/50 */
+    .p7 { top: 2280px; left: 0;      right: 854px;  }
+    .p8 { top: 2280px; left: 854px;  right: 0;      }
 
 
     /* ─── WHY PATINA ─────────────────────────────────── */
@@ -339,7 +345,7 @@
     }
 
     .why-label {
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       font-size: 48px;
       font-weight: 400;
       line-height: 72px;
@@ -349,7 +355,7 @@
 
     .why-body p {
       font-size: 29.5px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 48px;
       letter-spacing: -0.32px;
       max-width: 70vw;
@@ -357,7 +363,7 @@
 
     .why-body p + p { margin-top: 58px; }
 
-    .why-body .hi { color: var(--c-dark); font-style: italic; font-weight: 600; }
+    .why-body .hi { color: var(--c-dark); font-weight: 400; }
 
     /* ─── SERVICES CAROUSEL ─────────────────────────── */
     .services {
@@ -379,7 +385,7 @@
     }
 
     .services-title {
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       font-size: 48px;
       font-weight: 400;
       line-height: 72px;
@@ -393,7 +399,7 @@
       align-items: center;
       gap: 6px;
       font-size: 16.2px;
-      font-weight: 500;
+      font-weight: 200;
       letter-spacing: -0.352px;
       padding-bottom: 3px;
       transition: opacity 0.18s;
@@ -439,6 +445,7 @@
     .svc-c4 { background: #f6fef3; }
 
     .svc-label {
+      font-family: var(--f-instrument);
       font-size: 23.1px;
       font-weight: 400;
       line-height: 40.8px;
@@ -446,7 +453,7 @@
 
     .svc-desc {
       font-size: 12.9px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 19.71px;
       margin-top: 12px;
       max-width: 275px;
@@ -454,14 +461,14 @@
 
     .svc-quote-text {
       font-size: 22.3px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 40.8px;
       margin-bottom: 24px;
     }
 
     .svc-attr {
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 200;
       line-height: 19.71px;
     }
 
@@ -510,7 +517,7 @@
 
     .ww-section--dark .ww-card-title {
       color: var(--c-dark);
-      font-weight: 400;
+      font-weight: 200;
     }
 
     .ww-section--dark .ww-card-desc {
@@ -553,9 +560,9 @@
       padding: 7px 18px;
       border-radius: 100px;
       border: none;
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       font-size: 22px;
-      font-weight: 400;
+      font-weight: 200;
       cursor: pointer;
       background: transparent;
       color: #aaa;
@@ -572,7 +579,7 @@
 
     .ww-desc {
       font-size: 22px;
-      font-weight: 400;
+      font-weight: 200;
       line-height: 34px;
       color: var(--c-dark);
       max-width: 780px;
@@ -581,7 +588,7 @@
 
     .ww-with {
       font-size: 22px;
-      font-weight: 400;
+      font-weight: 200;
       color: var(--c-muted);
       margin-bottom: 40px;
       display: flex;
@@ -591,7 +598,7 @@
     }
 
     .ww-with-role {
-      font-weight: 500;
+      font-weight: 200;
       color: var(--c-dark);
     }
 
@@ -631,9 +638,9 @@
     }
 
     .ww-card-title {
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       font-size: 24px;
-      font-weight: 500;
+      font-weight: 400;
       color: var(--c-dark);
       margin-top: auto;
     }
@@ -645,7 +652,7 @@
       right: 32px;
       bottom: 32px;
       font-size: 18px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 28px;
       color: var(--c-muted);
       opacity: 0;
@@ -670,7 +677,7 @@
 
     .ww-tag {
       font-size: 16px;
-      font-weight: 400;
+      font-weight: 200;
       color: var(--c-dark);
       border: 1px solid var(--c-border);
       border-radius: 100px;
@@ -725,7 +732,7 @@
     }
 
     .cta-head {
-      font-family: var(--f-inter);
+      font-family: var(--f-instrument);
       font-size: 48px;
       font-weight: 400;
       line-height: 72px;
@@ -751,7 +758,7 @@
 
     .footer-blurb {
       font-size: 29.6px;
-      font-weight: 300;
+      font-weight: 200;
       line-height: 48px;
       letter-spacing: -0.32px;
       max-width: 450px;
@@ -766,7 +773,7 @@
 
     .footer-email {
       font-size: 29.6px;
-      font-weight: 400;
+      font-weight: 200;
       line-height: 48px;
       letter-spacing: -0.32px;
       color: var(--c-dark);
@@ -819,7 +826,7 @@
         position: relative;
         height: 420px;
       }
-      .p1, .p2, .p3, .p4, .p5, .p6 {
+      .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
         top: auto; left: auto; right: auto;
       }
 
@@ -976,27 +983,55 @@
         <span class="hero-line">Design Partner for Venture Backed Startups</span>
       </h1>
       <p class="hero-sub">Our team with previous experience from NVIDIA, Google, and $700M+ startups will embed into your team. See your first designs in 10 days.</p>
-      <div>
-        <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg">
-          Let's Chat
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
     </section>
 
     <!-- ─── PORTFOLIO GRID ─── -->
     <section class="features">
       <div class="features-grid">
         <!-- Row 1: wide left | narrow right -->
-        <div class="p-card p1">
-          <img src="images/projects/trenli/WebsiteImageTrenli.png" alt="Trenli">
+        <a href="quill.html" class="p-card p1">
+          <img src="images/projects/quill/MacBook.png" alt="Quill">
           <div class="p-card-overlay">
-            <h3 class="p-card-title">Trenli</h3>
+            <h3 class="p-card-title">Quill</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Trenli is a property management tool built for real estate companies to track and oversee their entire building portfolio.</p>
+            <p class="p-card-description">Quill is an enterprise productivity tool that learns your company's context to automatically assign tasks and track action items from meetings.</p>
           </div>
-        </div>
-        <div class="p-card p2">
+        </a>
+        <a href="luna.html" class="p-card p2">
+          <img src="images/projects/luna/10.png" alt="Luna — UX">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Luna</h3>
+            <p class="p-card-category">UX Design</p>
+            <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements.</p>
+          </div>
+        </a>
+        <!-- Row 2: narrow left | wide right -->
+        <a href="ar.html" class="p-card p3">
+          <img src="images/projects/ar/hero.png" alt="AR Shopping App">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">AR Shopping App</h3>
+            <p class="p-card-category">UX Design</p>
+            <p class="p-card-description">A photogrammetry app that lets sellers capture any object with their phone and generate a 3D model — so buyers can inspect and place it in their own space before purchasing.</p>
+          </div>
+        </a>
+        <a href="cayda.html" class="p-card p4">
+          <img src="images/projects/cayda/Test4.png" alt="Cayda">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Cayda</h3>
+            <p class="p-card-category">UX Design</p>
+            <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems.</p>
+          </div>
+        </a>
+        <!-- Row 3: wide left | narrow right -->
+        <a href="serro.html" class="p-card p5">
+          <img src="images/projects/serro/Hero.png" alt="Serro">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Serro</h3>
+            <p class="p-card-category">UX Design</p>
+            <p class="p-card-description">Serro is an AI technical project manager that reads your emails, Slack, and meeting notes to draft status reports, assign tasks, and surface blockers automatically.</p>
+          </div>
+        </a>
+        <div class="p-card p6">
           <img src="images/projects/ribbit/WebsiteImageRibbit.png" alt="Ribbit">
           <div class="p-card-overlay">
             <h3 class="p-card-title">Ribbit AI</h3>
@@ -1004,38 +1039,21 @@
             <p class="p-card-description">Ribbit AI is a consumer investing tool that makes it easy to understand your stock portfolio at a glance.</p>
           </div>
         </div>
-        <!-- Row 2: narrow left | wide right -->
-        <div class="p-card p3">
-          <img src="images/projects/freedom/Freedom1.png" alt="Cayda">
+        <!-- Row 4: equal 50/50 -->
+        <div class="p-card p7">
+          <img src="images/projects/freedom/Freedom1.png" alt="Freedom HR">
           <div class="p-card-overlay">
             <h3 class="p-card-title">Freedom HR</h3>
             <p class="p-card-category">UX Design</p>
             <p class="p-card-description">Freedom HR is a free, all-in-one HR platform that helps companies manage their people, payroll, and operations without the cost of enterprise software.</p>
           </div>
         </div>
-        <div class="p-card p4">
-          <img src="images/projects/quill/MacBook.png" alt="Drift — UX">
+        <div class="p-card p8">
+          <img src="images/projects/trenli/WebsiteImageTrenli.png" alt="Trenli">
           <div class="p-card-overlay">
-            <h3 class="p-card-title">Quill</h3>
+            <h3 class="p-card-title">Trenli</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Quill is an enterprise productivity tool that learns your company's context to automatically assign tasks and track action items from meetings.</p>
-          </div>
-        </div>
-        <!-- Row 3: wide left | narrow right -->
-        <div class="p-card p5">
-          <img src="images/projects/cayda/Test4.png" alt="Freedom">
-          <div class="p-card-overlay">
-            <h3 class="p-card-title">Cayda</h3>
-            <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems.</p>
-          </div>
-        </div>
-        <div class="p-card p6">
-          <img src="images/projects/luna/10.png" alt="Luna — UX">
-          <div class="p-card-overlay">
-            <h3 class="p-card-title">Luna</h3>
-            <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements.</p>
+            <p class="p-card-description">Trenli is a property management tool built for real estate companies to track and oversee their entire building portfolio.</p>
           </div>
         </div>
       </div>

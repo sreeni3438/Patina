@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patina — AR</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-footer: #f7f9fc;
+      --f-raleway: 'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-raleway);
+      color: var(--c-dark);
+      background: #fff;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAVBAR ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 14px 32px 18px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-raleway);
+      font-weight: 200;
+      font-size: 16px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      border: none;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      margin-left: auto;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+
+    /* ─── HERO — full-width image with phone mockups ─── */
+    /* Figma: 1728 × 870px */
+    .hero {
+      padding-top: 68.5px; /* nav height */
+    }
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 1728 / 870;
+      object-fit: cover;
+    }
+
+    /* ─── WHY PATINA SECTIONS ─── */
+    /* Figma: section left=229px at 1728px canvas → 13.25% */
+    .why {
+      padding: 160px 0;
+      background: #fff;
+    }
+    .why-inner {
+      padding-left: 13.25%;
+      padding-right: 8%;
+    }
+    .why h2 {
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 72px;
+      letter-spacing: -0.96px;
+      margin-bottom: 48px;
+      color: var(--c-dark);
+    }
+    .why p {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 34px;
+      color: var(--c-dark);
+      max-width: 61.8%; /* 1068/1728 */
+    }
+    .why p + p { margin-top: 48px; }
+
+    /* ─── FULL-WIDTH IMAGES ─── */
+    .full-dark img {
+      width: 100%;
+      height: auto;
+    }
+
+    /* ─── STRIP IMAGE ─── */
+    /* Figma: left=399px (23.1%), width=929px (53.8%) of 1728 */
+    .strip {
+      padding: 40px 0 60px;
+      background: #fff;
+    }
+    .strip img {
+      margin-left: 13.25%;
+      width: 73.5%;
+    }
+
+    /* ─── PHONE MOCKUP SECTIONS ─── */
+    /* Figma phone column: left=198px (11.46%), width=635px (36.75%) of 1728 */
+    /* Text column: width=585px (33.85%), gap ~58px (3.36%) */
+    /* Reversed: phone left=864px (50%), text left=248px (14.35%) */
+    .phone-row {
+      display: flex;
+      align-items: flex-start;
+      padding-bottom: 0;
+      background: #fff;
+    }
+
+    .phone-col {
+      flex: 0 0 36.75%;
+      margin-left: 11.46%;
+    }
+    .phone-col img {
+      width: 100%;
+      height: auto; /* let image display at natural height — preserves drop shadows */
+    }
+
+    .phone-text {
+      flex: 0 0 33.85%;
+      margin-left: 3.36%;
+      padding-top: 8.51%; /* stagger: 147px/1728px canvas = 8.51% */
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 34px;
+    }
+
+    /* Reversed layout: text left, phone right */
+    .phone-row.reversed .phone-col {
+      order: 2;
+      margin-left: 3.36%;
+      flex: 0 0 36.75%;
+    }
+    .phone-row.reversed .phone-text {
+      order: 1;
+      margin-left: 14.35%;
+      padding-top: 6.83%; /* stagger: 118px/1728px canvas = 6.83% */
+    }
+
+    /* ─── LANDSCAPE PHOTOS ─── */
+    .landscape {
+      padding: 0 0 80px 0;
+      background: #fff;
+    }
+    .landscape img {
+      display: block;
+      margin-left: 9.14%;
+      width: 53.8%;
+      height: auto;
+    }
+    .landscape:last-of-type img {
+      width: 54.49%;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .why h2 { font-size: 38px; line-height: 54px; }
+      .why p { font-size: 19px; line-height: 30px; max-width: 80%; }
+      .why-inner { padding-left: 8%; padding-right: 8%; }
+      .why p { max-width: 100%; }
+      .phone-row { flex-direction: column; padding: 0 40px 60px; }
+      .phone-col { flex: 0 0 auto; margin-left: 0; width: 70%; }
+      .phone-text { margin-left: 0; padding-top: 32px; flex: 0 0 auto; width: 100%; }
+      .phone-row.reversed .phone-col { order: 1; margin-left: 0; }
+      .phone-row.reversed .phone-text { order: 2; margin-left: 0; padding-top: 32px; }
+      .strip img { margin-left: 8%; width: 84%; }
+      .landscape { padding: 0 0 60px 0; }
+      .landscape img { margin-left: 5%; width: 90%; }
+    }
+
+    @media (max-width: 640px) {
+      .why { padding: 60px 0; }
+      .why-inner { padding-left: 20px; padding-right: 20px; }
+      .why h2 { font-size: 26px; line-height: 38px; margin-bottom: 24px; }
+      .why p { font-size: 16px; line-height: 26px; }
+      .phone-row { padding: 0 20px 48px; }
+      .phone-col { width: 100%; }
+      .strip { padding: 40px 0; }
+      .strip img { margin-left: 5%; width: 90%; }
+      .landscape { padding: 0 0 40px 0; }
+      .landscape img { margin-left: 5%; width: 90%; }
+    }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo/ImageLogo.svg" alt="Patina">
+      </a>
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn">
+        Let's Chat
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <img
+      class="hero-img"
+      src="images/projects/ar/hero.png"
+      alt="AR photogrammetry app">
+  </section>
+
+  <!-- ─── THE BRIEF ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>AR Shopping App</h2>
+      <p>Selling furniture and home goods online means buyers are making hundred-dollar decisions based on flat photos. We designed a photogrammetry app that lets sellers capture any object with their phone camera and generate a full 3D model — so buyers can inspect every angle and place it in their own space before purchasing.</p>
+      <p>The challenge was making professional-grade 3D capture feel as simple as taking a photo, while giving buyers an AR experience that builds genuine confidence in what they're buying.</p>
+    </div>
+  </section>
+
+  <!-- ─── FULL-WIDTH ─── -->
+  <section class="full-dark" style="overflow:hidden;">
+    <img
+      src="images/projects/ar/section.png"
+      alt="AR product placement"
+      style="transform:translateY(-5%);margin-bottom:-5%;">
+  </section>
+
+  <!-- ─── TWO FLOWS, ONE PLATFORM ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>Two Flows, One Platform</h2>
+      <p>The app serves two distinct users — sellers who need to capture and list products, and buyers who want to evaluate them in context. We designed each flow independently, then unified them into a single marketplace experience where 3D and AR are the default, not a feature.</p>
+    </div>
+  </section>
+
+  <!-- ─── DIAGRAM 2 ─── -->
+  <section class="strip">
+    <img
+      src="images/projects/ar/IMG.png"
+      alt="User flow diagram">
+  </section>
+
+  <!-- ─── PHONE ROW A: phone left ─── -->
+  <section class="phone-row">
+    <div class="phone-col" style="flex-basis:44.1%;">
+      <img src="images/projects/ar/IMG-1.png" alt="AR placement states">
+    </div>
+    <p class="phone-text">Buyers browse a familiar marketplace interface, but every product listing includes a live AR view. Place any item in your room, check the fit from every angle, and confirm before you buy.</p>
+  </section>
+
+  <!-- ─── PHONE ROW B: text left ─── -->
+  <section class="phone-row reversed">
+    <div class="phone-col">
+      <img src="images/projects/ar/IMG-2.png" alt="Marketplace and 3D product view">
+    </div>
+    <p class="phone-text">The marketplace surfaces popular items with 3D thumbnails. Open any listing and rotate the full model — inspecting texture, scale, and form from every angle before committing to a purchase.</p>
+  </section>
+
+  <!-- ─── PHONE ROW C: phone left ─── -->
+  <section class="phone-row">
+    <div class="phone-col">
+      <img src="images/projects/ar/IMG-3.png" alt="Photogrammetry capture and 3D model">
+    </div>
+    <p class="phone-text">Sellers circle their product slowly with their phone camera. The app processes the footage and generates a photorealistic 3D model in under a minute — no studio, no equipment, no expertise required.</p>
+  </section>
+
+  <!-- ─── PHONE ROW D: text left ─── -->
+  <section class="phone-row reversed">
+    <div class="phone-col">
+      <img src="images/projects/ar/IMG-4.png" alt="AR room placement">
+    </div>
+    <p class="phone-text">The AR experience detects the floor plane and drops the product into the buyer's actual space. Lighting adapts to the real environment so the object looks like it belongs — not like it was composited on top.</p>
+  </section>
+
+  <!-- ─── PHONE ROW E: phone left ─── -->
+  <section class="phone-row">
+    <div class="phone-col" style="flex-basis:44.1%;">
+      <img src="images/projects/ar/IMG-5.png" alt="AR outdoor placement">
+    </div>
+    <p class="phone-text">Try any product in any environment — indoors, outdoors, different rooms. The AR layer persists as you move, so buyers can genuinely experience how a piece fits their life before it arrives at their door.</p>
+  </section>
+
+  <!-- ─── THE OUTCOME ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>The Outcome</h2>
+      <p>Buyers who used the AR view before purchasing returned products at a significantly lower rate — they knew exactly what they were getting before it arrived. Sellers with 3D listings received measurably more saves and add-to-cart actions than those with photos alone.</p>
+      <p>By closing the gap between what a product looks like online and what it looks like in your home, the app turns browsing into confidence.</p>
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.25s ease';
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+
+    const revealSections = document.querySelectorAll('section:not(.hero)');
+    revealSections.forEach(el => el.classList.add('section-reveal'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -200px 0px', threshold: 0 });
+    revealSections.forEach(el => revealObserver.observe(el));
+  </script>
+
+</body>
+</html>

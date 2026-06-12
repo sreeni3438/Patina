@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patina — Freedom</title>
+  <title>Patina — Serro</title>
   <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,8 +109,7 @@
     }
     .full-dark img {
       width: 100%;
-      aspect-ratio: 1728 / 940;
-      object-fit: cover;
+      height: auto;
     }
 
     /* ─── SCREEN MOCKUP SECTIONS ─── */
@@ -129,8 +128,6 @@
     .screen-col img {
       width: 100%;
       height: auto;
-      border-radius: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
     }
 
     .screen-text {
@@ -154,6 +151,15 @@
       padding-top: 3%;
     }
 
+    /* ─── CAPTION ─── */
+    .caption {
+      margin-top: 16px;
+      font-size: 19px;
+      font-weight: 200;
+      line-height: 24px;
+      color: var(--c-mid);
+    }
+
     /* ─── STRIP IMAGE ─── */
     .strip {
       padding: 0 0 100px;
@@ -163,8 +169,6 @@
       margin-left: 13.25%;
       width: 73.5%;
       margin-right: 13.25%;
-      border-radius: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.10);
     }
 
     /* ─── RESPONSIVE ─── */
@@ -190,6 +194,17 @@
       .strip { padding: 40px 0; }
       .strip img { margin-left: 4%; width: 92%; }
     }
+
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -211,92 +226,115 @@
   <section class="hero">
     <img
       class="hero-img"
-      src="images/projects/freedom/Freedom1.png"
-      alt="Freedom HR">
+      src="images/projects/serro/Hero.png"
+      alt="Serro">
   </section>
 
   <!-- ─── THE BRIEF ─── -->
   <section class="why">
     <div class="why-inner">
-      <h2>Freedom</h2>
-      <p>Serro is an AI workstream reporting tool built for engineering and product teams. Status updates are time-consuming, scattered across emails, Slack threads, and meeting notes — Serro aggregates it all and drafts your reports automatically.</p>
-      <p>We designed Serro to feel effortless. The interface needed to be minimal enough to disappear, letting the AI do the heavy lifting while keeping humans firmly in control of the final output.</p>
+      <h2>Serro</h2>
+      <p>Engineering teams spend hours each week chasing status — pulling updates from Jira, Slack, emails, and meetings just to write a report nobody has time to read. Serro is an AI technical project manager that does it for them.</p>
+      <p>We designed Serro to be invisible infrastructure. The challenge was building something powerful enough to earn trust, yet minimal enough that it never added to the noise it was meant to eliminate.</p>
     </div>
   </section>
 
-  <!-- ─── TASK DASHBOARD — full-width ─── -->
+  <!-- ─── FULL-WIDTH ─── -->
   <section class="full-dark">
-    <img
-      src="https://www.figma.com/api/mcp/asset/d946434a-b709-441f-b086-38c3cf0b0987"
-      alt="Serro task dashboard">
+    <img src="images/projects/serro/img7.png" alt="Serro dashboard">
   </section>
 
-  <!-- ─── STRUCTURED REPORTING ─── -->
+  <!-- ─── DESIGNED FOR YOUR ROLE ─── -->
   <section class="why">
     <div class="why-inner">
-      <h2>Structured Reporting</h2>
-      <p>Every workstream update follows a consistent structure — workstream name, type, target date, engineers, designers, PRD links, risks, path to green, confidence, and milestones. Serro pre-fills what it knows and flags what it doesn't, so your reports are always complete and audit-ready.</p>
+      <h2>Designed for Your Role</h2>
+      <p>Serro personalizes from day one. Tell it whether you're a project manager, individual contributor, or in management — and it configures your daily briefing around what actually matters to you, pulling from the tools and channels you already use.</p>
     </div>
   </section>
 
-  <!-- ─── SCREEN ROW A: clean report form, screen left ─── -->
+  <!-- ─── SCREEN ROW A: role selection ─── -->
+  <section class="screen-row">
+    <div class="screen-col" style="flex: 0 0 73.5%;">
+      <img src="images/projects/serro/img2.png" alt="Serro role selection">
+      <p class="caption">One question at setup — Serro configures your entire briefing around your role and the tools you already use.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW B: weekly task dashboard ─── -->
+  <section class="screen-row">
+    <div class="screen-col" style="flex: 0 0 73.5%;">
+      <img src="images/projects/serro/img03.png" alt="Serro weekly tasks">
+      <p class="caption">Your full week at a glance — open tasks, pending reports, and items ready for review, ranked by urgency.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW C: daily priority view ─── -->
+  <section class="screen-row">
+    <div class="screen-col" style="flex: 0 0 73.5%;">
+      <img src="images/projects/serro/img5.png" alt="Serro daily priorities">
+      <p class="caption">The daily priority view surfaces exactly what needs action today — with one click to generate, send, and close the task.</p>
+    </div>
+  </section>
+
+  <!-- ─── AI processing ─── -->
+  <section class="screen-row">
+    <div class="screen-col" style="flex: 0 0 73.5%;">
+      <img src="images/projects/serro/img01.png" alt="Serro AI processing">
+      <p class="caption">Serro processes your emails, Slack messages, and meeting notes in real time to build your briefing automatically.</p>
+    </div>
+  </section>
+
+  <!-- ─── REPORTS THAT WRITE THEMSELVES ─── -->
+  <section class="why">
+    <div class="why-inner">
+      <h2>Reports That Write Themselves</h2>
+      <p>When a workstream report is due, Serro reads your emails, Slack messages, and meeting notes to draft it automatically. Every field is pre-filled — workstream, type, target date, engineers, risks, milestones — sourced directly from the information that already exists.</p>
+    </div>
+  </section>
+
+  <!-- ─── SCREEN ROW D: clean report editor, screen left ─── -->
   <section class="screen-row">
     <div class="screen-col">
-      <img
-        src="https://www.figma.com/api/mcp/asset/060dba31-8915-420b-87fe-1a865215cd34"
-        alt="Workstream report form">
+      <img src="images/projects/serro/img10.png" alt="Serro workstream report">
     </div>
-    <p class="screen-text">The report editor surfaces exactly what stakeholders need to see. Rich-text formatting, structured fields, and inline team tags combine into a single coherent document — ready to confirm and send in one click.</p>
+    <p class="screen-text">The report editor is structured and clean. Every field has a clear purpose — no freeform notes, no ambiguity. What gets sent is exactly what stakeholders need to make decisions.</p>
   </section>
 
-  <!-- ─── SCREEN ROW B: source tooltip close-up, screen right ─── -->
+  <!-- ─── SCREEN ROW E: source attribution, screen right ─── -->
   <section class="screen-row reversed">
     <div class="screen-col">
-      <img
-        src="https://www.figma.com/api/mcp/asset/5f570472-bace-4dc3-87d1-7fb2c1f30d79"
-        alt="Source attribution tooltip">
+      <img src="images/projects/serro/img11.png" alt="Serro source tooltip">
     </div>
-    <p class="screen-text">Every AI-generated field cites its source. Hover any populated value to see exactly which document, email, or transcript it came from — building trust without slowing anyone down.</p>
+    <p class="screen-text">Every AI-populated field cites its source. Hover any value to see exactly which document or message it came from — so engineers can trust what Serro wrote, and stakeholders can verify it.</p>
   </section>
 
-  <!-- ─── SCREEN ROW C: AI-generated result, screen left ─── -->
+  <!-- ─── SCREEN ROW F: AI panel, screen left ─── -->
   <section class="screen-row">
     <div class="screen-col">
-      <img
-        src="https://www.figma.com/api/mcp/asset/cd4e52dc-6c8a-482f-b075-2b254f413eaa"
-        alt="AI-generated launch date field">
+      <img src="images/projects/serro/img8.png" alt="Serro AI assistant panel">
     </div>
-    <p class="screen-text">The AI panel sits alongside your report — always accessible, never intrusive. Ask Serro to fill in a missing field and it searches your connected sources, surfaces the answer, and populates the form with a single click.</p>
-  </section>
-
-  <!-- ─── SCHEDULE WORKFLOW — full-width ─── -->
-  <section class="full-dark">
-    <img
-      src="https://www.figma.com/api/mcp/asset/ee768589-2aef-4d44-a304-03d0348e6dba"
-      alt="Schedule workflow panel">
+    <p class="screen-text">The AI panel sits alongside every report. Ask Serro a question about your data, request a missing field, or have it pull a launch date from Slack — it searches your connected sources and populates the answer in place.</p>
   </section>
 
   <!-- ─── THE OUTCOME ─── -->
   <section class="why">
     <div class="why-inner">
       <h2>The Outcome</h2>
-      <p>Once a report is confirmed, Serro can schedule it to send automatically on any cadence — every Monday, twice a week until launch, or on a custom schedule you define. Status reporting becomes a system, not a task.</p>
-      <p>Teams using Serro reduced time spent on status reporting by over 60%. Reports that used to take 45 minutes are generated in under 5 — with full source attribution so every stakeholder stays aligned.</p>
+      <p>Engineering teams reduced time spent on status reporting by over 60%. Reports that used to take 45 minutes are generated in under 5 — with full source attribution, consistent structure, and zero follow-up questions from stakeholders.</p>
+      <p>Serro turns reporting from a recurring tax into background infrastructure — something that just happens, reliably, every time.</p>
     </div>
   </section>
 
-  <!-- ─── SIDEBAR STRIP ─── -->
+  <!-- ─── STRIP: generate reports ─── -->
   <section class="strip">
-    <img
-      src="https://www.figma.com/api/mcp/asset/6ca72d53-880c-4dce-a898-3dee149aa30f"
-      alt="Serro navigation and email connection">
+    <img src="images/projects/serro/img1.png" alt="Serro generate reports">
+    <p class="caption" style="margin-left: 13.25%;">Report generation panel — one click drafts a complete status update sourced directly from your connected tools.</p>
   </section>
 
-  <!-- ─── SIDEBAR STRIP 2 ─── -->
+  <!-- ─── STRIP: task cards ─── -->
   <section class="strip">
-    <img
-      src="https://www.figma.com/api/mcp/asset/6ca72d53-880c-4dce-a898-3dee149aa30f"
-      alt="Serro navigation and email connection">
+    <img src="images/projects/serro/img3.png" alt="Serro task cards">
+    <p class="caption" style="margin-left: 13.25%;">Task cards track every open action item with owner, due date, and current status across all your projects.</p>
   </section>
 
   <script>
@@ -310,6 +348,15 @@
         setTimeout(() => { window.location.href = href; }, 260);
       });
     });
+
+    const revealSections = document.querySelectorAll('section:not(.hero)');
+    revealSections.forEach(el => el.classList.add('section-reveal'));
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -200px 0px', threshold: 0 });
+    revealSections.forEach(el => revealObserver.observe(el));
   </script>
 
 </body>
