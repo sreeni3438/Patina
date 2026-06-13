@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brands — Patina</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark: #1e1e1e;
+      --c-mid: #7a7a7a;
+      --f-raleway: 'Raleway', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--f-raleway);
+      color: var(--c-dark);
+      background: #fff;
+      overflow-x: hidden;
+      animation: pageFadeIn 0.3s ease-out forwards;
+    }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ─── NAVBAR ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.88);
+    }
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 14px 32px 18px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-logo img { height: 23.8px; width: auto; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-raleway);
+      font-weight: 200;
+      font-size: 16px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      border: none;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      margin-left: auto;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+
+    /* ─── PAGE ─── */
+    .page {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 140px 192px 120px;
+    }
+
+    /* ─── PAGE TITLE ─── */
+    .page-title {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: -0.96px;
+      line-height: 72px;
+      margin-bottom: 80px;
+      color: var(--c-dark);
+    }
+
+    /* ─── BRAND SECTION ─── */
+    .brand {
+      margin-bottom: 120px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .brand.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .brand-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .brand-name {
+      font-size: 48px;
+      font-weight: 400;
+      letter-spacing: -0.96px;
+      line-height: 72px;
+      margin-bottom: 10px;
+      color: var(--c-dark);
+    }
+    .brand-desc {
+      font-size: 20px;
+      font-weight: 200;
+      line-height: 34px;
+      color: rgba(0,0,0,0.6);
+      max-width: 61.8%;
+    }
+
+    .brand-images {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .brand-images img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      display: block;
+    }
+    .brand-images-row {
+      display: flex;
+      gap: 16px;
+    }
+    .brand-images-row img {
+      flex: 1;
+      width: 0;
+      height: 520px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .page { padding: 140px 80px 120px; }
+      .brand-name { font-size: 38px; line-height: 54px; }
+      .brand-desc { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .page { padding: 120px 32px 80px; }
+      .page-title { font-size: 32px; line-height: 44px; margin-bottom: 56px; }
+      .brand-name { font-size: 26px; line-height: 38px; }
+      .brand-desc { font-size: 16px; line-height: 26px; }
+      .brand { margin-bottom: 80px; }
+    }
+    @media (max-width: 480px) {
+      .page { padding: 100px 20px 64px; }
+      .brand-name { font-size: 20px; line-height: 30px; letter-spacing: -0.3px; }
+      .brand-desc { font-size: 15px; line-height: 24px; }
+      .brand-images-row { flex-direction: column; }
+      .brand-images-row img { flex: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo/ImageLogo.svg" alt="Patina">
+      </a>
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn">
+        Let's Chat
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- ─── FREEDOM ─── -->
+    <div class="brand">
+      <div class="brand-header">
+        <h2 class="brand-name">Freedom</h2>
+        <p class="brand-desc">Freedom is an HR platform built to make compliance and people management feel effortless. The brand needed to counteract the heaviness of the category — clean whites, generous space, and a typographic system that makes even complex workflows feel approachable.</p>
+      </div>
+      <div class="brand-images">
+        <img src="images/brands/Freedom-1.png" alt="Freedom — 1">
+        <img src="images/brands/Freedom-2.png" alt="Freedom — 2">
+        <img src="images/brands/Freedom-3.png" alt="Freedom — 3">
+      </div>
+    </div>
+
+    <!-- ─── GEKIT ─── -->
+    <div class="brand">
+      <div class="brand-header">
+        <h2 class="brand-name">Gekit</h2>
+        <p class="brand-desc">The Gekit mark represents layers. Stacked planes signal how data exists across multiple levels — fragmented, distributed, and structured over time. The form is minimal and precise, surfacing only what's necessary while hinting at the complexity beneath. Built for engineers, but legible to anyone who's ever had to make sense of a system.</p>
+      </div>
+      <div class="brand-images">
+        <img src="images/brands/Gekit-1.png" alt="Gekit — 1">
+        <img src="images/brands/Gekit-2.png" alt="Gekit — 2">
+        <img src="images/brands/Gekit-4.png" alt="Gekit — 4">
+      </div>
+    </div>
+
+    <!-- ─── LUCIDIC ─── -->
+    <div class="brand">
+      <div class="brand-header">
+        <h2 class="brand-name">Lucidic — [One iteration]</h2>
+        <p class="brand-desc">Lucidic — one iteration.</p>
+      </div>
+      <div class="brand-images">
+        <img src="images/brands/Lucidic-1.png" alt="Lucidic — 1">
+        <img src="images/brands/Lucidic-2.png" alt="Lucidic — 2">
+      </div>
+    </div>
+
+    <!-- ─── ROYA ─── -->
+    <div class="brand">
+      <div class="brand-header">
+        <h2 class="brand-name">Roya</h2>
+        <p class="brand-desc">Roya is a GPU cloud platform built for teams pushing the limits of compute. The brand needed to feel as serious as the silicon it runs on — precise, dense, and technical without being cold. Every detail references the physical reality of chips: heat, structure, and the quiet power of optimised silicon.</p>
+      </div>
+      <div class="brand-images">
+        <img src="images/brands/Roya-1.png" alt="Roya — 1">
+        <img src="images/brands/Roya-2.png" alt="Roya — 2">
+      </div>
+    </div>
+
+    <!-- ─── ARIS ─── -->
+    <div class="brand">
+      <div class="brand-header">
+        <h2 class="brand-name">Aris</h2>
+        <p class="brand-desc">Aris is a GPU infrastructure platform for AI workloads. The brand speaks to engineers who think in silicon — direct, architectural, and stripped of anything unnecessary. Form follows function, just like the hardware it abstracts.</p>
+      </div>
+      <div class="brand-images">
+        <img src="images/brands/Aris-1.png" alt="Aris — 1">
+        <div class="brand-images-row">
+          <img src="images/brands/Aris-3.png" alt="Aris — 3">
+          <img src="images/brands/Aris-4.png" alt="Aris — 4">
+          <img src="images/brands/Aris-5.png" alt="Aris — 5">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ─── SCROLL REVEAL ─────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.brand').forEach(el => observer.observe(el));
+
+    // ─── PAGE TITLE REVEAL ─────────────────────────
+    const title = document.querySelector('.page-title');
+    if (title) {
+      title.style.opacity = '0';
+      title.style.transform = 'translateY(14px)';
+      title.style.transition = 'opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1)';
+      setTimeout(() => {
+        title.style.opacity = '1';
+        title.style.transform = 'translateY(0)';
+      }, 100);
+    }
+
+    // ─── PAGE TRANSITION ───────────────────────────
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 260);
+      });
+    });
+  </script>
+
+</body>
+</html>

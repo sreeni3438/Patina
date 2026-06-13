@@ -133,25 +133,27 @@
     }
 
     /* ─── 2-PHONE ROW ─── */
-    /* Two phones side by side + text */
+    /* Two phones side by side, text wraps to full-width line below */
     .phone-row-2 {
       display: flex;
+      flex-wrap: wrap;
       align-items: flex-start;
       padding-bottom: 210px;
       background: #1F1E1C;
     }
     .phone-row-2 .phone-col-a {
-      flex: 0 0 27%;
+      flex: 0 0 35%;
       margin-left: 13.25%;
     }
     .phone-row-2 .phone-col-b {
-      flex: 0 0 27%;
-      margin-left: 1.5%;
+      flex: 0 0 35%;
+      margin-left: 0.5%;
     }
+    /* Text drops to a new full-width line, aligned to content margins */
     .phone-row-2 .phone-text {
-      flex: 0 0 16%;
-      margin-left: 1.5%;
-      padding-top: 6%;
+      flex: 0 0 73.5%;
+      margin-left: 13.25%;
+      padding-top: 48px;
       font-size: 20px;
       font-weight: 200;
       line-height: 34px;
@@ -161,7 +163,7 @@
     .phone-row-2 .phone-col-b img { width: 100%; height: auto; }
 
     /* ─── 3-PHONE ROW ─── */
-    /* Three phones, no text */
+    /* Three phones, symmetric margins so left and right edges balance */
     .phone-row-3 {
       display: flex;
       align-items: flex-start;
@@ -169,16 +171,16 @@
       background: #1F1E1C;
     }
     .phone-row-3 .phone-col-a {
-      flex: 0 0 23.5%;
-      margin-left: 13.25%;
+      flex: 0 0 30.5%;
+      margin-left: 3.75%;
     }
     .phone-row-3 .phone-col-b {
-      flex: 0 0 23.5%;
-      margin-left: 1.5%;
+      flex: 0 0 30.5%;
+      margin-left: 0.5%;
     }
     .phone-row-3 .phone-col-c {
-      flex: 0 0 23.5%;
-      margin-left: 1.5%;
+      flex: 0 0 30.5%;
+      margin-left: 0.5%;
     }
     .phone-row-3 .phone-col-a img,
     .phone-row-3 .phone-col-b img,
