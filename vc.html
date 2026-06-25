@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patina — Design Studio</title>
+  <title>Patina — Design Partner for Your Portfolio</title>
+  <meta name="description" content="Patina is the embedded design partner for venture portfolios. We help your portfolio companies ship beautiful, fundraise-ready products — fast.">
   <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
   <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,25 +60,14 @@
     ul, ol { list-style: none; }
 
     /* ─── PAGE TRANSITION ────────────────────────────── */
-    body {
-      animation: pageFadeIn 0.3s ease-out forwards;
-    }
+    body { animation: pageFadeIn 0.3s ease-out forwards; }
     body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
-
-    @keyframes pageFadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     /* ─── ENTRANCE ANIMATIONS ───────────────────────── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0);    }
-    }
-
-    @keyframes scaleUp {
-      from { opacity: 0; transform: scale(0.96) translateY(24px); }
-      to   { opacity: 1; transform: scale(1)    translateY(0);    }
     }
 
     /* ─── SCROLL REVEAL ─────────────────────────────── */
@@ -87,17 +77,10 @@
       transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
                   transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── PAGE CONTAINER ─────────────────────────────── */
-    .page {
-      max-width: 1728px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    .page { max-width: 1728px; margin: 0 auto; width: 100%; }
 
     /* ─── BUTTON ─────────────────────────────────────── */
     .btn {
@@ -121,6 +104,13 @@
     .btn img, .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
     .btn-lg { padding: 12px 20px; }
     .btn-sm { padding: 12px 20px; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--c-dark);
+      border: 1px solid var(--c-border);
+    }
+    .btn-ghost:hover { background: var(--c-footer); }
 
     .nav .btn {
       font-size: 16px;
@@ -153,9 +143,9 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 55px;
+      gap: 40px;
       margin-left: auto;
-      margin-right: 60px;
+      margin-right: 40px;
     }
 
     .nav-links a {
@@ -168,7 +158,7 @@
 
     /* ─── HERO ───────────────────────────────────────── */
     .hero {
-      padding: 200px 144px 120px 64px;
+      padding: 200px 144px 110px 64px;
       background: #fff;
       display: flex;
       flex-direction: column;
@@ -180,29 +170,22 @@
       font-weight: 400;
       line-height: 68px;
       letter-spacing: -0.6px;
-      max-width: 732px;
-      margin-bottom: 36px;
+      max-width: 880px;
+      margin-bottom: 28px;
     }
+    .hero h1 em { font-style: italic; }
 
     .hero-line {
       display: inline-block;
       opacity: 0;
       transform: translateY(14px);
     }
-
-    .hero-line.visible {
-      animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .hero-line.visible:nth-of-type(1) { animation-delay: 0s; }
-    .hero-line.visible:nth-of-type(2) { animation-delay: 0.12s; }
-    .hero-line.visible:nth-of-type(3) { animation-delay: 0.24s; }
-    .hero-line.visible:nth-of-type(4) { animation-delay: 0.36s; }
-
-    .hero h1 em { font-style: italic; }
+    .hero-line.visible { animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
     .hero-pill {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       width: fit-content;
       background: var(--c-footer);
       color: var(--c-dark);
@@ -213,51 +196,188 @@
       font-weight: 200;
       margin-bottom: 24px;
     }
+    .hero-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--c-orange); flex-shrink: 0;
+    }
 
     .hero-sub {
       font-size: 22px;
       font-weight: 200;
       line-height: 34px;
       color: #555;
-      max-width: 620px;
+      max-width: 680px;
       margin-top: 0;
-      margin-bottom: 48px;
+      margin-bottom: 44px;
     }
 
-    /* Button uses transition (not animation) so hover works cleanly */
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
     .hero .btn {
       opacity: 0;
       transform: translateY(10px);
-      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 1s,
-                  transform 1s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 0.9s,
+                  transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.9s;
     }
-    .hero.visible .btn {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .hero.visible .btn { opacity: 1; transform: translateY(0); }
     .hero.visible .btn:hover {
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      opacity: 0.82;
+      transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease;
+      opacity: 0.92;
       transform: scale(1.04);
+    }
+
+    /* ─── LOGO STRIP ─────────────────────────────────── */
+    .logos {
+      padding: 0 64px 40px;
+    }
+    .logos-label {
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--c-mid);
+      margin-bottom: 22px;
+    }
+    .logos-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px 12px;
+    }
+    .logo-chip {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--c-dark);
+      border: 1px solid #e8e8e8;
+      border-radius: 100px;
+      padding: 8px 18px;
+      background: #fff;
+    }
+
+    /* ─── VC VALUE PROPS ─────────────────────────────── */
+    .vprop {
+      padding: 110px 64px;
+      background: var(--c-footer);
+    }
+    .vprop-head {
+      font-family: var(--f-instrument);
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 64px;
+      letter-spacing: -0.96px;
+      max-width: 880px;
+      margin-bottom: 18px;
+    }
+    .vprop-head .why-label-secondary { display: block; color: var(--c-mid); }
+    .vprop-sub {
+      font-size: 22px;
+      font-weight: 200;
+      line-height: 34px;
+      color: var(--c-muted);
+      max-width: 720px;
+      margin-bottom: 56px;
+    }
+
+    .vprop-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .vcard {
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 16px;
+      padding: 28px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s ease, transform 0.3s ease;
+    }
+    .vcard:hover { border-color: #c8c8c8; transform: translateY(-4px); }
+    .vcard-num {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--c-orange);
+      letter-spacing: 0.5px;
+      margin-bottom: auto;
+    }
+    .vcard-title {
+      font-family: var(--f-instrument);
+      font-size: 23px;
+      font-weight: 400;
+      line-height: 32px;
+      color: var(--c-dark);
+      margin-top: 20px;
+      margin-bottom: 12px;
+    }
+    .vcard-desc {
+      font-size: 16px;
+      font-weight: 200;
+      line-height: 25px;
+      color: var(--c-muted);
+    }
+
+    /* ─── STATS ──────────────────────────────────────── */
+    .stats {
+      padding: 100px 64px;
+      background: #fff;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-num {
+      font-family: var(--f-instrument);
+      font-size: 64px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      color: var(--c-dark);
+      margin-bottom: 14px;
+    }
+    .stat-label {
+      font-size: 18px;
+      font-weight: 200;
+      line-height: 27px;
+      color: var(--c-muted);
+    }
+
+    /* ─── SECTION HEADING ────────────────────────────── */
+    .section-head {
+      padding: 110px 64px 0;
+    }
+    .section-title {
+      font-family: var(--f-instrument);
+      font-size: 48px;
+      font-weight: 400;
+      line-height: 64px;
+      letter-spacing: -0.96px;
+      margin-bottom: 16px;
+    }
+    .section-title .why-label-secondary { display: block; color: var(--c-mid); }
+    .section-sub {
+      font-size: 22px;
+      font-weight: 200;
+      line-height: 34px;
+      color: var(--c-muted);
+      max-width: 720px;
     }
 
     /* ─── PORTFOLIO GRID ─────────────────────────────── */
     .features {
       background: #fff;
-      height: 3240px;
+      height: 2480px;
       position: relative;
       overflow: visible;
     }
-
     .features-grid {
       position: absolute;
-      top: 120px;
+      top: 60px;
       left: 20px;
       right: 20px;
       bottom: 0;
     }
-
-    /* Cards start invisible, animate in when scrolled into view */
     .p-card {
       position: absolute;
       height: 720px;
@@ -270,11 +390,7 @@
       transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
                   transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .p-card.visible {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
+    .p-card.visible { opacity: 1; transform: scale(1) translateY(0); }
     .p-card img {
       width: 100%;
       height: 100%;
@@ -282,7 +398,6 @@
       transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.4s ease;
     }
     .p-card:hover img { transform: scale(1.04); filter: blur(5px); }
-
     .p-card-overlay {
       position: absolute;
       inset: 0;
@@ -298,7 +413,6 @@
       padding: 40px;
     }
     .p-card:hover .p-card-overlay { opacity: 1; transform: scale(1); }
-
     .p-card-title {
       font-family: var(--f-instrument);
       font-size: 28px;
@@ -306,7 +420,6 @@
       color: #1e1e1e;
       margin-bottom: 8px;
     }
-
     .p-card-category {
       font-size: 14px;
       font-weight: 200;
@@ -315,7 +428,6 @@
       letter-spacing: 0.5px;
       margin-bottom: 16px;
     }
-
     .p-card-description {
       font-size: 16px;
       font-weight: 200;
@@ -323,27 +435,86 @@
       line-height: 24px;
       max-width: 280px;
     }
-
-    /* Row 1  (top: 0)    — wide-left / narrow-right  (60 / 40, 20px gap) */
     .p1 { top: 0;      left: 0;      right: 688px;  }
     .p2 { top: 0;      left: 1020px; right: 0;      }
-    /* Row 2  (top: 760)  — narrow-left / wide-right */
     .p3 { top: 760px;  left: 0;      right: 1020px; }
     .p4 { top: 760px;  left: 688px;  right: 0;      }
-    /* Row 3  (top: 1520) — wide-left / narrow-right */
     .p5 { top: 1520px; left: 0;      right: 688px;  }
     .p6 { top: 1520px; left: 1020px; right: 0;      }
-    /* Row 4  (top: 2280) — equal 50/50 */
     .p7 { top: 2280px; left: 0;      right: 854px;  }
     .p8 { top: 2280px; left: 854px;  right: 0;      }
 
+    /* ─── BRANDING SHOWCASE ──────────────────────────── */
+    .branding {
+      padding: 110px 64px;
+      background: var(--c-footer);
+    }
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .brand-item {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      background: #fff;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .brand-item.visible { opacity: 1; transform: translateY(0); }
+    .brand-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .brand-item:hover img { transform: scale(1.03); }
+    .brand-caption {
+      position: absolute;
+      left: 24px;
+      bottom: 20px;
+      z-index: 2;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .brand-caption .bc-name {
+      font-family: var(--f-instrument);
+      font-size: 22px;
+      font-weight: 400;
+      color: #fff;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+    }
+    .brand-caption .bc-tag {
+      font-size: 13px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: rgba(255,255,255,0.85);
+      text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+    }
+    .brand-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.32) 0%, rgba(0,0,0,0) 40%);
+      pointer-events: none;
+    }
+    /* spans */
+    .bi-7  { grid-column: span 7; height: 520px; }
+    .bi-5  { grid-column: span 5; height: 520px; }
+    .bi-4  { grid-column: span 4; height: 440px; }
+    .bi-8  { grid-column: span 8; height: 440px; }
+    .bi-6  { grid-column: span 6; height: 460px; }
+
+    .brand-cta { margin-top: 48px; }
 
     /* ─── WHY PATINA ─────────────────────────────────── */
-    .why {
-      padding: 120px 64px;
-      background: #fff;
-    }
-
+    .why { padding: 120px 64px; background: #fff; }
     .why-label {
       font-family: var(--f-instrument);
       font-size: 48px;
@@ -352,7 +523,6 @@
       letter-spacing: -0.96px;
       margin-bottom: 48px;
     }
-
     .why-body p {
       font-size: 29.5px;
       font-weight: 200;
@@ -360,30 +530,77 @@
       letter-spacing: -0.32px;
       max-width: 70vw;
     }
-
     .why-body p + p { margin-top: 58px; }
-
     .why-body .hi { color: var(--c-dark); font-weight: 400; }
+    .why-label-secondary { display: block; color: var(--c-mid); }
 
-    /* ─── SERVICES CAROUSEL ─────────────────────────── */
-    .services {
+    /* ─── PROCESS / WHAT WE OFFER ────────────────────── */
+    .ww-section { background: var(--c-footer); padding: 120px 64px; color: var(--c-dark); }
+    .ww-section .why-label { color: var(--c-dark); }
+    .ww-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 48px;
+    }
+    .ww-card {
       background: #fff;
-      padding: 120px 0;
+      border: 1px solid #e8e8e8;
+      border-radius: 16px;
+      height: 380px;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+                  border-color 0.2s ease;
     }
-
-    .services-wrap {
-      /* left: 64px, right: 144px → 1728-64-144=1520px inner */
-      margin-left: 64px;
-      margin-right: 144px;
+    .ww-card.visible { opacity: 1; transform: translateY(0); }
+    .ww-card:hover { border-color: #c8c8c8; }
+    .ww-card-step {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--c-orange);
+      letter-spacing: 0.5px;
     }
+    .ww-card-spacer { flex: 1; }
+    .ww-card-title {
+      font-family: var(--f-instrument);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--c-dark);
+      margin-top: auto;
+    }
+    .ww-card-desc {
+      position: absolute;
+      top: 56px;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      font-size: 17px;
+      font-weight: 200;
+      line-height: 27px;
+      color: var(--c-muted);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .ww-card:hover .ww-card-desc { opacity: 1; }
+    .ww-card.default-open .ww-card-desc { opacity: 1; }
 
+    /* ─── TESTIMONIAL CAROUSEL ───────────────────────── */
+    .services { background: #fff; padding: 120px 0; }
+    .services-wrap { margin-left: 64px; margin-right: 144px; }
     .services-header {
       height: 72px;
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
     }
-
     .services-title {
       font-family: var(--f-instrument);
       font-size: 48px;
@@ -393,43 +610,19 @@
       white-space: nowrap;
       text-align: left;
     }
-
-    .touch-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 16.2px;
-      font-weight: 200;
-      letter-spacing: -0.352px;
-      padding-bottom: 3px;
-      transition: opacity 0.18s;
-    }
-    .touch-link:hover { opacity: 0.6; }
-    .touch-link img, .touch-link svg { width: 16px; height: 16px; }
-
-    /* Carousel outer — holds arrows outside clip */
-    .carousel-outer {
-      position: relative;
-      height: 500px;
-      margin-top: 48px;
-    }
-
+    .carousel-outer { position: relative; height: 500px; margin-top: 48px; }
     .carousel-viewport {
       overflow: hidden;
       height: 100%;
-      /* Fade edges */
       -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
       mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
     }
-
     .carousel-track {
       display: flex;
       gap: 12px;
       height: 100%;
       transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
     }
-
-    /* Service cards */
     .svc-card {
       flex: 0 0 450px;
       height: 500px;
@@ -438,41 +631,17 @@
       position: relative;
       overflow: hidden;
     }
-
     .svc-c1 { background: #faf8fe; }
     .svc-c2 { background: #fdf7ed; }
     .svc-c3 { background: #fff3f3; }
     .svc-c4 { background: #f6fef3; }
-
-    .svc-label {
-      font-family: var(--f-instrument);
-      font-size: 23.1px;
-      font-weight: 400;
-      line-height: 40.8px;
-    }
-
-    .svc-desc {
-      font-size: 12.9px;
-      font-weight: 200;
-      line-height: 19.71px;
-      margin-top: 12px;
-      max-width: 275px;
-    }
-
     .svc-quote-text {
       font-size: 22.3px;
       font-weight: 200;
       line-height: 40.8px;
       margin-bottom: 24px;
     }
-
-    .svc-attr {
-      font-size: 13px;
-      font-weight: 200;
-      line-height: 19.71px;
-    }
-
-    /* Carousel arrow buttons */
+    .svc-attr { font-size: 13px; font-weight: 200; line-height: 19.71px; }
     .c-btn {
       position: absolute;
       top: 50%;
@@ -494,243 +663,15 @@
     .c-btn-next { right: -25px; }
     .c-btn[hidden] { display: none; }
 
-    /* ─── TESTIMONIALS / PRICING ─────────────────────── */
-    /* ─── WHO WE'RE FOR (TABS) ─────────────────────── */
-    .ww-section {
-      background: #fff;
-      padding: 120px 64px;
-    }
-
-    .ww-section--dark {
-      background: var(--c-footer);
-      color: var(--c-dark);
-    }
-
-    .ww-section--dark .why-label {
-      color: var(--c-dark);
-    }
-
-    .ww-section--dark .ww-card {
-      background: #fff;
-      border-color: #e8e8e8;
-    }
-
-    .ww-section--dark .ww-card-title {
-      color: var(--c-dark);
-      font-weight: 200;
-    }
-
-    .ww-section--dark .ww-card-desc {
-      color: var(--c-muted);
-    }
-
-    .ww-section--dark a {
-      color: var(--c-dark);
-    }
-
-    .ww-section--dark a:hover {
-      color: var(--c-mid);
-    }
-
-    .why-label-secondary {
-      display: block;
-      color: var(--c-mid);
-    }
-
-    .ww-section--dark .why-label-secondary {
-      color: var(--c-mid);
-    }
-
-    .ww-section--dark .ww-grid {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .ww-section--dark .ww-card {
-      height: 380px;
-      padding: 24px;
-    }
-
-    .ww-tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 32px;
-    }
-
-    .ww-tab {
-      padding: 7px 18px;
-      border-radius: 100px;
-      border: none;
-      font-family: var(--f-instrument);
-      font-size: 22px;
-      font-weight: 200;
-      cursor: pointer;
-      background: transparent;
-      color: #aaa;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .ww-tab--active {
-      background: #111;
-      color: #fff;
-    }
-
-    .ww-pane { display: block; }
-    .ww-pane--hidden { display: none; }
-
-    .ww-desc {
-      font-size: 22px;
-      font-weight: 200;
-      line-height: 34px;
-      color: var(--c-dark);
-      max-width: 780px;
-      margin-bottom: 12px;
-    }
-
-    .ww-with {
-      font-size: 22px;
-      font-weight: 200;
-      color: var(--c-muted);
-      margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .ww-with-role {
-      font-weight: 200;
-      color: var(--c-dark);
-    }
-
-    .ww-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 48px;
-    }
-
-    .ww-card {
-      background: #fff;
-      border: 1px solid #e8e8e8;
-      border-radius: 16px;
-      height: 300px;
-      padding: 32px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  border-color 0.2s ease;
-    }
-
-    .ww-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .ww-card:hover { border-color: #c8c8c8; }
-
-    .ww-card-spacer {
-      flex: 1;
-    }
-
-    .ww-card-title {
-      font-family: var(--f-instrument);
-      font-size: 24px;
-      font-weight: 400;
-      color: var(--c-dark);
-      margin-top: auto;
-    }
-
-    .ww-card-desc {
-      position: absolute;
-      top: 32px;
-      left: 32px;
-      right: 32px;
-      bottom: 32px;
-      font-size: 18px;
-      font-weight: 200;
-      line-height: 28px;
-      color: var(--c-muted);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-    }
-
-    .ww-card:hover .ww-card-desc {
-      opacity: 1;
-    }
-
-    .ww-card.default-open .ww-card-desc {
-      opacity: 1;
-    }
-
-    .ww-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .ww-tag {
-      font-size: 16px;
-      font-weight: 200;
-      color: var(--c-dark);
-      border: 1px solid var(--c-border);
-      border-radius: 100px;
-      padding: 3px 10px;
-    }
-
-    .ww-grid-4col {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
-
-    .ww-grid-4col .ww-card {
-      height: 380px;
-    }
-
-    .ww-section--dark .c-btn {
-      display: none;
-    }
-
-    /* ─── FULL WIDTH IMAGE ───────────────────────────── */
-    .full-img-section {
-      padding: 0 64px;
-    }
-    .full-img {
-      display: block;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      border-radius: 32px;
-      overflow: hidden;
-    }
-    .full-img-section.reveal {
-      transform: scale(0.96) translateY(24px);
-    }
-    .full-img-section.reveal.visible {
-      transform: scale(1) translateY(0);
-    }
-
-    /* ─── CTA SECTION ────────────────────────────────── */
+    /* ─── CTA ────────────────────────────────────────── */
     .cta {
-      padding: 120px 64px;
+      padding: 130px 64px;
       display: flex;
       flex-direction: column;
       align-items: center;
       background: #fff;
     }
-
-    .cta-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
-      text-align: center;
-    }
-
+    .cta-inner { display: flex; flex-direction: column; align-items: center; gap: 36px; text-align: center; }
     .cta-head {
       font-family: var(--f-instrument);
       font-size: 48px;
@@ -738,14 +679,17 @@
       line-height: 72px;
       letter-spacing: -0.96px;
     }
-
-    /* ─── FOOTER ─────────────────────────────────────── */
-    footer {
-      height: 476px;
-      background: var(--c-footer);
-      overflow: hidden;
+    .cta-sub {
+      font-size: 22px;
+      font-weight: 200;
+      line-height: 34px;
+      color: var(--c-muted);
+      max-width: 640px;
+      margin-top: -16px;
     }
 
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer { height: 476px; background: var(--c-footer); overflow: hidden; }
     .footer-inner {
       height: 100%;
       padding: 40px 64px;
@@ -753,9 +697,7 @@
       flex-direction: column;
       justify-content: space-between;
     }
-
     .footer-logo img { height: 23.8px; width: auto; }
-
     .footer-blurb {
       font-size: 29.6px;
       font-weight: 200;
@@ -764,13 +706,7 @@
       max-width: 450px;
     }
     .footer-blurb .dim { color: var(--c-muted); }
-
-    .footer-email-wrap {
-      display: inline-block;
-      position: relative;
-      margin-top: 28px;
-    }
-
+    .footer-email-wrap { display: inline-block; position: relative; margin-top: 28px; }
     .footer-email {
       font-size: 29.6px;
       font-weight: 200;
@@ -780,7 +716,6 @@
       transition: opacity 0.18s;
     }
     .footer-email:hover { opacity: 0.6; }
-
     .footer-email-line {
       position: absolute;
       bottom: 4px;
@@ -791,14 +726,11 @@
     }
 
     /* ─── RESPONSIVE ────────────────────────────────── */
-
-    /* Ultra-wide screens: add horizontal padding */
     @media (min-width: 1900px) {
       .page { padding: 0 calc((100% - 1728px) / 2); }
       .nav-inner { padding-left: calc(32px + (100% - 1728px) / 2); padding-right: calc(32px + (100% - 1728px) / 2); }
     }
 
-    /* Hide custom cursor on touch/pointer-coarse devices */
     @media (hover: none), (pointer: coarse) {
       #custom-cursor { display: none; }
       html, body, *, *::before, *::after { cursor: auto !important; }
@@ -807,12 +739,25 @@
     /* ── Tablet: ≤ 1100px ── */
     @media (max-width: 1100px) {
       .nav-inner { padding: 14px 28px 18px; }
+      .nav-links { gap: 26px; margin-right: 26px; }
 
-      .hero { padding: 100px 40px 80px; }
+      .hero { padding: 100px 40px 70px; }
       .hero h1 { font-size: 44px; line-height: 56px; }
       .hero-sub { font-size: 19px; line-height: 30px; }
 
-      /* Switch portfolio from absolute to CSS grid */
+      .logos { padding: 0 40px 30px; }
+
+      .vprop { padding: 80px 40px; }
+      .vprop-head { font-size: 38px; line-height: 50px; }
+      .vprop-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .stats { padding: 70px 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 32px; }
+      .stat-num { font-size: 52px; }
+
+      .section-head { padding: 80px 40px 0; }
+      .section-title { font-size: 38px; line-height: 50px; }
+
       .features { height: auto; }
       .features-grid {
         position: relative;
@@ -820,35 +765,28 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 16px;
-        padding: 60px 20px 80px;
+        padding: 40px 20px 0;
       }
-      .p-card {
-        position: relative;
-        height: 420px;
-      }
-      .p1, .p2, .p3, .p4, .p5, .p6, .p7, .p8 {
-        top: auto; left: auto; right: auto;
-      }
+      .p-card { position: relative; height: 420px; }
+      .p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8 { top: auto; left: auto; right: auto; }
+
+      .branding { padding: 80px 40px; }
+      .brand-grid { gap: 14px; }
+      .bi-7,.bi-5,.bi-4,.bi-8,.bi-6 { grid-column: span 12; height: 380px; }
 
       .why { padding: 80px 40px; }
       .why-label { font-size: 38px; line-height: 54px; }
       .why-body p { font-size: 22px; line-height: 36px; max-width: 100%; }
 
+      .ww-section { padding: 80px 40px; }
+      .ww-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .ww-card { height: 300px; }
+
       .services { padding: 80px 0; }
       .services-wrap { margin-left: 40px; margin-right: 80px; }
       .services-title { font-size: 38px; }
 
-      .ww-section { padding: 80px 40px; }
-      .ww-desc, .ww-with { font-size: 19px; line-height: 30px; }
-      .ww-section { padding: 80px 40px; }
-      .ww-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .ww-card { height: 280px; padding: 28px; }
-      .ww-card-title { font-size: 22px; }
-      .ww-card-desc { font-size: 16px; line-height: 26px; }
-
-      .full-img-section { padding: 0 40px; }
-
-      .cta { padding: 80px 40px; }
+      .cta { padding: 90px 40px; }
       .cta-head { font-size: 38px; line-height: 54px; }
 
       footer { height: auto; }
@@ -858,34 +796,59 @@
 
     /* ── Mobile: ≤ 640px ── */
     @media (max-width: 640px) {
-      .nav { display: block; }
       .nav-inner { padding: 12px 20px; }
       .nav-logo img { height: 16px; }
       .nav-links { display: none; }
-      .nav .btn { display: none; }
 
-      .hero { padding: 88px 20px 56px; }
-      .hero h1 { font-size: 30px; line-height: 40px; max-width: 100%; margin-bottom: 32px; }
-      .hero-pill { font-size: 12px; border: none; background: var(--c-footer); }
-      .hero-sub { font-size: 16px; line-height: 26px; max-width: 100%; margin-bottom: 36px; }
+      .hero { padding: 88px 20px 48px; }
+      .hero h1 { font-size: 30px; line-height: 40px; max-width: 100%; margin-bottom: 24px; }
+      .hero-pill { font-size: 12px; }
+      .hero-sub { font-size: 16px; line-height: 26px; max-width: 100%; margin-bottom: 32px; }
+      .hero-actions { width: 100%; }
+      .hero-actions .btn { flex: 1; justify-content: center; }
 
-      .features-grid {
-        grid-template-columns: 1fr;
-        padding: 40px 16px 56px;
-        gap: 12px;
-      }
+      .logos { padding: 0 20px 24px; }
+      .logo-chip { font-size: 15px; padding: 6px 14px; }
+
+      .vprop { padding: 56px 20px; }
+      .vprop-head { font-size: 26px; line-height: 36px; }
+      .vprop-sub { font-size: 16px; line-height: 26px; margin-bottom: 36px; }
+      .vprop-grid { grid-template-columns: 1fr; }
+      .vcard { min-height: 0; padding: 24px; }
+
+      .stats { padding: 56px 20px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+      .stat-num { font-size: 44px; }
+      .stat-label { font-size: 16px; line-height: 24px; }
+
+      .section-head { padding: 56px 20px 0; }
+      .section-title { font-size: 26px; line-height: 36px; }
+      .section-sub { font-size: 16px; line-height: 26px; }
+
+      .features-grid { grid-template-columns: 1fr; padding: 32px 16px 0; gap: 12px; }
       .p-card { height: 300px; border-radius: 20px; }
       .p-card-title { font-size: 22px; }
       .p-card-description { font-size: 14px; line-height: 21px; }
+
+      .branding { padding: 56px 20px; }
+      .bi-7,.bi-5,.bi-4,.bi-8,.bi-6 { height: 260px; border-radius: 18px; }
+      .brand-caption .bc-name { font-size: 18px; }
 
       .why { padding: 56px 20px; }
       .why-label { font-size: 26px; line-height: 38px; margin-bottom: 24px; }
       .why-body p { font-size: 17px; line-height: 28px; }
       .why-body p + p { margin-top: 32px; }
 
+      .ww-section { padding: 56px 20px; }
+      .ww-grid { grid-template-columns: 1fr; gap: 12px; }
+      .ww-card { height: auto; padding: 20px; }
+      .ww-card-spacer { flex: 0; }
+      .ww-card-title { font-size: 18px; margin-top: 0; }
+      .ww-card-desc { position: static; opacity: 1; font-size: 15px; line-height: 24px; margin-top: 12px; }
+
       .services { padding: 56px 0; }
       .services-wrap { margin-left: 20px; margin-right: 20px; }
-      .services-header { height: auto; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .services-header { height: auto; }
       .services-title { font-size: 26px; line-height: 36px; white-space: normal; }
       .carousel-outer { height: auto; margin-top: 32px; }
       .carousel-viewport { height: auto; -webkit-mask-image: none; mask-image: none; }
@@ -894,59 +857,10 @@
       .c-btn-prev { left: 8px; }
       .c-btn-next { right: 8px; }
 
-      .ww-section { padding: 56px 20px; }
-      .ww-tab { font-size: 16px; padding: 6px 14px; }
-      .ww-desc, .ww-with { font-size: 16px; line-height: 26px; }
-      .ww-grid { gap: 12px; }
-      .ww-card { height: auto; padding: 20px; }
-      .ww-card-spacer { flex: 0; }
-      .ww-card-title { font-size: 18px; margin-top: 0; }
-      .ww-card-desc { position: static; opacity: 1; font-size: 15px; line-height: 24px; }
-
-      .ww-section--dark {
-        position: relative;
-      }
-
-      .ww-section--dark .carousel-outer {
-        position: relative;
-        margin-top: 32px;
-      }
-
-      .ww-section--dark .c-btn {
-        display: block;
-      }
-
-      .ww-section--dark .ww-grid {
-        display: flex;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-behavior: smooth;
-        gap: 12px;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-      }
-
-      .ww-section--dark .ww-card {
-        height: 280px;
-        padding: 20px;
-        flex: 0 0 calc(85% - 6px);
-        scroll-snap-align: start;
-      }
-
-      .ww-section--dark .ww-grid {
-        scrollbar-width: none;
-      }
-
-      .ww-section--dark .ww-grid::-webkit-scrollbar {
-        display: none;
-      }
-
-      .full-img-section { padding: 0 16px; }
-      .full-img { border-radius: 20px; }
-
-      .cta { padding: 56px 20px; }
+      .cta { padding: 64px 20px; }
       .cta-head { font-size: 26px; line-height: 38px; }
-      .cta-inner { gap: 28px; }
+      .cta-sub { font-size: 16px; line-height: 26px; }
+      .cta-inner { gap: 24px; }
 
       footer { height: auto; }
       .footer-inner { padding: 32px 20px; gap: 32px; }
@@ -962,13 +876,16 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img
-          src="images/logo/ImageLogo.svg"
-          alt="Patina"
-        >
+        <img src="images/logo/ImageLogo.svg" alt="Patina">
       </a>
-      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left: auto;">
-        Let's Chat
+      <div class="nav-links">
+        <a href="#value">For Investors</a>
+        <a href="#work">Work</a>
+        <a href="#branding">Branding</a>
+        <a href="#process">Process</a>
+      </div>
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm">
+        Talk to us
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
     </div>
@@ -985,10 +902,40 @@
       <p class="hero-sub">Our team with previous experience from NVIDIA, Google, and $700M+ startups will embed into your team.</p>
     </section>
 
-    <!-- ─── PORTFOLIO GRID ─── -->
+    <!-- ─── VC VALUE PROPS ─── -->
+    <section class="vprop" id="value">
+      <h2 class="vprop-head reveal"><span class="why-label-secondary" style="color: var(--c-dark);">Here's what we do for your portfolio.</span></h2>
+      <p class="vprop-sub reveal" style="--reveal-delay: 0.1s">We give the companies you back a senior design team on day one — without the cost, risk, or time of a full-time hire. You get a single, trusted partner you can introduce again and again.</p>
+      <div class="vprop-grid">
+        <div class="vcard reveal" style="--reveal-delay: 0.05s">
+          <div class="vcard-num">01</div>
+          <div class="vcard-title">Make portfolio companies stand out</div>
+          <p class="vcard-desc">Brand and product design that helps founders look credible to customers and the next round of investors — from day zero.</p>
+        </div>
+        <div class="vcard reveal" style="--reveal-delay: 0.12s">
+          <div class="vcard-num">02</div>
+          <div class="vcard-title">Move at venture speed</div>
+          <p class="vcard-desc">First designs in 10 days. We embed, ship, and keep pace with engineering so your companies aren't bottlenecked on design.</p>
+        </div>
+        <div class="vcard reveal" style="--reveal-delay: 0.19s">
+          <div class="vcard-num">03</div>
+          <div class="vcard-title">Preferred partner terms</div>
+          <p class="vcard-desc">Portfolio companies get priority onboarding and preferred rates. One agreement covers every team you send our way.</p>
+        </div>
+        <div class="vcard reveal" style="--reveal-delay: 0.26s">
+          <div class="vcard-num">04</div>
+          <div class="vcard-title">One bench, every company</div>
+          <p class="vcard-desc">A consistent, vetted design partner you can introduce across your whole portfolio — no re-vetting agencies every time.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── WORK / PORTFOLIO GRID ─── -->
+    <div class="section-head" id="work">
+      <h2 class="section-title reveal">Product work<span class="why-label-secondary">A sample of what your founders would ship with us.</span></h2>
+    </div>
     <section class="features">
       <div class="features-grid">
-        <!-- Row 1: wide left | narrow right -->
         <a href="quill.html" class="p-card p1">
           <img src="images/projects/quill/MacBook.png" alt="Quill">
           <div class="p-card-overlay">
@@ -1005,7 +952,6 @@
             <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements.</p>
           </div>
         </a>
-        <!-- Row 2: narrow left | wide right -->
         <a href="ar.html" class="p-card p3">
           <img src="images/projects/ar/hero.png" alt="AR Shopping App">
           <div class="p-card-overlay">
@@ -1022,7 +968,6 @@
             <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems.</p>
           </div>
         </a>
-        <!-- Row 3: wide left | narrow right -->
         <a href="serro.html" class="p-card p5">
           <img src="images/projects/serro/Hero.png" alt="Serro">
           <div class="p-card-overlay">
@@ -1039,21 +984,61 @@
             <p class="p-card-description">Ribbit AI is a consumer investing tool that makes it easy to understand your stock portfolio at a glance.</p>
           </div>
         </div>
-        <!-- Row 4: equal 50/50 -->
-        <div class="p-card p7">
-          <img src="images/projects/freedom/Freedom1.png" alt="Freedom HR">
+      </div>
+    </section>
+
+    <!-- ─── BRANDING ─── -->
+    <div class="section-head" id="branding">
+      <h2 class="section-title reveal">Branding<span class="why-label-secondary">Identities that make early-stage companies look inevitable.</span></h2>
+    </div>
+    <section class="features">
+      <div class="features-grid">
+        <div class="p-card p1">
+          <img src="images/brands/Roya-1.png" alt="Roya">
           <div class="p-card-overlay">
-            <h3 class="p-card-title">Freedom HR</h3>
-            <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Freedom HR is a free, all-in-one HR platform that helps companies manage their people, payroll, and operations without the cost of enterprise software.</p>
+            <h3 class="p-card-title">Roya</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">Roya is a GPU cloud platform built for teams pushing the limits of compute. The brand feels as serious as the silicon it runs on — precise, dense, and technical without being cold.</p>
           </div>
         </div>
-        <div class="p-card p8">
-          <img src="images/projects/trenli/WebsiteImageTrenli.png" alt="Trenli">
+        <div class="p-card p2">
+          <img src="images/brands/Gekit-1.png" alt="Gekit">
           <div class="p-card-overlay">
-            <h3 class="p-card-title">Trenli</h3>
-            <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Trenli is a property management tool built for real estate companies to track and oversee their entire building portfolio.</p>
+            <h3 class="p-card-title">Gekit</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">The Gekit mark represents layers — stacked planes signalling how data exists across multiple levels. Minimal and precise, surfacing only what's necessary while hinting at the complexity beneath.</p>
+          </div>
+        </div>
+        <div class="p-card p3">
+          <img src="images/brands/Freedom-1.png" alt="Freedom">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Freedom</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">Freedom is an HR platform built to make compliance and people management feel effortless. Clean whites, generous space, and a typographic system that makes complex workflows feel approachable.</p>
+          </div>
+        </div>
+        <div class="p-card p4">
+          <img src="images/brands/Aris-1.png" alt="Aris">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Aris</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">Aris is a GPU infrastructure platform for AI workloads. The brand speaks to engineers who think in silicon — direct, architectural, and stripped of anything unnecessary.</p>
+          </div>
+        </div>
+        <div class="p-card p5">
+          <img src="images/brands/Lucidic-1.png" alt="Lucidic">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Lucidic</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">Lucidic is an AI company whose identity balances clarity and intelligence — a crisp, confident system designed to make a technical product feel approachable from day zero.</p>
+          </div>
+        </div>
+        <div class="p-card p6">
+          <img src="images/brands/Gekit-2.png" alt="Gekit brand system">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Gekit</h3>
+            <p class="p-card-category">Branding</p>
+            <p class="p-card-description">A full visual system built for engineers but legible to anyone who's ever had to make sense of a system — from logo marks to color, type, and application.</p>
           </div>
         </div>
       </div>
@@ -1076,48 +1061,72 @@
           and other leading funds.
         </p>
         <p class="reveal" style="--reveal-delay: 0.3s">
-          Our founder taught <span class="hi">"The Business of Design"</span> at <span class="hi">Harvard</span>. We design for <span class="hi">outcomes</span> — not just how things look, but how they drive engagement, retention, and revenue.
+          Our founder taught <span class="hi">"The Business of Design"</span> at <span class="hi">Harvard</span>. We design for <span class="hi">outcomes</span> — not just how things look, but how they drive engagement, retention, and the metrics your next round depends on.
         </p>
       </div>
     </section>
 
-    <!-- ─── SERVICES CAROUSEL ─── -->
+    <!-- ─── PROCESS / WHAT WE OFFER ─── -->
+    <section class="ww-section" id="process">
+      <h2 class="why-label reveal">How a portfolio engagement works<span class="why-label-secondary">See your founders' first designs in 10 days.</span></h2>
+      <div class="ww-grid">
+        <div class="ww-card">
+          <div class="ww-card-step">Step 01</div>
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">You make the intro</div>
+          <div class="ww-card-desc">Send us the founder. With a partner agreement in place, onboarding is priority and pre-negotiated — no procurement back-and-forth. We're in their Slack within days, with a design lead and senior designer assigned.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-step">Step 02</div>
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Research & first designs</div>
+          <div class="ww-card-desc">We dig into their users, business model, and competitive landscape, then deliver the first 5 screens for review within 10 days of kickoff. Fast enough to keep up with an early-stage roadmap.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-step">Step 03</div>
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Brand & prototype</div>
+          <div class="ww-card-desc">Identity, visual system, and interactive prototypes that make the company look fundraise-ready. We test with real users and refine until the experience is genuinely frictionless.</div>
+        </div>
+        <div class="ww-card">
+          <div class="ww-card-step">Step 04</div>
+          <div class="ww-card-spacer"></div>
+          <div class="ww-card-title">Own design end to end</div>
+          <div class="ww-card-desc">We work alongside engineering to ship pixel-perfect, then build a design system that scales as the company grows. You get a portfolio company that looks a stage ahead of where it is.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TESTIMONIALS ─── -->
     <section class="services">
       <div class="services-wrap">
         <div class="services-header reveal">
-          <p class="services-title">Trusted by leading startups</p>
+          <p class="services-title">What founders say</p>
         </div>
-
         <div class="carousel-outer">
           <button class="c-btn c-btn-prev" id="prevBtn" aria-label="Previous" hidden>
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 25H16M21 18l-7 7 7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
-
           <div class="carousel-viewport">
             <div class="carousel-track" id="track">
-              <!-- Card 1: Testimonial -->
               <div class="svc-card svc-c1 reveal" style="--reveal-delay: 0.1s">
                 <p class="svc-quote-text">"Patina did a really great job on our project. They quickly understood our users, business goals, and product requirements, and translated them into clean, thoughtful designs. They moved fast, communicated clearly throughout the process, and made collaboration easy."</p>
                 <p class="svc-attr">Mike, Co-Founder, Heavi AI</p>
               </div>
-              <!-- Card 2 -->
               <div class="svc-card svc-c2 reveal" style="--reveal-delay: 0.2s">
                 <p class="svc-quote-text">"[Patina] was awesome to work with! We wanted flexibility and they accommodated us immediately. They were also extremely fast at replying to requests and had super-fast turnarounds for redesigning. They are amazing to work with as a designer and also produces incredible designs and branding!"</p>
                 <p class="svc-attr">Jeremy, Co-Founder, Lucidic AI</p>
               </div>
-              <!-- Card 3 -->
               <div class="svc-card svc-c3 reveal" style="--reveal-delay: 0.3s">
                 <p class="svc-quote-text">"[Patina] is awesome! I'd highly recommend them. They helped craft our brand from day zero. They were not only a designer but a thought partner, helping us rethink how we present our company to customer."</p>
                 <p class="svc-attr">Liam, Co-Founder, Freedom</p>
               </div>
-              <!-- Card 4 -->
               <div class="svc-card svc-c4 reveal" style="--reveal-delay: 0.4s">
                 <p class="svc-quote-text">"Sreeni is one of the best UX designers I've worked with. She can bring clarity to hard user problems. She has a great eye for design, asks the right questions, and consistently elevates the quality of the product. Beyond that, she's thoughtful, reliable, and great to work with."</p>
                 <p class="svc-attr">Co-Founder, Agora</p>
               </div>
             </div>
           </div>
-
           <button class="c-btn c-btn-next" id="nextBtn" aria-label="Next">
             <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 25h14M29 18l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
@@ -1125,50 +1134,16 @@
       </div>
     </section>
 
-    <!-- ─── WHO WE'RE FOR ─── -->
-    <section class="ww-section ww-section--dark">
-      <h2 class="why-label reveal">See your first designs in 10 days<br><span class="why-label-secondary">How it works</span></h2>
-      <div class="carousel-outer">
-        <button class="c-btn c-btn-prev" id="ww-prevBtn" aria-label="Previous" hidden>
-          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M30 25H16M21 18l-7 7 7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      <div class="ww-grid" id="ww-track">
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Design lead and senior designer</div>
-          <div class="ww-card-desc">Every engagement is led by a design lead with experience as a founding designer and a senior designer. We embed into your team by owning design, joining Slack, sending async updates, and running feedback sessions once a week.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">User research and first designs</div>
-          <div class="ww-card-desc">We dig into your user interviews, business model, and competitive landscape to understand where friction lives. Then we'll give you the first 5 screens for review within 10 days of the engagement.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Interactive prototypes and test</div>
-          <div class="ww-card-desc">We build interactive prototypes to validate flows and communicate intent clearly before engineering picks it up. We test designs with real users and refine until the experience is genuinely frictionless.</div>
-        </div>
-        <div class="ww-card">
-          <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Own designs end to end</div>
-          <div class="ww-card-desc">We own the design from conception to implementation. We work alongside your engineering team to ensure designs are executed perfectly and create a design system that scales your workflow.</div>
-        </div>
-      </div>
-        <button class="c-btn c-btn-next" id="ww-nextBtn" aria-label="Next">
-          <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 25h14M29 18l7 7-7 7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
-      </div>
-    </section>
-
     <!-- ─── CTA ─── -->
     <section class="cta">
       <div class="cta-inner">
         <h2 class="cta-head reveal">
-          Let's create a beautiful<br>
-          experience for your customers.
+          Give your portfolio a<br>
+          design partner they'll thank you for.
         </h2>
+        <p class="cta-sub reveal" style="--reveal-delay: 0.15s">Let's set up a partnership so every company you back ships beautiful, fundraise-ready product — from day one.</p>
         <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg reveal" style="--reveal-delay: 0.25s">
-          Let's Chat
+          Book a partner chat
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -1178,15 +1153,12 @@
     <footer>
       <div class="footer-inner">
         <a href="index.html" class="footer-logo">
-          <img
-            src="images/logo/ImageLogo.svg"
-            alt="Patina"
-          >
+          <img src="images/logo/ImageLogo.svg" alt="Patina">
         </a>
         <div>
           <p class="footer-blurb">
-            We'd love to hear from you —
-            <span class="dim"> whether you have a project in mind, or just want to say hi.</span>
+            Backing great founders?
+            <span class="dim"> Let's make sure their product looks the part.</span>
           </p>
           <div class="footer-email-wrap">
             <a href="mailto:sreeni@patinaex.com" class="footer-email">sreeni@patinaex.com</a>
@@ -1199,7 +1171,7 @@
   </div><!-- /.page -->
 
   <script>
-    /* ─── Carousel ─── */
+    /* ─── Testimonial Carousel ─── */
     const track   = document.getElementById('track');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
@@ -1212,7 +1184,6 @@
       const gap = parseFloat(window.getComputedStyle(track).columnGap) || 12;
       return card.offsetWidth + gap;
     }
-
     function getMaxIdx() {
       const vp = document.querySelector('.carousel-viewport');
       if (!vp) return 0;
@@ -1220,7 +1191,6 @@
       const visible = Math.max(1, Math.floor(vp.offsetWidth / step));
       return Math.max(0, TOTAL - visible);
     }
-
     function render() {
       const step   = getStep();
       const maxIdx = getMaxIdx();
@@ -1229,51 +1199,10 @@
       prevBtn.hidden = idx === 0;
       nextBtn.hidden = idx >= maxIdx;
     }
-
     prevBtn.addEventListener('click', () => { if (idx > 0)           { idx--; render(); } });
     nextBtn.addEventListener('click', () => { if (idx < getMaxIdx()) { idx++; render(); } });
     window.addEventListener('resize', render);
-
     render();
-
-    /* ─── WHO WE'RE FOR Carousel (Mobile) ─── */
-    const wwTrack = document.getElementById('ww-track');
-    const wwPrevBtn = document.getElementById('ww-prevBtn');
-    const wwNextBtn = document.getElementById('ww-nextBtn');
-    const WW_TOTAL = 4;
-    let wwIdx = 0;
-
-    function getWWStep() {
-      const card = wwTrack.children[0];
-      if (!card) return 308;
-      const gap = parseFloat(window.getComputedStyle(wwTrack).gap) || 12;
-      return card.offsetWidth + gap;
-    }
-
-    function getWWMaxIdx() {
-      const vp = wwTrack.parentElement;
-      if (!vp) return 0;
-      const step = getWWStep();
-      const visible = Math.max(1, Math.floor(vp.offsetWidth / step));
-      return Math.max(0, WW_TOTAL - visible);
-    }
-
-    function renderWW() {
-      const step = getWWStep();
-      const maxIdx = getWWMaxIdx();
-      if (wwIdx > maxIdx) wwIdx = maxIdx;
-      wwTrack.style.scrollBehavior = 'smooth';
-      wwTrack.scrollLeft = wwIdx * step;
-      wwPrevBtn.hidden = wwIdx === 0;
-      wwNextBtn.hidden = wwIdx >= maxIdx;
-    }
-
-    if (wwPrevBtn && wwNextBtn) {
-      wwPrevBtn.addEventListener('click', () => { if (wwIdx > 0) { wwIdx--; renderWW(); } });
-      wwNextBtn.addEventListener('click', () => { if (wwIdx < getWWMaxIdx()) { wwIdx++; renderWW(); } });
-      window.addEventListener('resize', renderWW);
-      renderWW();
-    }
   </script>
 
   <script>
@@ -1290,7 +1219,6 @@
     /* Hero lines fire together as a group */
     const heroLines = document.querySelectorAll('.hero-line');
     const heroSection = document.querySelector('.hero');
-
     const heroObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         heroLines.forEach(line => line.classList.add('visible'));
@@ -1298,35 +1226,26 @@
         heroObserver.disconnect();
       }
     }, { threshold: 0.4 });
-
     if (heroSection) heroObserver.observe(heroSection);
 
-    /* Individual cards + all reveal elements */
-    document.querySelectorAll('.p-card, .reveal').forEach(el => observer.observe(el));
+    /* Cards + reveal elements + brand items */
+    document.querySelectorAll('.p-card, .reveal, .brand-item').forEach(el => observer.observe(el));
+
     const wwCards = document.querySelectorAll('.ww-card');
     wwCards.forEach((el, i) => {
       el.style.transitionDelay = (i * 0.08) + 's';
       observer.observe(el);
     });
-
-    /* ── First card open by default ── */
     if (wwCards.length > 0) {
       wwCards[0].classList.add('default-open');
-
       wwCards.forEach((card, idx) => {
         card.addEventListener('mouseenter', () => {
-          if (idx !== 0) {
-            wwCards[0].classList.remove('default-open');
-          }
+          if (idx !== 0) wwCards[0].classList.remove('default-open');
         });
         card.addEventListener('mouseleave', () => {
           let anyOtherHovered = false;
-          wwCards.forEach((c, i) => {
-            if (i !== 0 && c.matches(':hover')) anyOtherHovered = true;
-          });
-          if (!anyOtherHovered) {
-            wwCards[0].classList.add('default-open');
-          }
+          wwCards.forEach((c, i) => { if (i !== 0 && c.matches(':hover')) anyOtherHovered = true; });
+          if (!anyOtherHovered) wwCards[0].classList.add('default-open');
         });
       });
     }
@@ -1338,10 +1257,10 @@
       cursor.style.top  = e.clientY + 'px';
     });
 
-    /* ── Page transitions ── */
+    /* ── Page transitions (skip anchors, mail, external) ── */
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (!href || href.startsWith('#') || href.startsWith('mailto')) return;
+      if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
       link.addEventListener('click', e => {
         e.preventDefault();
         document.body.classList.add('fade-out');
