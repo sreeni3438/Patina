@@ -185,7 +185,7 @@
       z-index: 0;
       min-height: calc(100vh - var(--nav-h));
       margin-top: var(--nav-h);
-      padding: 64px calc(var(--gutter) + 65px) 48px;
+      padding: 64px calc(var(--gutter) + 65px) 0;
       background: #fff;
       display: flex;
       flex-direction: column;
@@ -206,6 +206,7 @@
       line-height: 80px;
       letter-spacing: -0.9px;
       max-width: 920px;
+      margin-top: 32px;
       margin-bottom: 28px;
     }
     .hero h1 em { font-style: italic; }
@@ -223,11 +224,11 @@
     .hero-line.visible { animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
 
     .hero-sub {
-      font-size: 20.5px;
+      font-size: 22px;
       font-weight: 200;
       line-height: 32px;
       color: #555;
-      max-width: 560px;
+      max-width: 920px;
       margin-top: 0;
       margin-bottom: 0;
     }
@@ -236,8 +237,8 @@
       font-size: 20.5px;
       font-weight: 300;
       letter-spacing: 0.2px;
-      color: var(--c-dark);
-      margin-top: 48px;
+      color: #777;
+      margin-top: 24px;
     }
 
     /* ─── VALUE (FOR INVESTORS) ──────────────────────── */
@@ -307,6 +308,7 @@
       overflow: visible;
       /* taller than the viewport: scroll through it normally (not pinned) */
       position: relative;
+      top: 0;
     }
     .features-grid {
       display: grid;
@@ -671,7 +673,7 @@
       body { --gutter: 24px; }
       .nav-inner { padding: 14px 28px 18px; }
 
-      .hero { padding: 44px calc(var(--gutter) + 41px) 40px; }
+      .hero { padding: 44px calc(var(--gutter) + 41px) 0; }
       .hero h1 { font-size: 38px; line-height: 48px; }
       .hero-sub { font-size: 18px; line-height: 28px; }
 
@@ -718,7 +720,7 @@
       .nav-inner { padding: 12px 20px; }
       .nav-logo img { height: 16px; }
 
-      .hero { padding: 44px calc(var(--gutter) + 21px) 32px; }
+      .hero { padding: 44px calc(var(--gutter) + 21px) 0; }
       .hero h1 { font-size: 28px; line-height: 38px; max-width: 100%; margin-bottom: 24px; }
       .hero-sub { font-size: 16px; line-height: 26px; max-width: 100%; }
       .hero-trust { font-size: 16px; margin-top: 32px; }
@@ -792,13 +794,13 @@
 
     <!-- ─── HERO ─── -->
     <section class="hero stack">
+      <p class="hero-trust">Trusted by teams backed by YCombinator, a16z, 10VC, Gradient Ventures, Theory Ventures and more...</p>
       <div class="hero-content">
         <h1>
           <span class="hero-line">Design Partner <span class="outline">for Venture Backed Startups</span></span>
         </h1>
         <p class="hero-sub">Our team with previous experience from NVIDIA, Google, and $700M+ startups will embed into your team.</p>
       </div>
-      <p class="hero-trust">Trusted by teams backed by YCombinator, a16z, 10VC, Gradient Ventures, Theory Ventures and more...</p>
     </section>
 
     <div class="content-rise">
@@ -811,7 +813,6 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Quill</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Quill is an enterprise productivity tool that learns your company's context to automatically assign tasks and track action items from meetings.</p>
           </div>
         </a>
         <a href="luna.html" class="p-card p2">
@@ -819,7 +820,6 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Luna</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Luna is an AI fitness assistant designed specifically for women, tailoring workout and wellness recommendations to their cycle and unique body requirements.</p>
           </div>
         </a>
         <a href="ar.html" class="p-card p3">
@@ -827,7 +827,6 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">AR Shopping App</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">A photogrammetry app that lets sellers capture any object with their phone and generate a 3D model — so buyers can inspect and place it in their own space before purchasing.</p>
           </div>
         </a>
         <a href="cayda.html" class="p-card p4">
@@ -835,7 +834,6 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Cayda</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Cayda is an operating system for real estate developers that surfaces construction risks before they become costly problems.</p>
           </div>
         </a>
         <a href="serro.html" class="p-card p5">
@@ -843,33 +841,29 @@
           <div class="p-card-overlay">
             <h3 class="p-card-title">Serro</h3>
             <p class="p-card-category">UX Design</p>
-            <p class="p-card-description">Serro is an AI technical project manager that reads your emails, Slack, and meeting notes to draft status reports, assign tasks, and surface blockers automatically.</p>
           </div>
         </a>
-        <div class="p-card p6">
-          <img src="images/brands/Roya-1.png" alt="Roya">
+        <a href="roya-2.html" class="p-card p6">
+          <img src="images/brands/roya-2/Frame%201321317190.png" alt="Roya">
           <div class="p-card-overlay">
             <h3 class="p-card-title">Roya</h3>
             <p class="p-card-category">Branding</p>
-            <p class="p-card-description">Roya is a GPU cloud platform built for teams pushing the limits of compute. The brand feels as serious as the silicon it runs on — precise, dense, and technical without being cold.</p>
           </div>
-        </div>
-        <div class="p-card p7">
-          <img src="images/brands/Gekit-1.png" alt="Gekit">
+        </a>
+        <a href="lucidic.html" class="p-card p7">
+          <img src="images/brands/Lucidic1/S53.png" alt="Lucidic">
+          <div class="p-card-overlay">
+            <h3 class="p-card-title">Lucidic</h3>
+            <p class="p-card-category">Branding</p>
+          </div>
+        </a>
+        <a href="gekit.html" class="p-card p8">
+          <img src="images/brands/Gekit1/F2.png" alt="Gekit">
           <div class="p-card-overlay">
             <h3 class="p-card-title">Gekit</h3>
             <p class="p-card-category">Branding</p>
-            <p class="p-card-description">The Gekit mark represents layers — stacked planes signalling how data exists across multiple levels. Minimal and precise, surfacing only what's necessary while hinting at the complexity beneath.</p>
           </div>
-        </div>
-        <div class="p-card p8">
-          <img src="images/brands/Freedom-1.png" alt="Freedom">
-          <div class="p-card-overlay">
-            <h3 class="p-card-title">Freedom</h3>
-            <p class="p-card-category">Branding</p>
-            <p class="p-card-description">Freedom is an HR platform built to make compliance and people management feel effortless. Clean whites, generous space, and a typographic system that makes complex workflows feel approachable.</p>
-          </div>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -897,43 +891,43 @@
 
     <!-- ─── PROCESS ─── -->
     <section class="ww-section stack" id="process">
-      <h2 class="why-label reveal">We give the companies you back a senior design team on day one — <span class="outline">without the cost, risk, or time of a full-time hire.</span><span class="why-label-secondary">See your first designs in 10 days.</span></h2>
+      <h2 class="why-label reveal">A senior design team on day one <br><span class="outline">See your first designs in 10 days.</span></h2>
       <div class="ww-grid">
         <div class="ww-card">
           <div class="ww-card-step">01</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">You make the intro</div>
-          <div class="ww-card-desc">Send us the founder. With a partner agreement in place, onboarding is priority and pre-negotiated. We're in their Slack within days, with a design lead and senior designer assigned.</div>
+          <div class="ww-card-title">You make an intro at a pre-negotiated rate</div>
+          <div class="ww-card-desc">Send us the founder. Your portfolio companies start at a pre-negotiated partner rate — no pricing back-and-forth, no procurement friction. Just a warm intro and we take it from there.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-step">02</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Research & first designs</div>
-          <div class="ww-card-desc">We dig into their users, business model, and competitive landscape, then deliver the first 5 screens for review within 10 days of kickoff — fast enough to keep up with an early-stage roadmap.</div>
+          <div class="ww-card-title">We integrate a senior designer and design lead into their team</div>
+          <div class="ww-card-desc">A senior designer and a design lead drop straight into their team. We're in their Slack within days, working as if we were the first design hires they never had to make.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-step">03</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Brand & prototype</div>
-          <div class="ww-card-desc">Identity, visual system, and interactive prototypes that make the company look fundraise-ready. We test with real users and refine until the experience is genuinely frictionless.</div>
+          <div class="ww-card-title">We research and understand their business and users</div>
+          <div class="ww-card-desc">We dig into their users, business model, and competitive landscape until we understand the product as well as the founders do — so every design decision is grounded in their reality.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-step">04</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Own design end to end</div>
-          <div class="ww-card-desc">We work alongside engineering to ship pixel-perfect, then build a design system that scales as the company grows — so it looks a stage ahead of where it is.</div>
+          <div class="ww-card-title">We show them MVP designs in 10 days</div>
+          <div class="ww-card-desc">First screens land for review within 10 days of kickoff. Fast enough to keep up with an early-stage roadmap, polished enough to put in front of users and investors.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-step">05</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Launch & measure</div>
-          <div class="ww-card-desc">We instrument the product and watch how real users behave, then refine the flows around the metrics that move activation, retention, and conversion.</div>
+          <div class="ww-card-title">We own design end to end as their long-term partner</div>
+          <div class="ww-card-desc">From brand and product to design systems, we own design end to end as their long-term partner — staying embedded through new features, new surfaces, and every fundraise.</div>
         </div>
         <div class="ww-card">
           <div class="ww-card-step">06</div>
           <div class="ww-card-spacer"></div>
-          <div class="ww-card-title">Long-term partner</div>
-          <div class="ww-card-desc">We stay embedded as the company grows — new features, new surfaces, fundraise decks — so design keeps pace with every stage and every round.</div>
+          <div class="ww-card-title">Launch, test, and repeat</div>
+          <div class="ww-card-desc">We ship, watch how real users behave, and refine around the metrics that move activation and retention — then run the loop again so the product keeps getting sharper.</div>
         </div>
       </div>
     </section>
@@ -976,8 +970,8 @@
     <section class="cta stack">
       <div class="cta-inner">
         <h2 class="cta-head reveal">
-          Give your portfolio a<br>
-          design partner <span class="outline">they'll thank you for.</span>
+          Designs their users love,<br>
+          <span class="outline">for every company you back.</span>
         </h2>
         <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg reveal" style="--reveal-delay: 0.25s">
           Let's Chat
