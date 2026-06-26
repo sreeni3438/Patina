@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal for Marlo — Patina</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-muted:  #5a6271;
+      --c-border: #bfbfbf;
+      --c-orange: #f36235;
+      --c-blue:   #0099ff;
+      --c-footer: #f7f9fc;
+      --f-inter:  'Public Sans', sans-serif;
+      --f-geist:  'Public Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; cursor: none !important; }
+    body { cursor: none !important; }
+    *, *::before, *::after { cursor: none !important; }
+
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background: #111;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 99999;
+      transition: transform 0.08s ease;
+    }
+
+    body {
+      font-family: var(--f-inter);
+      color: var(--c-dark);
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    ul, ol { list-style: none; }
+
+    /* ─── PAGE TRANSITION ────────────────────────────── */
+    body {
+      animation: pageFadeIn 0.3s ease-out forwards;
+    }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── ENTRANCE ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.96) translateY(24px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── PAGE CONTAINER ─────────────────────────────── */
+    .page {
+      max-width: 1728px;
+      margin: 0 auto;
+    }
+
+    /* ─── BUTTON ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      font-weight: 500;
+      font-size: 16.4px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      padding: 0 16px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+    .btn img, .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .btn-lg { padding: 12px 20px; }
+    .btn-sm { padding: 12px 20px; }
+
+    .nav .btn {
+      font-size: 16px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      gap: 7px;
+    }
+    .nav .btn img, .nav .btn svg { width: 15px; height: 15px; }
+
+    /* ─── NAVBAR ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 14px 32px 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img { height: 23.8px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      margin-left: auto;
+      margin-right: 60px;
+    }
+
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--c-dark); }
+    .nav-links a.active { color: var(--c-dark); font-weight: 500; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      padding: 200px 288px 120px 128px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 68px;
+      letter-spacing: -0.6px;
+      max-width: 1464px;
+      margin-bottom: 36px;
+    }
+
+    .hero-line {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .hero-line.visible {
+      animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .hero-line.visible:nth-of-type(1) { animation-delay: 0s; }
+    .hero-line.visible:nth-of-type(2) { animation-delay: 0.12s; }
+    .hero-line.visible:nth-of-type(3) { animation-delay: 0.24s; }
+    .hero-line.visible:nth-of-type(4) { animation-delay: 0.36s; }
+
+    .hero h1 em { font-style: italic; }
+
+    .hero-pill {
+      display: inline-block;
+      width: fit-content;
+      background: var(--c-footer);
+      color: var(--c-dark);
+      padding: 8px 16px;
+      border: none;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 34px;
+      color: #555;
+      max-width: 620px;
+      margin-top: 0;
+      margin-bottom: 48px;
+    }
+
+    .hero .btn {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 1s,
+                  transform 1s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    }
+    .hero.visible .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero.visible .btn:hover {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0.82;
+      transform: scale(1.04);
+    }
+
+    /* ─── CONTENT SECTION ────────────────────────────── */
+    .section {
+      padding: 120px 128px;
+      background: #fff;
+    }
+
+    .section h2 {
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 54px;
+      letter-spacing: -0.4px;
+      margin-bottom: 48px;
+    }
+
+    .section-content {
+      max-width: 900px;
+    }
+
+    .section p {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 32px;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .section ul {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 32px;
+      color: #555;
+      margin-bottom: 24px;
+      margin-left: 20px;
+    }
+
+    .section ul li {
+      margin-bottom: 16px;
+      list-style: disc;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    .footer {
+      background: var(--c-footer);
+      padding: 80px 128px 64px;
+      margin-top: 120px;
+    }
+
+    .footer-content {
+      max-width: 1728px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .footer-col h4 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--c-mid);
+    }
+
+    .footer-col ul li {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      margin-bottom: 16px;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li:hover {
+      color: var(--c-dark);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--c-border);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--c-mid);
+    }
+
+    /* ─── ACCORDION ─────────────────────────────────── */
+    .accordion {
+      border-top: 1px solid #e8e8e8;
+    }
+    .accordion-item {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      cursor: pointer;
+      user-select: none;
+      gap: 40px;
+    }
+    .accordion-header:hover .accordion-title { opacity: 1; color: var(--c-dark); }
+    .accordion-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 10px;
+    }
+    .accordion-title {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: var(--c-mid);
+      line-height: 1.2;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .accordion-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--c-mid);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .accordion-chevron {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      color: var(--c-mid);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-content {
+      padding-bottom: 64px;
+    }
+    .option-pill {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--c-footer);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--c-dark);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero {
+        padding: 150px 96px 80px;
+      }
+      .hero h1 {
+        font-size: 42px;
+        line-height: 52px;
+      }
+      .section {
+        padding: 80px 96px;
+      }
+      .footer {
+        padding: 60px 96px 48px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 60px 48px;
+      }
+
+      [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        row-gap: 24px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #custom-cursor {
+        display: none !important;
+      }
+
+      .hero {
+        padding: 120px 32px 60px;
+      }
+      .hero h1 {
+        font-size: 30px;
+        line-height: 38px;
+        max-width: 100%;
+      }
+      .hero-sub {
+        font-size: 17px;
+        line-height: 27px;
+        max-width: 100%;
+      }
+      .section {
+        padding: 48px 32px;
+      }
+      .section h2 {
+        font-size: 26px;
+        line-height: 34px;
+        margin-bottom: 24px;
+      }
+      .section p {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .section ul {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .accordion-title {
+        font-size: 22px;
+        line-height: 1.3;
+      }
+      .accordion-sub {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      .accordion-header {
+        padding: 24px 0;
+        gap: 16px;
+      }
+      h3 {
+        font-size: 17px !important;
+      }
+
+      [style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        row-gap: 16px !important;
+      }
+
+      img {
+        height: auto !important;
+      }
+
+      /* Stack the investment price row (label above price) */
+      [style*="justify-content: space-between"] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+
+      [style*="padding: 40px"] {
+        padding: 24px !important;
+      }
+
+      [style*="font-size: 48px"] {
+        font-size: 32px !important;
+      }
+
+      /* Stack the meeting cadence rows on mobile */
+      .cadence > div {
+        flex-direction: column !important;
+        gap: 6px !important;
+      }
+      .cadence > div > div:first-child {
+        flex: 0 0 auto !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero { padding: 100px 20px 48px; }
+      .section { padding: 40px 20px; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="custom-cursor"></div>
+
+  <!-- ─── HERO ───────────────────────────────────────── -->
+  <div class="page">
+    <section class="hero">
+      <span class="hero-pill">Proposal for Marlo</span>
+      <h1>
+        <span class="hero-line">End-to-end design for Marlo's</span><br>
+        <span class="hero-line"><em>budgeting platform.</em></span>
+      </h1>
+      <p class="hero-sub">A dedicated full-time senior product designer, backed by a design lead, to redesign Marlo's core experience and design the new budgeting feature end to end — on a flat monthly retainer.</p>
+    </section>
+
+    <!-- ─── BACKGROUND ────────────────────────────────── -->
+    <section class="section reveal" style="padding-top: 60px;">
+      <div style="margin-bottom: 48px;">
+        <h2 style="max-width: 900px;">Background</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 24px;">Marlo is a spend management platform for fast-growing companies. Built feature by feature over four years, the interface works but no longer reflects the quality of the company behind it.</p>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">You're now introducing budgeting — letting finance teams set, track, and enforce budgets across the organisation — and it's the moment to address the wider experience alongside it. The challenge is onboarding finance leads into the model, giving teams clear visibility into spend against budget, and designing controls they trust rather than work around.</p>
+      </div>
+    </section>
+
+    <!-- ─── SCOPE OF WORK ─────────────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 48px;">
+        <h2 style="max-width: 900px;">Scope of work</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">Four areas of work, covering the budgeting feature end to end and the surrounding experience it depends on.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; row-gap: 64px; margin-top: 48px; max-width: 1100px;">
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Budgeting onboarding</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">The setup flow where finance leads define budgets, allocate them across teams, and configure rules. The first impression of budgeting, and where adoption is won or lost.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Spend visibility &amp; reporting</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">Dashboards and reports that show spend against budget in real time — by team, category, and period — so finance and team leads always know where they stand.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Budget controls &amp; approvals</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">The rules, limits, alerts, and approval flows that enforce budgets in practice — designed to guide behaviour without creating friction that teams route around.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">UX audit of existing flows</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">A review of the current product beyond budgeting — surfacing friction, inconsistencies, and quick wins, prioritised and addressed within the same engagement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── DELIVERABLES ──────────────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 48px;">
+        <h2 style="max-width: 900px;">Deliverables</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">Approximately <strong style="font-weight: 500; color: var(--c-dark);">40 high-fidelity screens</strong> across the engagement, plus prototypes, a design system, and engineering-ready handoff.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 48px; row-gap: 48px; max-width: 1100px;">
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">~40 high-fidelity screens</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">Production-ready designs covering every meaningful state — default, empty, loading, error, and edge cases — across the budgeting feature and redesigned flows.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">Interactive prototypes</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">Clickable prototypes of the key flows, ready for internal review and user testing before engineering builds.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">Engineering-ready handoff</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">Clean, annotated Figma files — specs, states, and behaviour documented — set up to work with Figma MCP so engineers can pull components directly into their workflow.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">Design system &amp; component library</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">A documented set of components, patterns, and tokens that the team can extend and reuse beyond this engagement.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">UX audit &amp; recommendations</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">A prioritised list of issues and opportunities across the existing product, with recommendations and designs for the items addressed during the engagement.</p>
+        </div>
+        <div>
+          <h3 style="font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--c-dark);">Two design reviews per week</h3>
+          <p style="font-size: 17px; color: var(--c-mid); line-height: 27px; margin: 0;">Standing sessions to review work in progress and align on direction, so feedback is continuous and there are no surprises.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ─── TIMELINE & DURATION ───────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 48px;">
+        <h2>Timeline</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">First high-fidelity screens are delivered within the first 10 days. From there the work runs in a weekly rhythm, with two design reviews per week — built, reviewed, and revised in short cycles rather than held for a single reveal.</p>
+      </div>
+
+      <!-- Meetings & feedback cadence -->
+      <div style="max-width: 1100px; margin-bottom: 64px;">
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 20px;">When we'll meet</h3>
+        <div class="cadence" style="border-top: 1px solid #e8e8e8;">
+          <div style="display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid #e8e8e8;">
+            <div style="flex: 0 0 200px; font-size: 17px; font-weight: 500; color: var(--c-dark);">Kickoff call</div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 500; color: var(--c-dark); margin-bottom: 4px;">Day 1 · 60 minutes</div>
+              <p style="font-size: 16px; color: var(--c-mid); line-height: 25px; margin: 0;">Align on goals, target users, success metrics, and constraints. We leave with a shared definition of what good looks like.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid #e8e8e8;">
+            <div style="flex: 0 0 200px; font-size: 17px; font-weight: 500; color: var(--c-dark);">Design reviews</div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 500; color: var(--c-dark); margin-bottom: 4px;">Twice a week · Tue &amp; Thu · 30–45 minutes</div>
+              <p style="font-size: 16px; color: var(--c-mid); line-height: 25px; margin: 0;">Two standing sessions every week — one to review work in progress, one to align on the next direction. These run for the full engagement.</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 24px; padding: 20px 0; border-bottom: 1px solid #e8e8e8;">
+            <div style="flex: 0 0 200px; font-size: 17px; font-weight: 500; color: var(--c-dark);">Async feedback</div>
+            <div style="flex: 1;">
+              <div style="font-size: 15px; font-weight: 500; color: var(--c-dark); margin-bottom: 4px;">Anytime · in Figma</div>
+              <p style="font-size: 16px; color: var(--c-mid); line-height: 25px; margin: 0;">Comment directly on designs between sessions. We ask for feedback within 24 hours of each review so momentum holds.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phased timeline -->
+      <h3 style="font-size: 16px; font-weight: 600; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 24px;">How the work runs</h3>
+      <div style="margin-bottom: 0; max-width: 1100px;">
+        <div style="display: flex; gap: 0;">
+          <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+            <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+          </div>
+          <div style="padding-bottom: 40px;">
+            <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Days 1–10</div>
+            <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Discovery and first screens</h3>
+            <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0 0 14px;">Kickoff call on day one, then we audit the current product, map the budgeting journey, and deliver the first high-fidelity screens by day 10 — reviewed together in the first design sessions.</p>
+            <span style="display: inline-block; background: #fde8e4; color: #b32d12; font-size: 14px; font-weight: 500; line-height: 22px; padding: 6px 14px; border-radius: 100px;">All your founders will get their first screens in 10 days of engagement</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0;">
+          <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+            <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+          </div>
+          <div style="padding-bottom: 40px;">
+            <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Day 11 onwards</div>
+            <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Core design</h3>
+            <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Budgeting onboarding, spend visibility, and controls driven to high fidelity in weekly cycles — designs built, reviewed in the twice-weekly sessions, and revised in short loops rather than held for a single reveal.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0;">
+          <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+            <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+          </div>
+          <div style="padding-bottom: 40px;">
+            <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ongoing</div>
+            <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">UX audit</h3>
+            <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Improvements across the existing product, prioritised and addressed in the same rhythm — not limited to budgeting.</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0;">
+          <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ongoing</div>
+            <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Handoff and design system</h3>
+            <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Screens are handed to engineering as they are finalised, and the design system is built out in parallel — set up to work with Figma MCP so the team can use it directly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What we'll need from you -->
+      <div style="max-width: 1100px; margin-top: 64px;">
+        <h3 style="font-size: 16px; font-weight: 600; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 20px;">What we'll need from you</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="padding: 14px 0; border-bottom: 1px solid #e8e8e8; font-size: 17px; color: var(--c-dark); line-height: 27px;">A primary point of contact who can make decisions and join the two weekly reviews.</li>
+          <li style="padding: 14px 0; border-bottom: 1px solid #e8e8e8; font-size: 17px; color: var(--c-dark); line-height: 27px;">Access to the current product, plus any analytics or session data that shows how it's used today.</li>
+          <li style="padding: 14px 0; border-bottom: 1px solid #e8e8e8; font-size: 17px; color: var(--c-dark); line-height: 27px;">Any existing research, brand assets, and design files we should build on.</li>
+          <li style="padding: 14px 0; border-bottom: 1px solid #e8e8e8; font-size: 17px; color: var(--c-dark); line-height: 27px;">Timely feedback — within about 24 hours of each review — so the weekly rhythm stays on track.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─── TEAM ──────────────────────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 32px;">
+        <h2>Team</h2>
+      </div>
+      <div>
+        <p style="font-size: 18px; font-weight: 300; line-height: 32px; color: #555; max-width: 900px; margin-bottom: 0;">One dedicated full-time senior product designer leads the work day to day, backed by a design lead for direction and review. Backgrounds span B2B SaaS, fintech, and consumer products.</p>
+      </div>
+    </section>
+
+    <!-- ─── INVESTMENT ───────────────────────────────── -->
+    <section class="section reveal">
+      <div>
+        <h2>Investment</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-top: 24px; margin-bottom: 0;">A flat monthly retainer covering the full team and every deliverable in this proposal. Billed monthly, with no long-term commitment — the engagement continues month to month for as long as it is useful.</p>
+        <div style="max-width: 1100px; margin-top: 48px; padding: 40px; background: var(--c-footer); border-radius: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 28px; border-bottom: 1px solid var(--c-border);">
+            <span style="font-size: 20px; color: var(--c-mid);">Monthly retainer</span>
+            <span style="font-size: 48px; font-weight: 400; color: var(--c-dark);">$10,000 / mo</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 24px;">
+            <span style="font-size: 17px; color: var(--c-dark);">1 month</span>
+            <span style="font-size: 17px; color: var(--c-mid);">~15 screens — core budgeting flow, design-ready to build</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px;">
+            <span style="font-size: 17px; color: var(--c-dark);">3 months</span>
+            <span style="font-size: 17px; color: var(--c-mid);">~40 screens — full scope, budgeting end to end + UX audit</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── COMMON PACKAGES ───────────────────────────── -->
+    <section class="section reveal">
+      <div style="max-width: 1100px;">
+        <h2>Common packages</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">Typical ways teams work with us. Timelines shown — pricing shared on request.</p>
+
+        <div style="font-size: 16px; font-weight: 600; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.6px; margin: 56px 0 4px;">Branding</div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div>
+                <div class="accordion-title" style="font-size: 22px;">Launch Kit</div>
+                <div class="accordion-sub" style="font-size: 15px; margin-top: 6px;">1 month</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content" style="padding-bottom: 36px;">
+                <p style="font-size: 16px; color: var(--c-mid); line-height: 30px; margin: 0; max-width: 760px;">Brand direction &amp; moodboard · 2 logo concepts · Logo suite (primary, alt, icon) · Color palette · Typography · Imagery · Single-page website design</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div>
+                <div class="accordion-title" style="font-size: 22px;">Brand Sprint</div>
+                <div class="accordion-sub" style="font-size: 15px; margin-top: 6px;">2 months</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content" style="padding-bottom: 36px;">
+                <p style="font-size: 16px; color: var(--c-mid); line-height: 30px; margin: 0; max-width: 760px;">Everything in Launch Kit, plus 3 logo concepts · Website design (up to 3 pages) · Brand strategy doc · Social assets (up to 3) · Google templates (up to 2)</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div>
+                <div class="accordion-title" style="font-size: 22px;">Brand System</div>
+                <div class="accordion-sub" style="font-size: 15px; margin-top: 6px;">3 months</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content" style="padding-bottom: 36px;">
+                <p style="font-size: 16px; color: var(--c-mid); line-height: 30px; margin: 0; max-width: 760px;">Everything in Brand Sprint, plus 4 logo concepts · Website design (up to 6 pages) · Social assets (up to 8) · Google templates (up to 5) · Conference posters (up to 3) · Newsletter template · Pitch deck template</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 16px; font-weight: 600; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.6px; margin: 56px 0 4px;">UX</div>
+        <div class="accordion">
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div>
+                <div class="accordion-title" style="font-size: 22px;">MVP Sprint</div>
+                <div class="accordion-sub" style="font-size: 15px; margin-top: 6px;">1 month</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content" style="padding-bottom: 36px;">
+                <p style="font-size: 16px; color: var(--c-mid); line-height: 30px; margin: 0; max-width: 760px;">High-fidelity UI design (up to 2 flows) · ~15 screens · Developer handoff notes</p>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <div class="accordion-header">
+              <div>
+                <div class="accordion-title" style="font-size: 22px;">Fractional Designer</div>
+                <div class="accordion-sub" style="font-size: 15px; margin-top: 6px;">Ongoing</div>
+              </div>
+              <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content" style="padding-bottom: 36px;">
+                <p style="font-size: 16px; color: var(--c-mid); line-height: 30px; margin: 0; max-width: 760px;">Dedicated designer, month to month · User flows &amp; high-fidelity UI · Interactive prototypes · Evolving design system · Developer handoff notes</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <script>
+    const customCursor = document.getElementById('custom-cursor');
+    const htmlElement = document.documentElement;
+
+    document.addEventListener('mousemove', (e) => {
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      customCursor.style.display = 'block';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      customCursor.style.display = 'none';
+    });
+
+    // ─── SCROLL REVEAL ANIMATIONS ─────────────────
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ─── HERO ANIMATION ───────────────────────────
+    const heroSection = document.querySelector('.hero');
+    const heroLines = document.querySelectorAll('.hero-line');
+
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            heroLines.forEach(line => {
+              line.classList.add('visible');
+            });
+            heroObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      heroObserver.observe(heroSection);
+    }
+
+    // ─── ACCORDION ────────────────────────────────
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.accordion-item');
+        const body = item.querySelector('.accordion-body');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-body').style.maxHeight = '0';
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ─── PAGE TRANSITION ──────────────────────────
+    document.querySelectorAll('a[href]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (!link.href.startsWith('#')) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = link.href;
+          }, 250);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

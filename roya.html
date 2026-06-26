@@ -314,6 +314,48 @@
       width: 15%; height: 2px;
       background: var(--c-dark);
     }
+
+    /* ─── MOBILE / TABLET RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .ry-hero-image { height: 120vw; max-height: 560px; }
+
+      /* Hero info: drop absolute layout, stack in flow */
+      .ry-hero-info { position: static; height: auto; padding: 32px 20px 4px; }
+      .ry-hero-left { position: static; left: auto; top: auto; width: 100%; }
+      .ry-project-title { font-size: 32px; line-height: 40px; letter-spacing: -0.6px; margin-bottom: 20px; }
+      .ry-project-body { font-size: 17px; line-height: 27px; }
+      .ry-hero-services { position: static; left: auto; top: auto; margin-top: 28px; }
+      .ry-services-label { font-size: 14px; margin-bottom: 12px; }
+      .ry-services-list p { font-size: 17px; line-height: 26px; }
+      .ry-year { position: static; left: auto; top: auto; margin-top: 24px; font-size: 17px; }
+
+      /* Sections: tighter side margins */
+      .ry-section, .ry-text-section, .ry-split, .ry-two-col { margin: 48px 20px 0; }
+      .ry-section-h2 { font-size: 30px; line-height: 38px; letter-spacing: -0.5px; margin-bottom: 28px; }
+      .ry-section-p { font-size: 17px; line-height: 27px; max-width: 100%; }
+
+      /* Photos: responsive cover height */
+      .ry-img-wrap { height: 64vw; max-height: 480px; }
+      /* Template pages: show the full image (the desktop crop cuts content on mobile) */
+      .ry-tpl-wrap,
+      .ry-split-right .ry-tpl-wrap,
+      .ry-col .ry-tpl-wrap { height: auto; }
+      .ry-tpl-wrap img { position: static; width: 100%; height: auto; left: 0; top: 0; }
+
+      /* Split + two-col: stack vertically */
+      .ry-split, .ry-two-col { flex-direction: column; height: auto; gap: 20px; }
+      .ry-split-left { flex: 0 0 auto; width: 100%; padding-right: 0; }
+      .ry-split-right, .ry-col { width: 100%; }
+      .ry-split-left .ry-section-h2 { line-height: 38px; }
+      .ry-split-right .ry-img-wrap,
+      .ry-col .ry-img-wrap { height: 64vw; max-height: 480px; }
+
+      /* Footer */
+      .ry-footer { height: auto; }
+      .ry-footer-inner { padding: 40px 20px; gap: 28px; }
+      .ry-footer-blurb { font-size: 22px; line-height: 34px; max-width: 100%; }
+      .ry-footer-email { font-size: 22px; line-height: 34px; }
+    }
   </style>
   <!-- PATINA-NAV: standardized navbar (matches vc-copy.html) -->
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
