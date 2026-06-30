@@ -788,7 +788,7 @@
       <a href="index.html" class="nav-logo">
         <img src="images/logo/ImageLogo.svg" alt="Patina">
       </a>
-      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-sm" style="margin-left: auto;">
+      <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" onclick="openBookingModal(event)" class="btn btn-sm" style="margin-left: auto;">
         Let's Chat
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
@@ -978,7 +978,7 @@
           Designs their users love,<br>
           <span class="outline">for every company you back.</span>
         </h2>
-        <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" target="_blank" rel="noopener" class="btn btn-lg reveal" style="--reveal-delay: 0.25s">
+        <a href="https://cal.com/aishwarya-sreenivas-miolyd/30-min-chat" onclick="openBookingModal(event)" class="btn btn-lg reveal" style="--reveal-delay: 0.25s">
           Let's Chat
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -1137,6 +1137,65 @@
         document.body.classList.add('fade-out');
         setTimeout(() => { window.location.href = href; }, 260);
       });
+    });
+  </script>
+
+  <!-- ─── BOOKING MODAL ─── -->
+  <div id="booking-modal" class="booking-modal" aria-hidden="true">
+    <div class="booking-modal-overlay" onclick="closeBookingModal()"></div>
+    <div class="booking-modal-dialog" role="dialog" aria-modal="true" aria-label="Book a chat">
+      <button type="button" class="booking-modal-close" onclick="closeBookingModal()" aria-label="Close">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <div class="booking-modal-body" id="booking-modal-body"></div>
+    </div>
+  </div>
+
+  <style>
+    .booking-modal { position: fixed; inset: 0; z-index: 1000; display: none; }
+    .booking-modal.open { display: block; }
+    .booking-modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(2px); }
+    .booking-modal-dialog {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 48px);
+      background: #fff; border-radius: 16px; overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.3); display: flex; flex-direction: column;
+    }
+    .booking-modal-close {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      width: 36px; height: 36px; border: none; border-radius: 50%;
+      background: rgba(0,0,0,0.06); color: #111; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .booking-modal-close:hover { background: rgba(0,0,0,0.12); }
+    .booking-modal-body { overflow-y: auto; -webkit-overflow-scrolling: touch; }
+    .booking-modal-body iframe { display: block; width: 100%; min-height: 700px; border: none; }
+  </style>
+
+  <script>
+    function openBookingModal(e) {
+      if (e) e.preventDefault();
+      var modal = document.getElementById('booking-modal');
+      var body = document.getElementById('booking-modal-body');
+      if (!body.querySelector('iframe')) {
+        body.innerHTML = '<iframe src="https://api.leadconnectorhq.com/widget/booking/s6fbtm2E1dzqT2GO0dIV" scrolling="no" id="s6fbtm2E1dzqT2GO0dIV_1782414756161"></iframe>';
+        var s = document.createElement('script');
+        s.src = 'https://link.msgsndr.com/js/form_embed.js';
+        s.type = 'text/javascript';
+        document.body.appendChild(s);
+      }
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeBookingModal() {
+      var modal = document.getElementById('booking-modal');
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeBookingModal();
     });
   </script>
 
