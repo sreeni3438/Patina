@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal for Backops — Patina</title>
+  <link rel="icon" type="image/png" href="images/logo/favicon-light.png" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/png" href="images/logo/favicon-dark.png" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-dark:   #1e1e1e;
+      --c-mid:    #7a7a7a;
+      --c-muted:  #5a6271;
+      --c-border: #bfbfbf;
+      --c-orange: #f36235;
+      --c-blue:   #0099ff;
+      --c-footer: #f7f9fc;
+      --f-inter:  'Public Sans', sans-serif;
+      --f-geist:  'Public Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; cursor: none !important; }
+    body { cursor: none !important; }
+    *, *::before, *::after { cursor: none !important; }
+
+    #custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 12px;
+      height: 12px;
+      background: #111;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 99999;
+      transition: transform 0.08s ease;
+    }
+
+    body {
+      font-family: var(--f-inter);
+      color: var(--c-dark);
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { display: block; }
+    ul, ol { list-style: none; }
+
+    /* ─── PAGE TRANSITION ────────────────────────────── */
+    body {
+      animation: pageFadeIn 0.3s ease-out forwards;
+    }
+    body.fade-out { opacity: 0; transition: opacity 0.25s ease; }
+
+    @keyframes pageFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ─── ENTRANCE ANIMATIONS ───────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+    @keyframes scaleUp {
+      from { opacity: 0; transform: scale(0.96) translateY(24px); }
+      to   { opacity: 1; transform: scale(1)    translateY(0);    }
+    }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s),
+                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0s);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── PAGE CONTAINER ─────────────────────────────── */
+    .page {
+      max-width: 1728px;
+      margin: 0 auto;
+    }
+
+    /* ─── BUTTON ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-dark);
+      color: #fff;
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      font-weight: 500;
+      font-size: 16.4px;
+      letter-spacing: -0.352px;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      padding: 0 16px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .btn:hover { opacity: 0.82; transform: scale(1.04); }
+    .btn img, .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .btn-lg { padding: 12px 20px; }
+    .btn-sm { padding: 12px 20px; }
+
+    .nav .btn {
+      font-size: 16px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      gap: 7px;
+    }
+    .nav .btn img, .nav .btn svg { width: 15px; height: 15px; }
+
+    /* ─── PASSWORD MODAL ──────────────────────────────── */
+    #password-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+
+    #password-modal.hidden {
+      display: none;
+    }
+
+    #password-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      max-width: 400px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #password-container h2 {
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--c-dark);
+      margin-bottom: 12px;
+    }
+
+    #password-container p {
+      font-size: 16px;
+      color: var(--c-mid);
+      line-height: 24px;
+    }
+
+    #password-input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid var(--c-border);
+      border-radius: 8px;
+      font-family: var(--f-inter);
+      transition: border-color 0.2s;
+    }
+
+    #password-input:focus {
+      outline: none;
+      border-color: var(--c-dark);
+    }
+
+    #password-input.error {
+      border-color: #f36235;
+    }
+
+    .password-error {
+      font-size: 14px;
+      color: #f36235;
+      margin-top: -24px;
+      display: none;
+    }
+
+    .password-error.show {
+      display: block;
+    }
+
+    /* ─── NAVBAR ─────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .nav-inner {
+      max-width: 1728px;
+      margin: 0 auto;
+      padding: 14px 32px 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo img { height: 23.8px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 55px;
+      margin-left: auto;
+      margin-right: 60px;
+    }
+
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      transition: color 0.18s;
+    }
+    .nav-links a:hover { color: var(--c-dark); }
+    .nav-links a.active { color: var(--c-dark); font-weight: 500; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      padding: 200px 288px 120px 128px;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 400;
+      line-height: 68px;
+      letter-spacing: -0.6px;
+      max-width: 1464px;
+      margin-bottom: 36px;
+    }
+
+    .hero-line {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .hero-line.visible {
+      animation: fadeUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .hero-line.visible:nth-of-type(1) { animation-delay: 0s; }
+    .hero-line.visible:nth-of-type(2) { animation-delay: 0.12s; }
+    .hero-line.visible:nth-of-type(3) { animation-delay: 0.24s; }
+    .hero-line.visible:nth-of-type(4) { animation-delay: 0.36s; }
+
+    .hero h1 em { font-style: italic; }
+
+    .hero-pill {
+      display: inline-block;
+      width: fit-content;
+      background: var(--c-footer);
+      color: var(--c-dark);
+      padding: 8px 16px;
+      border: none;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 34px;
+      color: #555;
+      max-width: 620px;
+      margin-top: 0;
+      margin-bottom: 48px;
+    }
+
+    .hero .btn {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1) 1s,
+                  transform 1s cubic-bezier(0.4, 0, 0.2, 1) 1s;
+    }
+    .hero.visible .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero.visible .btn:hover {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      opacity: 0.82;
+      transform: scale(1.04);
+    }
+
+    /* ─── CONTENT SECTION ────────────────────────────── */
+    .section {
+      padding: 120px 128px;
+      background: #fff;
+    }
+
+    .section h2 {
+      font-size: 42px;
+      font-weight: 400;
+      line-height: 54px;
+      letter-spacing: -0.4px;
+      margin-bottom: 48px;
+    }
+
+    .section-content {
+      max-width: 900px;
+    }
+
+    .section p {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 32px;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .section ul {
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 32px;
+      color: #555;
+      margin-bottom: 24px;
+      margin-left: 20px;
+    }
+
+    .section ul li {
+      margin-bottom: 16px;
+      list-style: disc;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    .footer {
+      background: var(--c-footer);
+      padding: 80px 128px 64px;
+      margin-top: 120px;
+    }
+
+    .footer-content {
+      max-width: 1728px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 80px;
+    }
+
+    .footer-col h4 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--c-mid);
+    }
+
+    .footer-col ul li {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--c-mid);
+      margin-bottom: 16px;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li:hover {
+      color: var(--c-dark);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--c-border);
+      padding-top: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--c-mid);
+    }
+
+    /* ─── ACCORDION ─────────────────────────────────── */
+    .accordion {
+      border-top: 1px solid #e8e8e8;
+    }
+    .accordion-item {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px 0;
+      cursor: pointer;
+      user-select: none;
+      gap: 40px;
+    }
+    .accordion-header:hover .accordion-title { opacity: 1; color: var(--c-dark); }
+    .accordion-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--c-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 10px;
+    }
+    .accordion-title {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      color: var(--c-mid);
+      line-height: 1.2;
+      transition: opacity 0.2s, color 0.2s;
+    }
+    .accordion-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--c-mid);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .accordion-chevron {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      color: var(--c-mid);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .accordion-content {
+      padding-bottom: 64px;
+    }
+    .option-pill {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--c-footer);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--c-dark);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero {
+        padding: 150px 96px 80px;
+      }
+      .hero h1 {
+        font-size: 42px;
+        line-height: 52px;
+      }
+      .section {
+        padding: 80px 96px;
+      }
+      .footer {
+        padding: 60px 96px 48px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 60px 48px;
+      }
+
+      [style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 24px !important;
+        row-gap: 24px !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      #custom-cursor {
+        display: none !important;
+      }
+
+      .hero {
+        padding: 120px 32px 60px;
+      }
+      .hero h1 {
+        font-size: 30px;
+        line-height: 38px;
+        max-width: 100%;
+      }
+      .hero-sub {
+        font-size: 17px;
+        line-height: 27px;
+        max-width: 100%;
+      }
+      .section {
+        padding: 48px 32px;
+      }
+      .section h2 {
+        font-size: 26px;
+        line-height: 34px;
+        margin-bottom: 24px;
+      }
+      .section p {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .section ul {
+        font-size: 16px;
+        line-height: 28px;
+      }
+      .accordion-title {
+        font-size: 22px;
+        line-height: 1.3;
+      }
+      .accordion-sub {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      .accordion-header {
+        padding: 24px 0;
+        gap: 16px;
+      }
+      h3 {
+        font-size: 17px !important;
+      }
+
+      [style*="grid-template-columns"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        row-gap: 16px !important;
+      }
+
+      img {
+        height: auto !important;
+      }
+
+      /* Stack the investment price row (label above price) */
+      [style*="justify-content: space-between"] {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+
+      [style*="padding: 40px"] {
+        padding: 24px !important;
+      }
+
+      [style*="font-size: 48px"] {
+        font-size: 32px !important;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .hero { padding: 100px 20px 48px; }
+      .section { padding: 40px 20px; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="custom-cursor"></div>
+
+  <!-- ─── PASSWORD MODAL ───────────────────────────── -->
+  <div id="password-modal">
+    <div id="password-container">
+      <h2>Access Required</h2>
+      <p>Enter the password to view this proposal</p>
+      <input type="password" id="password-input" placeholder="Enter password" autocomplete="off">
+      <div class="password-error">Incorrect password. Please try again.</div>
+      <button class="btn btn-lg" id="password-submit">Submit</button>
+    </div>
+  </div>
+
+  <!-- ─── HERO ───────────────────────────────────────── -->
+  <div class="page">
+    <section class="hero">
+      <span class="hero-pill">Proposal for Backops</span>
+      <h1>
+        <span class="hero-line">A complete rebrand for Backops —</span><br>
+        <span class="hero-line"><em>website, sales content, marketing.</em></span>
+      </h1>
+      <p class="hero-sub">One design lead and one dedicated senior designer. Two engagement options below — a fixed package or an ongoing retainer.</p>
+    </section>
+
+    <!-- ─── WHAT WE'RE DESIGNING ──────────────────────── -->
+    <section class="section reveal" style="padding-top: 60px;">
+      <div style="margin-bottom: 48px;">
+        <h2 style="max-width: 900px;">What we're designing</h2>
+        <p style="max-width: 900px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">The rebrand end to end — from the identity system itself to every surface a customer or prospect actually touches.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 48px; row-gap: 80px;">
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Brand identity</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">Logo and wordmark, colour system, typography, iconography, imagery direction, and the visual language that ties them together. The foundation everything else is built on.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Website</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">A full redesign of the marketing site — home, product, pricing, about, and the supporting pages. Structure, messaging hierarchy, and high-fidelity design across desktop and mobile.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Sales content</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">The pitch deck, one-pagers, case studies, and proposal template your team sends every week — rebuilt on the new identity and set up as editable templates, not one-off files.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Marketing materials</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">Social and ad templates, email layouts, event and print collateral, and the reusable content formats marketing needs to publish consistently without redesigning from scratch each time.</p>
+        </div>
+
+        <div>
+          <h3 style="font-size: 22px; font-weight: 500; margin-bottom: 20px; color: var(--c-dark);">Brand guidelines and asset kit</h3>
+          <p style="font-size: 18px; color: var(--c-mid); line-height: 28px;">A practical guidelines doc — usage rules, do's and don'ts, tone — plus organised source files and exported assets, so the team can keep the brand consistent after the engagement ends.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── EXAMPLE WORK ──────────────────────────────── -->
+    <section class="section reveal">
+      <h2>Example work</h2>
+      <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 24px;">
+        <video src="images/GekitRec.mov" autoplay loop muted playsinline preload="metadata" style="width: 100%; height: auto; border-radius: 20px; display: block;"></video>
+        <img src="images/brands/Gekit-2.png" alt="Gekit — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Gekit-4.png" alt="Gekit — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Freedom-2.png" alt="Freedom — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Freedom-3.png" alt="Freedom — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Lucidic-1.png" alt="Lucidic — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Roya-1.png" alt="Roya — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+        <img src="images/brands/Roya-2.png" alt="Roya — brand work" style="width: 100%; height: auto; border-radius: 20px;">
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div>
+          <img src="images/Test2.png" alt="Example work" style="width: 100%; border-radius: 20px; object-fit: cover; height: 600px;">
+        </div>
+        <div>
+          <img src="images/Test3.png" alt="Example work" style="width: 100%; border-radius: 20px; object-fit: cover; height: 600px;">
+        </div>
+        <div>
+          <img src="images/Test4.png" alt="Example work" style="width: 100%; border-radius: 20px; object-fit: cover; object-position: center top; height: 450px;">
+        </div>
+        <div>
+          <img src="images/Test5.png" alt="Example work" style="width: 100%; border-radius: 20px; object-fit: cover; object-position: center top; height: 450px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── YOUR DESIGNER ───────────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 56px;">
+        <h2>Your designer</h2>
+      </div>
+      <div>
+        <h3 style="font-size: 28px; font-weight: 400; letter-spacing: -0.3px; margin-bottom: 16px; color: var(--c-dark);">Ashish</h3>
+        <p style="font-size: 18px; font-weight: 300; line-height: 32px; color: #555; max-width: 900px; margin-bottom: 0;">Ashish was the founding designer at a $700M agritech startup, where he built both the brand and the product UX from the ground up — identity, marketing site, sales material, and the platform itself. Since then he's led brand work for an inference startup, an AI agents startup in SF, and a range of early-stage companies building their first real identity.</p>
+      </div>
+    </section>
+
+    <!-- ─── ENGAGEMENT OPTIONS ──────────────────────── -->
+    <section class="section reveal">
+      <div style="margin-bottom: 56px;">
+        <h2>Engagement options</h2>
+        <p style="max-width: 700px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 0;">Two ways to run the rebrand. Same team, same quality bar — one is a defined package with a fixed end date, the other is ongoing design capacity.</p>
+      </div>
+
+      <div class="accordion">
+
+        <!-- ── Option 1 ── -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div>
+              <div class="accordion-label">Option 1</div>
+              <div class="accordion-title">Fixed package</div>
+              <div class="accordion-sub">The full rebrand, fixed scope and price — two feedback sessions</div>
+            </div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;">
+                <span class="option-pill">2 feedback sessions</span>
+                <span class="option-pill">Fixed scope</span>
+                <span class="option-pill">Fixed price</span>
+                <span class="option-pill">Defined end date</span>
+              </div>
+
+              <p style="font-size: 18px; font-weight: 300; line-height: 32px; color: #555; max-width: 800px; margin-bottom: 48px;">The process includes <strong style="font-weight: 500; color: var(--c-dark);">two feedback sessions in total</strong>.</p>
+
+              <div style="margin-bottom: 48px;">
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Step 1 — Weeks 1–2</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Discovery and direction</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">A kickoff to understand positioning, audience, and how sales and marketing actually work today. We audit every existing asset, then develop the identity direction — logo, colour, type, and visual language, shown in context rather than in isolation.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-orange); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-orange); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Feedback session 1 of 2</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Direction review</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">One working session to review the direction and choose a route. Consolidated notes from your side, one revision pass from ours — then the direction is locked and everything downstream is built on it.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Step 2 — Weeks 3–6</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Application</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">The locked identity applied across every surface — the full website in high fidelity, the sales deck and one-pagers, the marketing templates. Designed as one pass, without review calls in between.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-orange); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-orange); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Feedback session 2 of 2</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Application review</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">The second and final session. We walk through everything together, collect one consolidated round of notes across all surfaces, and apply them in a single revision pass.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                  </div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Step 3 — Weeks 7–8</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Guidelines and handoff</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Final polish, brand guidelines, editable templates for sales and marketing, organised source files, and exported assets. Annotated files handed to your developers, ready to build.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Option 2 ── -->
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <div>
+              <div class="accordion-label">Option 2</div>
+              <div class="accordion-title">Monthly retainer</div>
+              <div class="accordion-sub">Ongoing design capacity — two live sessions a week, unlimited rounds</div>
+            </div>
+            <svg class="accordion-chevron" viewBox="0 0 24 24" fill="none">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="accordion-body">
+            <div class="accordion-content">
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;">
+                <span class="option-pill">2 live sessions / week</span>
+                <span class="option-pill">Async otherwise</span>
+                <span class="option-pill">Unlimited rounds</span>
+                <span class="option-pill">Dedicated designer</span>
+                <span class="option-pill">Adaptive scope</span>
+              </div>
+
+              <div style="margin-bottom: 48px;">
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Weeks 1–2</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Discovery and direction</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Same starting point — positioning, audit of existing assets, and the identity direction developed and reviewed together.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Week 3 onwards</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Rolling application</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Surfaces get rebuilt in priority order — whatever unblocks sales and marketing first. Work is designed, reviewed, and revised in short cycles rather than saved for a single reveal.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ongoing</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Feedback</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Two live sessions per week throughout — one to review work in progress, one to align on what's next. Everything in between runs async over Slack and Figma comments, so you're never waiting on a call to unblock something. No cap on revision rounds.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                    <div style="width: 1px; flex: 1; background: #e8e8e8; margin: 8px 0;"></div>
+                  </div>
+                  <div style="padding-bottom: 40px;">
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ongoing</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">New work as it comes up</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Campaign creative, launch pages, new decks, event collateral, product marketing — picked up in the same rhythm, not quoted as separate projects.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 0;">
+                  <div style="display: flex; flex-direction: column; align-items: center; margin-right: 28px; padding-top: 4px;">
+                    <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--c-dark); flex-shrink: 0;"></div>
+                  </div>
+                  <div>
+                    <div style="font-size: 13px; font-weight: 500; color: var(--c-mid); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Ongoing</div>
+                    <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 10px; color: var(--c-dark);">Handoff</h3>
+                    <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Assets are handed over as they're finalised rather than held to the end. Guidelines and templates grow with the work, so the system is always current.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── INVESTMENT ───────────────────────────────── -->
+    <section class="section reveal">
+      <div>
+        <h2>Investment</h2>
+        <p style="max-width: 800px; font-size: 18px; font-weight: 300; line-height: 32px; color: #555; margin-bottom: 48px;">Package pricing is based on the number of assets in scope — how many pages the site runs to, how many templates sales and marketing need, how much collateral comes with it. We'll price yours off the final asset list.</p>
+
+        <div style="padding: 40px; background: var(--c-footer); border-radius: 16px; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
+            <span style="font-size: 20px; color: var(--c-mid);">Option 1 — Fixed package</span>
+            <span style="font-size: 48px; font-weight: 400; color: var(--c-dark);">Starts at $7K</span>
+          </div>
+          <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin-bottom: 24px;">Priced on the number of assets in scope. Example package pricing:</p>
+          <div style="margin-bottom: 24px;">
+            <div style="margin-bottom: 20px;">
+              <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 8px; color: var(--c-dark);">$7K — Core identity</h3>
+              <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Brand direction and moodboard, (2) logo concepts, (3) final logo files — primary, alt and icon — colour palette, typography, imagery direction, and a (1) page website.</p>
+            </div>
+            <div>
+              <h3 style="font-size: 18px; font-weight: 500; margin-bottom: 8px; color: var(--c-dark);">$20K — Full rebrand</h3>
+              <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Everything above with (4) logo concepts, a brand strategy doc, a website up to (6) pages, (1) pitch deck, (2) one-pagers, (1) case study template, (1) proposal template, (8) social templates, (3) conference posters, (1) newsletter template, and brand guidelines.</p>
+            </div>
+          </div>
+          <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">Includes two feedback sessions and one revision pass after each.</p>
+        </div>
+        <div style="padding: 40px; background: var(--c-footer); border-radius: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px;">
+            <span style="font-size: 20px; color: var(--c-mid);">Option 2 — Monthly retainer</span>
+            <span style="font-size: 48px; font-weight: 400; color: var(--c-dark);">$10,000 / mo</span>
+          </div>
+          <p style="font-size: 16px; color: var(--c-mid); line-height: 26px; margin: 0;">A dedicated designer, two live sessions a week with async communication otherwise, and no cap on revision rounds or asset count. No long-term commitment — continue month to month for as long as it's working.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+
+  <script>
+    // ─── PASSWORD PROTECTION ──────────────────────
+    const PROPOSAL_PASSWORD = 'Backops';
+    const PASSWORD_KEY = 'proposal_unlocked';
+
+    function initPasswordProtection() {
+      if (sessionStorage.getItem(PASSWORD_KEY)) {
+        document.getElementById('password-modal').classList.add('hidden');
+        return;
+      }
+
+      const passwordModal = document.getElementById('password-modal');
+      const passwordInput = document.getElementById('password-input');
+      const passwordSubmit = document.getElementById('password-submit');
+      const passwordError = document.querySelector('.password-error');
+
+      passwordSubmit.addEventListener('click', () => {
+        if (passwordInput.value === PROPOSAL_PASSWORD) {
+          sessionStorage.setItem(PASSWORD_KEY, 'true');
+          passwordModal.classList.add('hidden');
+          passwordError.classList.remove('show');
+        } else {
+          passwordInput.classList.add('error');
+          passwordError.classList.add('show');
+          passwordInput.value = '';
+          setTimeout(() => {
+            passwordInput.classList.remove('error');
+          }, 1500);
+        }
+      });
+
+      passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          passwordSubmit.click();
+        }
+      });
+
+      passwordInput.focus();
+    }
+
+    // Initialize password protection
+    initPasswordProtection();
+
+    const customCursor = document.getElementById('custom-cursor');
+    const htmlElement = document.documentElement;
+
+    document.addEventListener('mousemove', (e) => {
+      customCursor.style.left = e.clientX + 'px';
+      customCursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseenter', () => {
+      customCursor.style.display = 'block';
+    });
+
+    document.addEventListener('mouseleave', () => {
+      customCursor.style.display = 'none';
+    });
+
+    // ─── SCROLL REVEAL ANIMATIONS ─────────────────
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      observer.observe(el);
+    });
+
+    // ─── HERO ANIMATION ───────────────────────────
+    const heroSection = document.querySelector('.hero');
+    const heroLines = document.querySelectorAll('.hero-line');
+
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            heroLines.forEach(line => {
+              line.classList.add('visible');
+            });
+            heroObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+
+      heroObserver.observe(heroSection);
+    }
+
+    // ─── ACCORDION ────────────────────────────────
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.accordion-item');
+        const body = item.querySelector('.accordion-body');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-body').style.maxHeight = '0';
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ─── PAGE TRANSITION ──────────────────────────
+    document.querySelectorAll('a[href]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (!link.href.startsWith('#')) {
+          e.preventDefault();
+          document.body.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = link.href;
+          }, 250);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

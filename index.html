@@ -777,10 +777,80 @@
         text-stroke-width: 0.3px;
       }
     }
+
+    /* ─── PASSWORD MODAL ──────────────────────────────── */
+    #password-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      backdrop-filter: blur(4px);
+    }
+
+    #password-modal.hidden { display: none; }
+
+    #password-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      max-width: 400px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    #password-container h2 {
+      font-size: 32px;
+      font-weight: 400;
+      color: #1e1e1e;
+      margin-bottom: 12px;
+    }
+
+    #password-container p {
+      font-size: 16px;
+      color: #7a7a7a;
+      line-height: 24px;
+    }
+
+    #password-input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 1px solid #bfbfbf;
+      border-radius: 8px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    #password-input:focus { outline: none; border-color: #1e1e1e; }
+    #password-input.error { border-color: #f36235; }
+
+    .password-error {
+      font-size: 14px;
+      color: #f36235;
+      margin-top: -24px;
+      display: none;
+    }
+
+    .password-error.show { display: block; }
   </style>
 </head>
 <body>
 <div id="custom-cursor"></div>
+
+  <!-- ─── PASSWORD MODAL ───────────────────────────── -->
+  <div id="password-modal">
+    <div id="password-container">
+      <h2>Under construction</h2>
+      <p>This site is being rebuilt. Enter the password to take a look.</p>
+      <input type="password" id="password-input" placeholder="Enter password" autocomplete="off">
+      <div class="password-error">Incorrect password. Please try again.</div>
+      <button class="btn btn-lg" id="password-submit">Submit</button>
+    </div>
+  </div>
 
   <!-- ─── NAVBAR ─── -->
   <nav class="nav">
@@ -1009,6 +1079,41 @@
   </div><!-- /.page -->
 
   <script>
+    /* ─── PASSWORD PROTECTION ─── */
+    const SITE_PASSWORD = 'PatinaNew';
+    const SITE_PASSWORD_KEY = 'patina_site_unlocked';
+
+    (function initPasswordProtection() {
+      const passwordModal  = document.getElementById('password-modal');
+      const passwordInput  = document.getElementById('password-input');
+      const passwordSubmit = document.getElementById('password-submit');
+      const passwordError  = document.querySelector('.password-error');
+
+      if (sessionStorage.getItem(SITE_PASSWORD_KEY)) {
+        passwordModal.classList.add('hidden');
+        return;
+      }
+
+      passwordSubmit.addEventListener('click', () => {
+        if (passwordInput.value === SITE_PASSWORD) {
+          sessionStorage.setItem(SITE_PASSWORD_KEY, 'true');
+          passwordModal.classList.add('hidden');
+          passwordError.classList.remove('show');
+        } else {
+          passwordInput.classList.add('error');
+          passwordError.classList.add('show');
+          passwordInput.value = '';
+          setTimeout(() => passwordInput.classList.remove('error'), 1500);
+        }
+      });
+
+      passwordInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') passwordSubmit.click();
+      });
+
+      passwordInput.focus();
+    })();
+
     /* ─── Testimonial Carousel (infinite forward cycle) ─── */
     const track   = document.getElementById('track');
     const nextBtn = document.getElementById('nextBtn');
