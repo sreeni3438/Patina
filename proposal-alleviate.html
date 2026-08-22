@@ -322,6 +322,15 @@
       max-width: 900px;
     }
 
+    .full-bleed-video {
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      border-radius: 0 !important;
+      display: block;
+    }
+
     .section p {
       font-size: 18px;
       font-weight: 300;
@@ -537,6 +546,16 @@
     .pricing-table tbody tr:last-child th,
     .pricing-table tbody tr:last-child td { border-bottom: none; }
     .pt-check { color: var(--c-dark); font-size: 15px; }
+    .pricing-table tbody tr.pt-phase td {
+      text-align: left;
+      padding: 10px 20px;
+      font-size: 13px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--c-orange);
+      background: rgba(243, 98, 53, 0.06);
+      border-bottom: 1px solid #e4e8ef;
+    }
 
     @media (max-width: 900px) {
       .pricing-panel { padding: 24px; }
@@ -741,6 +760,8 @@
     <section class="section reveal">
       <h2>Example work</h2>
       <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 24px;">
+        <video class="full-bleed-video" src="CaydaRecording.mov" autoplay loop muted playsinline preload="metadata" style="height: auto; margin-bottom: 24px;"></video>
+        <video src="TemperatureBreach.mp4" autoplay loop muted playsinline preload="metadata" style="width: 100%; height: auto; border-radius: 20px; display: block;"></video>
         <video src="images/GekitRec.mov" autoplay loop muted playsinline preload="metadata" style="width: 100%; height: auto; border-radius: 20px; display: block;"></video>
         <img src="images/brands/Gekit-2.png" alt="Gekit — brand work" style="width: 100%; height: auto; border-radius: 20px;">
         <img src="images/brands/Gekit-4.png" alt="Gekit — brand work" style="width: 100%; height: auto; border-radius: 20px;">
@@ -765,7 +786,6 @@
           <img src="images/Test5.png" alt="Example work" style="width: 100%; border-radius: 20px; object-fit: cover; object-position: center top; height: 450px;">
         </div>
       </div>
-      <video src="TemperatureBreach.mp4" autoplay loop muted playsinline preload="metadata" style="width: 100%; height: auto; border-radius: 20px; display: block; margin-top: 24px;"></video>
     </section>
     <!-- ─── WHAT FOUNDERS HAVE SAID ───────────────────── -->
     <section class="section reveal">
@@ -816,10 +836,10 @@
         <div class="step-card step-card-accent" tabindex="0">
           <div class="step-card-top">
             <span class="step-dot"></span>
-            <span class="step-label">Feedback session 1 of 2</span>
+            <span class="step-label">Feedback session 1 of 3 — Week 1</span>
           </div>
           <h3 class="step-title">Direction review</h3>
-          <p class="step-desc">You review the identity routes and site structure and pick a direction. One consolidated round of notes, one revision pass, then the direction is locked.</p>
+          <p class="step-desc">We walk through the identity routes and site structure together, talk through your notes on the website design, and work out the copy and direction with you before we build on it.</p>
         </div>
         <div class="step-card" tabindex="0">
           <div class="step-card-top">
@@ -827,23 +847,39 @@
             <span class="step-label">Step 3 — Weeks 2–3</span>
           </div>
           <h3 class="step-title">Brand implementation and website</h3>
-          <p class="step-desc">The identity applied across the site. Every page designed in high fidelity for desktop and mobile, plus the component library behind them.</p>
+          <p class="step-desc">The identity applied across the site. All five pages designed in high fidelity for desktop and mobile, plus the component library behind them and the brand strategy doc. This closes out week 3.</p>
         </div>
         <div class="step-card step-card-accent" tabindex="0">
           <div class="step-card-top">
             <span class="step-dot"></span>
-            <span class="step-label">Feedback session 2 of 2</span>
+            <span class="step-label">Feedback session 2 of 3 — Week 3</span>
           </div>
           <h3 class="step-title">Design review</h3>
-          <p class="step-desc">You review the full site. One consolidated round of notes across every page, applied in a single revision pass.</p>
+          <p class="step-desc">We go through the full site with you page by page, work through your notes together, and refine the copy and layouts until it feels right.</p>
         </div>
         <div class="step-card" tabindex="0">
           <div class="step-card-top">
             <span class="step-dot"></span>
-            <span class="step-label">Step 4 — Week 3</span>
+            <span class="step-label">Step 4 — Week 4</span>
           </div>
-          <h3 class="step-title">Guidelines and handoff</h3>
-          <p class="step-desc">Brand guidelines, the documented component library, organised source files, and exported assets. Annotated files handed to your developers.</p>
+          <h3 class="step-title">Supporting assets and guidelines</h3>
+          <p class="step-desc">The final week: social assets and Google templates, plus the brand guidelines and the documented component library.</p>
+        </div>
+        <div class="step-card step-card-accent" tabindex="0">
+          <div class="step-card-top">
+            <span class="step-dot"></span>
+            <span class="step-label">Feedback session 3 of 3 — Week 4</span>
+          </div>
+          <h3 class="step-title">Final review</h3>
+          <p class="step-desc">We go over the supporting assets and guidelines with you and make any last adjustments before the files are handed over.</p>
+        </div>
+        <div class="step-card" tabindex="0">
+          <div class="step-card-top">
+            <span class="step-dot"></span>
+            <span class="step-label">Step 5 — Week 4</span>
+          </div>
+          <h3 class="step-title">Handoff</h3>
+          <p class="step-desc">Organised source files and exported assets, with annotated files handed to your developers.</p>
         </div>
       </div>
     </section>
@@ -858,103 +894,61 @@
             <tr>
               <th scope="col" class="pt-feature">Brand Feature</th>
               <th scope="col">
-                <span class="pt-plan">Launch Kit</span>
-                <span class="pt-price">$7K</span>
-              </th>
-              <th scope="col">
-                <span class="pt-plan">Brand Sprint</span>
-                <span class="pt-price">$9K</span>
-              </th>
-              <th scope="col">
                 <span class="pt-plan">Brand System</span>
-                <span class="pt-price">$15K</span>
+                <span class="pt-price">$12K</span>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Timeline</th>
-              <td>3 weeks</td>
-              <td>3–4 weeks</td>
-              <td>4–5 weeks</td>
+              <td>4 weeks</td>
             </tr>
             <tr>
               <th scope="row">Brand Direction / Moodboard</th>
               <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Logo Concepts</th>
-              <td>2</td>
-              <td>3</td>
               <td>4</td>
             </tr>
             <tr>
               <th scope="row">Logo <span style="color: var(--c-mid); font-weight: 400;">(Primary, Alt, Icon)</span></th>
               <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Color Palette</th>
-              <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
               <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Typography</th>
               <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Imagery</th>
               <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
-              <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Website Design</th>
-              <td>Single Page</td>
-              <td>Up to 3 pages</td>
-              <td>Up to 6 pages</td>
+              <td>Up to 5 pages</td>
+            </tr>
+            <tr class="pt-phase">
+              <td colspan="2">Up to this point takes 3 weeks</td>
             </tr>
             <tr>
               <th scope="row">Brand Strategy Doc</th>
-              <td></td>
-              <td class="pt-check">✓</td>
               <td class="pt-check">✓</td>
             </tr>
             <tr>
               <th scope="row">Social Assets</th>
-              <td></td>
-              <td>Up to 3</td>
               <td>Up to 8</td>
             </tr>
             <tr>
               <th scope="row">Google Templates</th>
-              <td></td>
-              <td>Up to 2</td>
               <td>Up to 5</td>
             </tr>
-            <tr>
-              <th scope="row">Conference Posters</th>
-              <td></td>
-              <td></td>
-              <td>Up to 3</td>
-            </tr>
-            <tr>
-              <th scope="row">Newsletter Template</th>
-              <td></td>
-              <td></td>
-              <td class="pt-check">✓</td>
-            </tr>
-            <tr>
-              <th scope="row">Pitch Deck Template</th>
-              <td></td>
-              <td></td>
-              <td class="pt-check">✓</td>
+            <tr class="pt-phase">
+              <td colspan="2">Everything above takes 4 weeks in total</td>
             </tr>
           </tbody>
         </table>
